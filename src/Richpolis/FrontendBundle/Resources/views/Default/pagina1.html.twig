@@ -1,0 +1,42 @@
+{% extends "FrontendBundle::splash.html.twig" %}
+
+{% block body %}
+	<section id="contenedor">
+		<article>
+			<figure class="splash" id="cara">
+				<img src="{{ asset('images/keyarts/cara_splash.jpg') }}" alt="splash"/>
+			</figure>
+			<figure class="splash" id="frase">
+				<img src="{{ asset('images/keyarts/leyenda_splash.jpg') }}" alt="splash"/>
+			</figure>
+			<figure class="splash" id="leyenda">
+				<img src="{{ asset('images/keyarts/leyenda.png') }}" alt="splash"/>
+			</figure>
+			<div id="botones" class="splash">
+				<figure id="boton-yes">
+					<a href="{{path('homepage')}}">
+						<img src="{{asset('images/keyarts/yes.png')}}" alt="yes">
+					</a>
+				</figure>
+				<figure id="boton-no">
+					<a href="{{path('splash')}}">
+						<img src="{{asset('images/keyarts/no.png')}}" alt="no">		
+					</a>
+				</figure>
+			</div>		
+		</article>
+	</section>
+{% endblock %}
+{% block footer %}
+	<footer>
+	    <div id="contenido-footer">
+	    	Copyright 2013 La Niña del Mezcal info@laniñadelmezcal.com	
+	    </div>
+	    <figure id="facebook-footer">
+	        <img src="{{ asset('images/keyarts/facebook.png') }}" alt="facebook">
+	    </figure>
+	    <figure id="twitter-footer">
+	    	<img src="{{ asset('images/keyarts/twitter.png') }}" alt="twitter">
+	    </figure>
+    </footer>
+{% endblock %}

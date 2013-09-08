@@ -1,0 +1,54 @@
+{% extends "FrontendBundle::layout.html.twig" %}
+
+{% block body %}
+<section id="contenido">
+   <article>
+         <figure id="foto-la-nina">
+               <img src="{{asset('images/keyarts/fotos/la-nina-vintage-960x460.jpg')}}" alt="foto la niña">
+         </figure>
+         <h2 class="titulo-article">about la niña</h2>
+         <p>
+               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, sit, molestiae pariatur consectetur quisquam non fuga quidem et modi asperiores aliquam aliquid odio assumenda eius dolor quaerat in libero eum!
+               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, ea, eos dolore fuga facere similique ipsam consequuntur eaque officiis dolor esse sequi et omnis odio ratione corporis nostrum. Dolorum, eveniet.
+               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, quod, mollitia, quidem possimus quaerat vitae expedita itaque laborum debitis laudantium eum optio earum quis deleniti asperiores cupiditate facere! Officiis, soluta!
+         </p>
+   </article>
+   <article>
+         <h2 class="titulo-article">
+               the story
+         </h2>
+         <p>
+               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, non, aliquam velit eum dolor assumenda temporibus mollitia earum veritatis voluptas modi doloremque pariatur sapiente minima necessitatibus molestiae nulla illum fuga!
+               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, beatae, perspiciatis eius explicabo sit hic consequatur magni laudantium animi vitae labore quisquam voluptates aliquid rem qui necessitatibus minima nesciunt vero.
+         </p>
+         <div id="galeria-about" class="galeria">
+               <figure class="control-galeria-izquierda">
+                     <img src="{{asset('images/keyarts/arrow_left.png')}}" alt="control galeria izquierda">
+               </figure>
+               <div class="contenedor-galeria about">
+                  <ul>
+                     <li><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 1"></a></li>
+                     <li><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 2"></a></li>
+                     <li><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 3"></a></li>
+                  </ul>
+               </div>
+               <figure class="control-galeria-derecha">
+                     <img src="{{asset('images/keyarts/arrow_right.png')}}" alt="control galeria derecha">
+               </figure>
+         </div>
+         <p>
+               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, quae, atque mollitia aspernatur illo ipsum vero sed error soluta quisquam itaque tempore voluptates est in blanditiis nostrum vitae minima molestiae?
+               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, earum, inventore, quas, hic minima a adipisci ullam libero illum tempore doloribus nihil atque similique deserunt perferendis. Atque minus necessitatibus magnam.
+         </p>
+   </article>
+   <div id="redes-sociales-pagina">
+         <figure id="red-social-pagina-facebook">
+               <img src="{{asset('images/keyarts/facebook_share.png')}}" alt="compartir en facebook">
+         </figure>
+         <figure id="red-social-pagina-twitter">
+               <img src="{{asset('images/keyarts/twitter_share.png')}}" alt="compartir en twitter">
+         </figure>
+   </div>
+</section>
+
+{% endblock %}

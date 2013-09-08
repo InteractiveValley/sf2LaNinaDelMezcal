@@ -1,0 +1,70 @@
+{% extends "FrontendBundle::layout.html.twig" %}
+
+{% block body %}
+<section id="contenido" class="botellas">
+   <div class="galeria">
+      <figure class="control-galeria-izquierda">
+         <img src="{{asset('images/keyarts/arrow_left.png')}}" alt="control galeria izquierda">
+      </figure>
+      <article id="botella">
+            <div class="descripcion-botella">
+               <header>
+                  <h1>bottle tour</h1>
+                  <h2 class="espadin">espadin</h2>   
+               </header>
+               <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat, mollitia, minima nisi quae repellendus eligendi dolorem molestiae aliquam unde. Harum, consequatur non modi possimus ab sit voluptatibus quae quaerat qui.
+               </p>
+            </div>
+            <figure class="botella">
+                  <img src="{{asset('images/keyarts/espadin.png')}}" alt="espadin">
+                  <div class="texto-floante-derecha">
+                     <a href="">
+                        proof
+                        <span class="tooltip">
+                           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore, expedita corrupti facilis molestias iste nemo.
+                        </span>   
+                     </a>
+                  </div>
+            </figure>
+            
+      </article>
+      <figure class="control-galeria-derecha">
+            <img src="{{asset('images/keyarts/arrow_right.png')}}" alt="control galeria derecha">
+      </figure>   
+   </div>
+   <figure id="boton-comprar">
+      <a href="">
+         comprar
+      </a>
+   </figure>
+
+   <div id="redes-sociales-pagina" class="derecha">
+         <figure id="red-social-pagina-facebook">
+               <img src="{{asset('images/keyarts/facebook_share.png')}}" alt="compartir en facebook">
+         </figure>
+         <figure id="red-social-pagina-twitter">
+               <img src="{{asset('images/keyarts/twitter_share.png')}}" alt="compartir en twitter">
+         </figure>
+   </div>
+   <figure id="menus-botellas">
+      <ul>
+         <li><a href="" class="espadin">espadin</a></li>
+         <li><a href="" class="madrecuixe">madrecuixe</a></li>
+         <li><a href="" class="tobala">tobala</a></li>
+         <li><a href="" class="tepextate">tepextate</a></li>
+         <li><a href="" class="pechuga">pechuga</a></li>
+         <li><a href="" class="primario-mezcal">primario mezcal</a></li>
+         <li><a href="" class="primario-licor">primario licor</a></li>
+      </ul>
+   </figure>
+</section>
+
+{% endblock %}
+
+{% block javascripts %}
+   {{parent()}}
+   <!--script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js">
+   </script-->
+
+{% endblock %}

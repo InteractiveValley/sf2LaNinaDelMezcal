@@ -1,0 +1,23 @@
+frontend:
+    resource: "@FrontendBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+categorias_galeria:
+    resource: "@CategoriasGaleriaBundle/Controller/"
+    type:     annotation
+    prefix:   /backend
+
+publicaciones:
+    resource: "@PublicacionesBundle/Controller/"
+    type:     annotation
+    prefix:   /backend
+
+backend:
+    resource: "@BackendBundle/Controller/"
+    type:     annotation
+    prefix:   /backend
+
+_imagine:
+    resource: .
+    type:     imagine
