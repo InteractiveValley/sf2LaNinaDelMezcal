@@ -1,5 +1,10 @@
 {% extends "FrontendBundle::layout.html.twig" %}
 
+{% block stylesheets %}
+{{parent()}}
+<link rel="stylesheet" href="{{ asset('css/jquery.bxslider.css') }}">
+{% endblock %}
+
 {% block body %}
 <section id="contenido">
    <article>
@@ -22,16 +27,19 @@
                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, beatae, perspiciatis eius explicabo sit hic consequatur magni laudantium animi vitae labore quisquam voluptates aliquid rem qui necessitatibus minima nesciunt vero.
          </p>
          <div id="galeria-about" class="galeria">
-               <figure class="control-galeria-izquierda">
-                     <img src="{{asset('images/keyarts/arrow_left.png')}}" alt="control galeria izquierda">
-               </figure>
                <div class="contenedor-galeria about">
-                  <ul>
+                  <ul class="slider1">
+                     <li><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 1"></a></li>
+                     <li><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 2"></a></li>
+                     <li><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 3"></a></li>
                      <li><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 1"></a></li>
                      <li><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 2"></a></li>
                      <li><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 3"></a></li>
                   </ul>
                </div>
+               <figure class="control-galeria-izquierda">
+                     <img src="{{asset('images/keyarts/arrow_left.png')}}" alt="control galeria izquierda">
+               </figure>
                <figure class="control-galeria-derecha">
                      <img src="{{asset('images/keyarts/arrow_right.png')}}" alt="control galeria derecha">
                </figure>
@@ -51,4 +59,23 @@
    </div>
 </section>
 
+{% endblock %}
+
+{% block javascripts %}
+{{parent()}}
+<script type="text/javascript" src="{{asset('js/jquery.bxslider.min.js')}}"></script>
+<script>
+   $(document).ready(function(){
+     $('.slider1').bxSlider({
+       slideWidth: 290,
+       minSlides: 1,
+       maxSlides: 3,
+       slideMargin: 5,
+       nextSelector: '.control-galeria-izquierda',
+       prevSelector: '.control-galeria-derecha',
+       nextText: 'Next',
+       prevText: 'Prev'
+     });
+   });
+</script>
 {% endblock %}
