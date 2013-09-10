@@ -34,8 +34,8 @@ footer #twitter-footer {
 #botones figure {
   display: inline-block;
   vertical-align: top;
-  opacity: 1;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 0.7;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
   width: 128px;
   transition: all 1s ease;
 }
@@ -46,8 +46,8 @@ footer #twitter-footer {
   margin-left: 5px;
 }
 #botones figure:hover {
-  opacity: 0.7;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+  opacity: 0.1;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=10);
 }
 #frase,
 #leyenda {

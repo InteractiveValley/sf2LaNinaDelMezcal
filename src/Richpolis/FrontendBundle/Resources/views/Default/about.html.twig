@@ -29,19 +29,19 @@
          <div id="galeria-about" class="galeria">
                <div class="contenedor-galeria about">
                   <ul class="slider1">
-                     <li><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 1"></a></li>
-                     <li><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 2"></a></li>
-                     <li><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 3"></a></li>
-                     <li><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 1"></a></li>
-                     <li><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 2"></a></li>
-                     <li><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 3"></a></li>
+                     <li class="item-regular"><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 1"></a></li>
+                     <li class="item-regular"><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 2"></a></li>
+                     <li class="item-regular"><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 3"></a></li>
+                     <li class="item-regular"><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 1"></a></li>
+                     <li class="item-regular"><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 2"></a></li>
+                     <li class="item-regular"><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 3"></a></li>
                   </ul>
                </div>
                <figure class="control-galeria-izquierda">
-                     <img src="{{asset('images/keyarts/arrow_left.png')}}" alt="control galeria izquierda">
+
                </figure>
                <figure class="control-galeria-derecha">
-                     <img src="{{asset('images/keyarts/arrow_right.png')}}" alt="control galeria derecha">
+
                </figure>
          </div>
          <p>
@@ -73,8 +73,9 @@
        slideMargin: 5,
        nextSelector: '.control-galeria-izquierda',
        prevSelector: '.control-galeria-derecha',
-       nextText: 'Next',
-       prevText: 'Prev'
+       nextText: '&nbsp;',
+       prevText: '&nbsp;',
+       pager:false
      });
    });
 </script>

@@ -82,6 +82,7 @@ h2.titulo-galeria.titulo-galeria-find {
   background: url("/images/keyarts/separador.png");
   background-repeat: repeat-x;
   background-position: top left;
+  margin: 16px 0 24px 0;
   padding-top: 26px;
 }
 header {
@@ -340,14 +341,27 @@ nav ul li a:active {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  background: url("/images/keyarts/galeria_about.png") no-repeat center center;
-  background-size: 100% 100%;
   display: inline-block;
-  height: 225px;
   margin: 0;
   padding: 5px;
   vertical-align: top;
+}
+.galeria ul li.item-regular {
+  background: url("/images/keyarts/galeria_about.png") no-repeat center center;
+  background-size: 100% 100%;
+  height: 225px;
   width: 290px;
+}
+.galeria ul li.item-small {
+  background: url("/images/keyarts/retail_galeria.png") no-repeat center center;
+  background-size: 100% 100%;
+  height: 146px;
+  width: 195px;
+}
+.galeria ul li.item-distribuidores {
+  background: url("/images/keyarts/separadorvertical.png") no-repeat top right;
+  height: 422px;
+  width: 300px;
 }
 .galeria ul li a {
   margin: 0 auto;
@@ -358,16 +372,36 @@ nav ul li a:active {
   width: 100%;
 }
 .galeria figure.control-galeria-izquierda {
-  margin: -43px -25px 0 0;
+  margin: -23px -25px 0 0;
   right: 100%;
   top: 50%;
   position: absolute;
 }
+.galeria figure.control-galeria-izquierda a {
+  background: url("/images/arrow_left.png") no-repeat center center;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: transparent;
+  height: 46px;
+  padding: 15px;
+  width: 32px;
+}
 .galeria figure.control-galeria-derecha {
   left: 100%;
-  margin: -43px 0 0 -25px;
+  margin: -23px 0 0 -25px;
   top: 50%;
   position: absolute;
+}
+.galeria figure.control-galeria-derecha a {
+  background: url("/images/arrow_right.png") no-repeat center center;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: transparent;
+  height: 46px;
+  padding: 15px 15px;
+  width: 32px;
 }
 .galeria.distribuidores {
   padding: 0;

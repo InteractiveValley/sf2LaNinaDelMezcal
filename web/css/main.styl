@@ -95,6 +95,7 @@ h2.titulo-galeria
 		background url('/images/keyarts/separador.png')
 		background-repeat repeat-x
 		background-position top left
+		margin 16px 0 24px 0
 		padding-top 26px
 
 
@@ -316,14 +317,24 @@ nav
 		padding 0
 		& li
 			box-sizing border-box
-			background url('/images/keyarts/galeria_about.png') no-repeat center center
-			background-size 100% 100%
 			display inline-block
-			height 225px
 			margin  0
 			padding 5px
 			vertical-align top
-			width 290px
+			&.item-regular
+				background url('/images/keyarts/galeria_about.png') no-repeat center center
+				background-size 100% 100%
+				height 225px
+				width 290px
+			&.item-small
+				background url('/images/keyarts/retail_galeria.png') no-repeat center center
+				background-size 100% 100%
+				height 146px
+				width 195px
+			&.item-distribuidores
+				background url('/images/keyarts/separadorvertical.png') no-repeat top right
+				height 422px
+				width 300px
 			& a
 				margin 0 auto
 				vertical-align middle
@@ -332,15 +343,29 @@ nav
 					width 100%
 
 	& figure.control-galeria-izquierda
-		margin -43px -25px 0 0
+		margin -23px -25px 0 0
 		right 100%
 		top 50%
 		position absolute
+		& a
+			background url('/images/arrow_left.png') no-repeat center center
+			box-sizing border-box
+			color transparent
+			height 46px
+			padding 15px
+			width 32px
 	& figure.control-galeria-derecha
 		left 100%
-		margin -43px 0 0 -25px
+		margin -23px 0 0 -25px
 		top 50%
 		position absolute
+		& a
+			background url('/images/arrow_right.png') no-repeat center center
+			box-sizing border-box
+			color transparent
+			height 46px
+			padding 15px 15px
+			width 32px
 	&.distribuidores
 		padding 0
 		& figure.control-galeria-izquierda
