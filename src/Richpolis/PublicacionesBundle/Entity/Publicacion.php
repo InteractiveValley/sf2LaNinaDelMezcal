@@ -63,6 +63,16 @@ class Publicacion
      * @ORM\Column(name="is_active", type="boolean", nullable=true)
      */
     private $isActive;
+    
+    /**
+     * @var \CategoriasPublicacion
+     *
+     * @ORM\ManyToOne(targetEntity="CategoriasPublicacion", inversedBy="publicaciones")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="categoria_id", referencedColumnName="id")
+     * })
+     */
+    private $categoria;
 
     /**
      * @var \DateTime
@@ -446,10 +456,10 @@ class Publicacion
         return \Richpolis\BackendBundle\Utils\Richsys::getArchivoView($opciones);
     }
     public function getWidth(){
-        return 120;
+        return 300;
     }
     public function getHeight(){
-        return 80;
+        return 225;
     }
     
 
@@ -480,26 +490,49 @@ class Publicacion
     }
 
     public function getDescripcionHtml(){
-       $traduce=array( 'Á'=>'&Aacute;',
-                      'á'=>'&aacute;',
-                      'É'=>'&Eacute;',
-                      'é'=>'&eacute;',
-                      'Í'=>'&Iacute;',
-                      'í'=>'&iacute;',
-                      'Ó'=>'&Oacute;',
-'ó'=>'&oacute;',
-'Ú'=>'&Uacute;',
-'ú'=>'&uacute;',
-'Ü'=>'&Uuml;',
-'ü'=>'&uuml;',
-'Ṅ'=>'&Ntilde;',
-'ñ'=>'&ntilde;',
-'&'=>'&amp;',
-'<'=>'&lt;',
-'>'=>'&gt;',
-"'"=>"\'");
+       $traduce=array('Á'=>'&Aacute;',
+                    'á'=>'&aacute;',
+                    'É'=>'&Eacute;',
+                    'é'=>'&eacute;',
+                    'Í'=>'&Iacute;',
+                    'í'=>'&iacute;',
+                    'Ó'=>'&Oacute;',
+                    'ó'=>'&oacute;',
+                    'Ú'=>'&Uacute;',
+                    'ú'=>'&uacute;',
+                    'Ü'=>'&Uuml;',
+                    'ü'=>'&uuml;',
+                    'Ṅ'=>'&Ntilde;',
+                    'ñ'=>'&ntilde;',
+                    '&'=>'&amp;',
+                    '<'=>'&lt;',
+                    '>'=>'&gt;',
+                    "'"=>"\'");
        $sale=strtr( $this->getDescripcion() , $traduce );
        return $sale;
 
+    }
+
+    /**
+     * Set categoria
+     *
+     * @param \Richpolis\PublicacionesBundle\Entity\CategoriasPublicacion $categoria
+     * @return Publicacion
+     */
+    public function setCategoria(\Richpolis\PublicacionesBundle\Entity\CategoriasPublicacion $categoria = null)
+    {
+        $this->categoria = $categoria;
+    
+        return $this;
+    }
+
+    /**
+     * Get categoria
+     *
+     * @return \Richpolis\PublicacionesBundle\Entity\CategoriasPublicacion 
+     */
+    public function getCategoria()
+    {
+        return $this->categoria;
     }
 }

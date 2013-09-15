@@ -14,7 +14,7 @@ security:
         in_memory:
             memory:
                 users:
-                    admin:  { password: admin777, roles: [ 'ROLE_USER' ] }
+                    admin:  { password: admin, roles: [ 'ROLE_USER' ] }
                     richpolis: { password: D3m3s1s1, roles: [ 'ROLE_ADMIN' ] }
 
     firewalls:

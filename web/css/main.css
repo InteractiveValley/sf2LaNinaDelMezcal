@@ -95,30 +95,63 @@ nav {
   background: url("/images/keyarts/menu.png");
   background-position: top center;
   background-repeat: no-repeat;
-  height: 75px;
 }
-nav ul {
-  list-style: none;
+nav > a {
+  display: none;
 }
-nav ul li {
-  display: inline-block;
-  margin-right: 1em;
-  margin-top: 0.7em;
-  vertical-align: top;
-}
-nav ul li a {
+nav a {
   color: #fff;
   text-decoration: none;
   text-transform: uppercase;
+  display: block;
+  padding: 10px 15px;
 }
-nav ul li a:hover,
-nav ul li a:active {
+nav a:hover,
+nav a:active {
   text-decoration: underline;
+}
+nav li {
+  position: relative;
+}
+nav li:hover > ul {
+  max-height: 300px;
+}
+nav > ul {
+  height: 75px;
+  list-style: none;
+  padding: 0;
+}
+nav > ul > li {
+  display: inline-block;
+  vertical-align: top;
+}
+nav > ul > li > ul {
+  left: -40px;
+  top: 100%;
+  position: absolute;
+  max-height: 0px;
+  overflow: hidden;
+  -webkit-transition: max-height 1s linear;
+  -moz-transition: max-height 1s linear;
+  -ms-transition: max-height 1s linear;
+  -o-transition: max-height 1s linear;
+  transition: max-height 1s linear;
+  width: 250px;
+  z-index: 2000;
+}
+nav > ul > li > ul > li {
+  background: url("/images/keyarts/menu.png");
+  background-position: top center;
+  background-repeat: no-repeat;
+  list-style: none;
+  margin-bottom: 1px solid #f00;
+  text-align: left;
 }
 #boton-comprar {
   text-align: left;
+  position: relative;
 }
-#boton-comprar a {
+#boton-comprar > a {
   background: url("/images/keyarts/comprar.png") no-repeat center right;
   color: #fff;
   height: 24px;
@@ -127,6 +160,38 @@ nav ul li a:active {
   text-transform: uppercase;
   padding: 1em;
   width: 150px;
+}
+#boton-comprar:hover ul.menu-comprar {
+  max-height: 300px;
+}
+#boton-comprar ul.menu-comprar {
+  position: absolute;
+  bottom: 6px;
+  left: -35px;
+  max-height: 0px;
+  overflow: hidden;
+  -webkit-transition: max-height 1s linear;
+  -moz-transition: max-height 1s linear;
+  -ms-transition: max-height 1s linear;
+  -o-transition: max-height 1s linear;
+  transition: max-height 1s linear;
+  width: 250px;
+  z-index: 2000;
+}
+#boton-comprar ul.menu-comprar li {
+  background: url("/images/keyarts/menu.png");
+  background-position: top center;
+  background-repeat: no-repeat;
+  list-style: none;
+  margin-bottom: 1px solid #f00;
+  text-align: left;
+}
+#boton-comprar ul.menu-comprar li a {
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  display: block;
+  padding: 10px 15px;
 }
 #contenedor {
   margin: 0 auto;
@@ -153,6 +218,10 @@ nav ul li a:active {
 }
 #desarrollado img {
   opacity: 0.7;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  -o-transition: all 1s ease;
   transition: all 1s ease;
 }
 #desarrollado:hover img {
@@ -230,10 +299,12 @@ nav ul li a:active {
   vertical-align: top;
 }
 #menus-botellas ul li a {
-  font-size: 0.9em;
+  font-size: 0.8em;
   text-transform: uppercase;
   text-decoration: none;
+  margin-left: 0.1em;
 }
+#menus-botellas ul li a.active,
 #menus-botellas ul li a:hover {
   text-decoration: underline;
 }
@@ -254,40 +325,48 @@ nav ul li a:active {
   display: inline-block;
   vertical-align: top;
 }
-.botella {
+#botella {
   position: relative;
 }
-.botella .texto-floante-derecha {
-  position: absolute;
-  right: 0px;
-  top: 0px;
-}
-.botellas {
-  position: relative;
-}
-.botellas .descripcion-botella {
+#botella .descripcion-botella {
   left: 0px;
   position: absolute;
   top: 0px;
   width: 40%;
 }
-.botellas .descripcion-botella header h1,
-.botellas .descripcion-botella header h2 {
+#botella .descripcion-botella header h1,
+#botella .descripcion-botella header h2 {
   font-family: 'Oswald', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: -1.5px;
   text-shadow: 2px 2px 0px #ccc;
 }
-.botellas .descripcion-botella header h1 {
+#botella .descripcion-botella header h1 {
   font-size: 2em;
 }
-.botellas .descripcion-botella header h2 {
+#botella .descripcion-botella header h2 {
   font-size: 3em;
 }
-.botellas .descripcion-botella p {
+#botella .descripcion-botella p {
   border-left: 6px solid #f00;
   padding-left: 5px;
+}
+#botella .mensaje-toltip {
+  font-size: 1em;
+  text-transform: capitalize;
+  position: absolute;
+}
+#botella .mensaje-toltip.right {
+  text-align: right;
+  right: 125px;
+}
+#botella .mensaje-toltip.left {
+  text-align: left;
+  left: 95px;
+}
+.botellas {
+  position: relative;
 }
 .botellas #redes-sociales-pagina {
   text-align: right;
@@ -376,6 +455,7 @@ nav ul li a:active {
   right: 100%;
   top: 50%;
   position: absolute;
+  z-index: 1000;
 }
 .galeria figure.control-galeria-izquierda a {
   background: url("/images/arrow_left.png") no-repeat center center;
@@ -392,6 +472,7 @@ nav ul li a:active {
   margin: -23px 0 0 -25px;
   top: 50%;
   position: absolute;
+  z-index: 1000;
 }
 .galeria figure.control-galeria-derecha a {
   background: url("/images/arrow_right.png") no-repeat center center;

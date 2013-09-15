@@ -1,42 +1,52 @@
 {% extends "FrontendBundle::layout.html.twig" %}
 
+{% block stylesheets %}
+{{parent()}}
+<link rel="stylesheet" href="{{ asset('css/jquery.qtip.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/prettyPhoto.css') }}">
+{% endblock %}
+
 {% block body %}
-<section id="contenido" class="botellas">
+<section id="contenido" class="botellas" ng-controller="BotellasController">
    <div class="galeria">
       <figure class="control-galeria-izquierda">
-         <img src="{{asset('images/keyarts/arrow_left.png')}}" alt="control galeria izquierda">
+          <a class="bx-prev" href="{{path(botella_anterior)}}">&nbsp;</a>
       </figure>
       <article id="botella">
+      {% raw %}
             <div class="descripcion-botella">
                <header>
                   <h1>bottle tour</h1>
-                  <h2 class="espadin">espadin</h2>   
+                  <h2 class="{{botella.clase}}">{{botella.botella}}</h2>   
                </header>
                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat, mollitia, minima nisi quae repellendus eligendi dolorem molestiae aliquam unde. Harum, consequatur non modi possimus ab sit voluptatibus quae quaerat qui.
+                  {{botella.descripcion}}
                </p>
             </div>
             <figure class="botella">
-                  <img src="{{asset('images/keyarts/espadin.png')}}" alt="espadin">
-                  <div class="texto-floante-derecha">
-                     <a href="">
-                        proof
-                        <span class="tooltip">
-                           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore, expedita corrupti facilis molestias iste nemo.
-                        </span>   
-                     </a>
-                  </div>
+                <img src="{{botella.imagen}}" alt="{{botella.titulo}}">
             </figure>
-            
+              <div ng-repeat="mensaje in botella.mensajes" class="mensaje-toltip {{botella.clase}} {{mensaje.clase}}" rel="tip" title="{{mensaje.mensaje}}" style="{{mensaje.style}}">
+                      {{mensaje.titulo}}
+              </div>  
+            <div id="howToMix" class="mensaje-toltip {{botella.clase}} {{botella.howToMix.clase}}" style="{{botella.howToMix.style}}">
+                <span onclick="javascript:generarHowToMix({{botella.howToMix.imagenes}})" style="cursor:pointer;">{{botella.howToMix.titulo}}</span>
+            </div>
+
+      {% endraw %}
       </article>
       <figure class="control-galeria-derecha">
-            <img src="{{asset('images/keyarts/arrow_right.png')}}" alt="control galeria derecha">
+            <a class="bx-next" href="{{path(botella_siguiente)}}">&nbsp;</a>
       </figure>   
    </div>
    <figure id="boton-comprar">
       <a href="">
          comprar
       </a>
+      <ul class="menu-comprar">
+        <li><a href="">mexico</a></li>
+        <li><a href="">usa</a></li>
+      </ul>
    </figure>
 
    <div id="redes-sociales-pagina" class="derecha">
@@ -49,13 +59,13 @@
    </div>
    <figure id="menus-botellas">
       <ul>
-         <li><a href="" class="espadin">espadin</a></li>
-         <li><a href="" class="madrecuixe">madrecuixe</a></li>
-         <li><a href="" class="tobala">tobala</a></li>
-         <li><a href="" class="tepextate">tepextate</a></li>
-         <li><a href="" class="pechuga">pechuga</a></li>
-         <li><a href="" class="primario-mezcal">primario mezcal</a></li>
-         <li><a href="" class="primario-licor">primario licor</a></li>
+         <li><a href="{{path('botella_espadin')}}" class="{%if(pagina_actual=='espadin')%}active{%endif%} espadin">espadin</a></li>
+         <li><a href="" class="{%if(pagina_actual=='madrecuixe')%}active{%endif%} madrecuixe">madrecuixe</a></li>
+         <li><a href="" class="{%if(pagina_actual=='tobala')%}active{%endif%} tobala">tobala</a></li>
+         <li><a href="" class="{%if(pagina_actual=='tepextate')%}active{%endif%} tepextate">tepextate</a></li>
+         <li><a href="" class="{%if(pagina_actual=='pechuga')%}active{%endif%} pechuga">pechuga</a></li>
+         <li><a href="{{path('botella_primario')}}" class="{%if(pagina_actual=='primario-mezcal')%}active{%endif%} primario-mezcal">primario mezcal</a></li>
+         <li><a href="" class="{%if(pagina_actual=='primario-licor')%}active{%endif%} primario-licor">primario licor</a></li>
       </ul>
    </figure>
 </section>
@@ -64,7 +74,45 @@
 
 {% block javascripts %}
    {{parent()}}
-   <!--script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js">
-   </script-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js">
+   </script>
+<script src="{{asset(app_angular)}}"></script>   
+<script src="{{asset('js/jquery.qtip.min.js')}}"></script>
+<script src="{{asset('js/jquery.prettyPhoto.js')}}"></script>  
+<script src="{{asset('js/sfrichpolis.js')}}"></script>  
+<script>
+function generarHowToMix(objImagenes){
+  var titulos=[],imagenes=[],descripciones=[],contador;
+  for(contador=0;contador<objImagenes.length;contador++){
+    titulos[contador]="Imagen "+(contador+1);
+    imagenes[contador]=objImagenes[contador].imagen;
+    descripciones[contador] ="";
+  }
+  $.prettyPhoto.open(imagenes,titulos,descripciones);
+} 
+$(document).ready(function() {
+  $.configPrettyPhoto();
+  $('[rel=tip]').qtip({
+      content: { 
+        text: true
+             },
+      position: {
+        my: 'top center',  // Position my top left...
+        at: 'bottom center', // at the bottom right of...
+        target: 'event'
+      },
+      show: {
+        event: 'click mouseenter',
+        solo: true
+      },
+      hide: {
+        event: 'unfocus'
+      },
+      style: {
+        classes: 'qtip-light qtip-bootstrap'
+      }
+    });
+});
 
+</script>
 {% endblock %}

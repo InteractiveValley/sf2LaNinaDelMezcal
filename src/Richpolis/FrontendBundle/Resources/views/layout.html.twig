@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="es"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" ng-app> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" ng-app> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" ng-app> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es" ng-app> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
         <title>{% block title %}La Niña del Mezcal{% endblock %}</title>
-       
+
         <meta property="og:title" content="La niña del mezcal" />
         <meta property="og:type" content="album" />
         <meta property="og:url" content="{{url('homepage')}}" />
@@ -29,6 +29,7 @@
         <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
         <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/superfish.css') }}">
         {% endblock %}
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -44,78 +45,91 @@
         <![endif]-->
         <div id="contenedor">
             <header>
-            <figure id="logo">
-                <a href="{{path('homepage')}}">
-                    <img src="{{asset('images/keyarts/logo_header.png')}}" alt="">
-                </a>
-            </figure>
-            <span id="nav-left">
-                &nbsp;
-            </span>
-            <nav>
-                <ul>
-                    <li><a href="{{path('about_la_nina')}}">about la niña</a></li>
-                    <li><a href="{{path('the_mezcal')}}">the mezcal</a></li>
-                    <li><a href="">the blog</a></li>
-                    <li><a href="">events</a></li>
-                    <li><a href="{{path('find_la_nina')}}">find la niña</a></li>
-                    <li><a href="">shop online</a></li>
-                    <li><a href="{{path('frontend_contacto')}}">contact</a></li>
-                </ul>
-            </nav>
-            <span id="nav-right">
-                &nbsp;
-            </span>
-            <div id="lenguajes">
-                <span id="lenguaje-es">
-                    <a href="">
-                        español    
-                    </a>
-                </span>
-                <span id="lenguaje-en">
-                    <a href="">
-                        english    
-                    </a>
-                </span>
-            </div>
-            <div id="redes-sociales">
-                <figure id="red-social-twitter">
-                    <a href="">
-                        <img src="{{asset('images/keyarts/twitter.png')}}" alt=""/>    
+                <figure id="logo">
+                    <a href="{{path('homepage')}}">
+                        <img src="{{asset('images/keyarts/logo_header.png')}}" alt="">
                     </a>
                 </figure>
-                <figure id="red-social-facebook">
-                    <a href="">
-                        <img src="{{asset('images/keyarts/facebook.png')}}" alt=""/>    
-                    </a>
-                </figure>
-            </div>
-        </header>
+                <span id="nav-left">
+                    &nbsp;
+                </span>
+                <nav>
+                    <ul>
+                        <li><a href="{{path('about_la_nina')}}">about la niña</a></li>
+                        <li>
+                            <a href="?mezcal">the mezcal</a>
+                            <ul>
+                                <li><a href="{{path('botella_espadin')}}">Espadin</a></li>
+                                <li><a href="{{path('botella_primario')}}}">Primario mazcal joven</a></li>
+                            </ul>    
+                        </li>
+                        <li><a href="#">the blog</a></li>
+                        <li><a href="#">events</a></li>
+                        <li><a href="{{path('find_la_nina')}}">find la niña</a></li>
+                        <li>
+                            <a href="?shop">shop online</a>
+                            <ul>
+                                <li><a href="#">Shirts</a></li>
+                                <li><a href="#">Jackets</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="{{path('frontend_contacto')}}">contact</a></li>
+                    </ul>
+                </nav>
+                <span id="nav-right">
+                    &nbsp;
+                </span>
+                <div id="lenguajes">
+                    <span id="lenguaje-es">
+                        <a href="">
+                            español    
+                        </a>
+                    </span>
+                    <span id="lenguaje-en">
+                        <a href="">
+                            english    
+                        </a>
+                    </span>
+                </div>
+                <div id="redes-sociales">
+                    <figure id="red-social-twitter">
+                        <a href="">
+                            <img src="{{asset('images/keyarts/twitter.png')}}" alt=""/>    
+                        </a>
+                    </figure>
+                    <figure id="red-social-facebook">
+                        <a href="">
+                            <img src="{{asset('images/keyarts/facebook.png')}}" alt=""/>    
+                        </a>
+                    </figure>
+                </div>
+            </header>
         {% block body %}{% endblock %}
-        <footer>
-            <div id="contenido-footer">
-                Copyright 2013 La Niña del Mezcal info@laniñadelmezcal.com  
-            </div>
-            <figure id="desarrollado">
-                <a href="mailto:rafael@interactivevalley.com">
-                    <img src="{{asset('images/developed_negro.png')}}" alt="developed for Interactive Valley">
-                </a>
-            </figure>
-            <figure id="facebook-footer">
-                <a href="">
-                    <img src="{{ asset('images/keyarts/facebook.png') }}" alt="facebook">
-                </a>
-            </figure>
-            <figure id="twitter-footer">
-                <a href="">
-                    <img src="{{ asset('images/keyarts/twitter.png') }}" alt="twitter">
-                </a>
-            </figure>
-        </footer>    
+            <footer>
+                <div id="contenido-footer">
+                    Copyright 2013 La Niña del Mezcal info@laniñadelmezcal.com  
+                </div>
+                <figure id="desarrollado">
+                    <a href="mailto:rafael@interactivevalley.com">
+                        <img src="{{asset('images/developed_negro.png')}}" alt="developed for Interactive Valley">
+                    </a>
+                </figure>
+                <figure id="facebook-footer">
+                    <a href="">
+                        <img src="{{ asset('images/keyarts/facebook.png') }}" alt="facebook">
+                    </a>
+                </figure>
+                <figure id="twitter-footer">
+                    <a href="">
+                        <img src="{{ asset('images/keyarts/twitter.png') }}" alt="twitter">
+                    </a>
+                </figure>
+            </footer>    
         </div>
         {% block javascripts %}
         <script type="text/javascript" src="{{asset('js/jquery-1.8.3.min.js')}}"></script>
-        <script type="text/javascript" src="{{asset('js/main.js')}}"></script>
+
         {% endblock %}
-   </body>
+    </body>
 </html>

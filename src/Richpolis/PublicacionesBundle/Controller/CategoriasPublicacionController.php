@@ -1,6 +1,6 @@
 <?php
 
-namespace Richpolis\CategoriasGaleriaBundle\Controller;
+namespace Richpolis\PublicacionesBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -8,16 +8,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Richpolis\CategoriasGaleriaBundle\Entity\Categorias;
-use Richpolis\CategoriasGaleriaBundle\Form\CategoriasType;
+use Richpolis\PublicacionesBundle\Entity\CategoriasPublicacion;
+use Richpolis\PublicacionesBundle\Form\CategoriasPublicacionType;
 
 
 /**
  * Categorias controller.
  *
- * @Route("/backend/categorias")
+ * @Route("/backend/publicaciones")
  */
-class CategoriasController extends Controller
+class CategoriasPublicacionController extends Controller
 {
     protected function getFilters()
     {
@@ -28,7 +28,7 @@ class CategoriasController extends Controller
     /**
      * Lists all Categorias entities.
      *
-     * @Route("/", name="categorias")
+     * @Route("/", name="publicaciones")
      * @Template()
      */
     public function indexAction()
@@ -37,17 +37,11 @@ class CategoriasController extends Controller
 
         $filters = $this->getFilters();
 
-        if(!isset($filters['categorias']))
-            $filters['categorias']=Categorias::$GALERIA;
+        if(!isset($filters['publicaciones']))
+            $filters['publicaciones']=  CategoriasPublicacion::$ABOUT;
         
-        if($filters['categorias']==Categorias::$GALERIA){
-            $galeriaoficial=true;
-        }else{
-            $galeriaoficial=false;
-        }
-
-        $query = $em->getRepository('CategoriasGaleriaBundle:Categorias')
-                            ->getQueryCategoriasPorTipoYActivas($filters['categorias'],true);
+        $query = $em->getRepository('PublicacionesBundle:CategoriasPublicacion')
+                            ->getQueryCategoriasPorTipoYActivas($filters['publicaciones'],true);
         
         $paginator = $this->get('knp_paginator');
         
@@ -60,27 +54,26 @@ class CategoriasController extends Controller
 
         
         return array(
-            'tipos'         =>  Categorias::getArrayTipoCategorias(),
-            'tipo_categoria'=>  $filters['categorias'],
+            'tipos'         =>  CategoriasPublicacion::getArrayTipoCategorias(),
+            'tipo_categoria'=>  $filters['publicaciones'],
             'pagination' => $pagination,
-            'galeriaoficial'=>$galeriaoficial,
         );
     }
     
     /**
      * Seleccionar un tipo de categoria.
      *
-     * @Route("/seleccionar", name="categorias_seleccionar")
+     * @Route("/seleccionar", name="publicaciones_seleccionar")
      */
     public function selectAction()
     {
         $filters = $this->getFilters();
         
-        if(isset($filters['categorias'])){
-            return $this->redirect($this->generateUrl('categorias'));
+        if(isset($filters['publicaciones'])){
+            return $this->redirect($this->generateUrl('publicaciones'));
         }else{
-            return $this->render('CategoriasGaleriaBundle:Categorias:select.html.twig', array(
-                'tipos'  => Categorias::getArrayTipoCategorias(),
+            return $this->render('PublicacionesBundle:CategoriasPublicacion:select.html.twig', array(
+                'tipos'  => CategoriasPublicacion::getArrayTipoCategorias(),
             ));
         }
     }
@@ -88,21 +81,21 @@ class CategoriasController extends Controller
     /**
      * Mostrar categoria por tipo
      *
-     * @Route("/list/{tipo}/tipo", name="categorias_por_tipo")
+     * @Route("/list/{tipo}/tipo", name="publicaciones_por_tipo")
      */
     public function porTipoAction($tipo)
     {
         $filters = $this->getFilters();
         if($tipo){
-            $filters['categorias']=$tipo;
+            $filters['publicaciones']=$tipo;
             $this->get('session')->set('filters',$filters);
-            return $this->redirect($this->generateUrl('categorias'));
+            return $this->redirect($this->generateUrl('publicaciones'));
         }else{
-            if(isset($filters['categorias'])){
-                return $this->redirect($this->generateUrl('categorias'));
+            if(isset($filters['publicaciones'])){
+                return $this->redirect($this->generateUrl('publicaciones'));
             }else{
-                return $this->render('CategoriasGaleriaBundle:Categorias:select.html.twig', array(
-                    'tipos'  => Categorias::getArrayTipoCategorias(),
+                return $this->render('PublicacionesBundle:CategoriasPublicacion:select.html.twig', array(
+                    'tipos'  => CategoriasPublicacion::getArrayTipoCategorias(),
                 ));
             }
         }        
@@ -110,30 +103,30 @@ class CategoriasController extends Controller
     
 
     /**
-     * Finds and displays a Categorias entity.
+     * Finds and displays a CategoriasPublicacion entity.
      *
-     * @Route("/{id}/show", name="categorias_show")
+     * @Route("/{id}/show", name="publicaciones_show")
      * @Template()
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $categoria_actual = $em->getRepository('CategoriasGaleriaBundle:Categorias')
+        $categoria_actual = $em->getRepository('PublicacionesBundle:CategoriasPublicacion')
                                ->find($id);
         
-        $categorias = $em->getRepository('CategoriasGaleriaBundle:Categorias')
+        $publicaciones = $em->getRepository('PublicacionesBundle:CategoriasPublicacion')
                 ->getCategoriasPorTipoCategoria($categoria_actual->getTipoCategoria(),$categoria_actual->getId());
         
         if (!$categoria_actual) {
-            throw $this->createNotFoundException('Unable to find Categorias entity.');
+            throw $this->createNotFoundException('Unable to find CategoriasPublicacion entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
         return array(
             'entity'      => $categoria_actual,
-            'categorias'  => $categorias,
-            'tipos'       => Categorias::getArrayTipoCategorias(),
+            'publicaciones'  => $publicaciones,
+            'tipos'       => CategoriasPublicacion::getArrayTipoCategorias(),
             'delete_form' => $deleteForm->createView(),
 
         );
@@ -142,54 +135,54 @@ class CategoriasController extends Controller
     
     
     /**
-     * Mostrar categorias segun el tipo.
+     * Mostrar publicaciones segun el tipo.
      *
-     * @Route("/show/{tipo}/tipo", name="categorias_show_tipo")
-     * @Template("CategoriasGaleriaBundle:Categorias:show.html.twig")
+     * @Route("/show/{tipo}/tipo", name="publicaciones_show_tipo")
+     * @Template("PublicacionesBundle:CategoriasPublicacion:show.html.twig")
      */
     public function showCategoriaAction($tipo)
     {
         
         $categoria_actual=$this->getDoctrine()
-                ->getRepository('CategoriasGaleriaBundle:Categorias')
+                ->getRepository('PublicacionesBundle:CategoriasPublicacion')
                 ->getCategoriaActualPorTipoCategoria($tipo);
-        $categorias = $this->getDoctrine()
-                ->getRepository('CategoriasGaleriaBundle:Categorias')
+        $publicaciones = $this->getDoctrine()
+                ->getRepository('PublicacionesBundle:CategoriasPublicacion')
                 ->getCategoriasPorTipoCategoria($tipo,$categoria_actual->getId());
         
         if (!$categoria_actual) {
-            throw $this->createNotFoundException('Unable to find Categorias entity.');
+            throw $this->createNotFoundException('Unable to find CategoriasPublicacion entity.');
         }
 
         $deleteForm = $this->createDeleteForm($categoria_actual->getId());
 
         return array(
             'entity'      => $categoria_actual,
-            'categorias'  => $categorias,
-            'tipos'       => Categorias::getArrayTipoCategorias(),
+            'publicaciones'  => $publicaciones,
+            'tipos'       => CategoriasPublicacion::getArrayTipoCategorias(),
             'delete_form' => $deleteForm->createView(),
         );
     }
     
-    public function oficialAction(){
+    public function aboutAction(){
         return $this->forward(
-                'CategoriasGaleriaBundle:Categorias:showCategoria', 
-                array('tipo'=>  Categorias::$GALERIA)
+                'PublicacionesBundle:CategoriasPublicacion:showCategoria', 
+                array('tipo'=>  CategoriasPublicacion::$ABOUT)
                 );
     }
     
-    public function recomendacionesAction(){
+    public function distribuidoresAction(){
         return $this->forward(
-                'CategoriasGaleriaBundle:Categorias:showCategoria', 
-                array('tipo'=>  Categorias::$RECOMENDACIONES)
+                'PublicacionesBundle:CategoriasPublicacion:showCategoria', 
+                array('tipo'=>  CategoriasPublicacion::$DISTRIBUIDORES)
                 );
     }
     
 
     /**
-     * Displays a form to create a new Categorias entity.
+     * Displays a form to create a new CategoriasPublicacion entity.
      *
-     * @Route("/new", name="categorias_new")
+     * @Route("/new", name="publicaciones_new")
      * @Template()
      */
     public function newAction()
@@ -197,7 +190,7 @@ class CategoriasController extends Controller
         $request=$this->getRequest();
         $tipo=$request->query->get('tipo',0);
         $entity = new Categorias();
-        $max=$this->getDoctrine()->getRepository('CategoriasGaleriaBundle:Categorias')->getMaxPosicion();
+        $max=$this->getDoctrine()->getRepository('PublicacionesBundle:CategoriasPublicacion')->getMaxPosicion();
         
         if(!is_null($max)){
             $entity->setPosicion($max+1);
@@ -219,11 +212,11 @@ class CategoriasController extends Controller
     }
 
     /**
-     * Creates a new Categorias entity.
+     * Creates a new CategoriasPublicacion entity.
      *
-     * @Route("/create", name="categorias_create")
+     * @Route("/create", name="publicaciones_create")
      * @Method("POST")
-     * @Template("CategoriasGaleriaBundle:Categorias:new.html.twig")
+     * @Template("PublicacionesBundle:CategoriasPublicacion:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -236,7 +229,7 @@ class CategoriasController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('categorias_por_tipo', array('tipo' => $entity->getTipoCategoria())));
+            return $this->redirect($this->generateUrl('publicaciones_por_tipo', array('tipo' => $entity->getTipoCategoria())));
         }
 
         return array(
@@ -247,19 +240,19 @@ class CategoriasController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Categorias entity.
+     * Displays a form to edit an existing CategoriasPublicacion entity.
      *
-     * @Route("/{id}/edit", name="categorias_edit")
+     * @Route("/{id}/edit", name="publicaciones_edit")
      * @Template()
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CategoriasGaleriaBundle:Categorias')->find($id);
+        $entity = $em->getRepository('PublicacionesBundle:CategoriasPublicacion')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Categorias entity.');
+            throw $this->createNotFoundException('Unable to find CategoriasPublicacion entity.');
         }
 
         $editForm = $this->createForm(new CategoriasType(), $entity);
@@ -275,20 +268,20 @@ class CategoriasController extends Controller
     }
 
     /**
-     * Edits an existing Categorias entity.
+     * Edits an existing CategoriasPublicacion entity.
      *
-     * @Route("/{id}/update", name="categorias_update")
+     * @Route("/{id}/update", name="publicaciones_update")
      * @Method("POST")
-     * @Template("CategoriasGaleriaBundle:Categorias:edit.html.twig")
+     * @Template("PublicacionesBundle:CategoriasPublicacion:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CategoriasGaleriaBundle:Categorias')->find($id);
+        $entity = $em->getRepository('PublicacionesBundle:CategoriasPublicacion')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Categorias entity.');
+            throw $this->createNotFoundException('Unable to find CategoriasPublicacion entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -299,7 +292,7 @@ class CategoriasController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('categorias_por_tipo', array('tipo' => $entity->getTipoCategoria())));
+            return $this->redirect($this->generateUrl('publicaciones_por_tipo', array('tipo' => $entity->getTipoCategoria())));
         }
 
         return array(
@@ -311,9 +304,9 @@ class CategoriasController extends Controller
     }
 
     /**
-     * Deletes a Categorias entity.
+     * Deletes a CategoriasPublicacion entity.
      *
-     * @Route("/{id}/delete", name="categorias_delete")
+     * @Route("/{id}/delete", name="publicaciones_delete")
      * @Method("POST")
      */
     public function deleteAction(Request $request, $id)
@@ -323,10 +316,10 @@ class CategoriasController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('CategoriasGaleriaBundle:Categorias')->find($id);
+            $entity = $em->getRepository('PublicacionesBundle:CategoriasPublicacion')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Categorias entity.');
+                throw $this->createNotFoundException('Unable to find CategoriasPublicacion entity.');
             }
             
             foreach($entity->getGalerias() as $galeria){
@@ -337,7 +330,7 @@ class CategoriasController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('categorias'));
+        return $this->redirect($this->generateUrl('publicaciones'));
     }
 
     private function createDeleteForm($id)
@@ -351,12 +344,12 @@ class CategoriasController extends Controller
     /**
      * Galeria de una categoria segun el status del registro.
      *
-     * @Route("/galeria/{categoria}/{isActive}", name="categorias_galeria")
+     * @Route("/galeria/{categoria}/{isActive}", name="publicaciones_galeria")
      * @Template()
      */
     public function galeriaAction($categoria,$isActive){
         $em = $this->getDoctrine()->getEntityManager();
-        $entities=$em->getRepository('CategoriasGaleriaBundle:Galerias')
+        $entities=$em->getRepository('PublicacionesBundle:Publicacion')
                 ->getGaleriaPorCategoriaYStatus($categoria,$isActive);
         
         return array(
@@ -368,19 +361,19 @@ class CategoriasController extends Controller
     /**
      * Ordenar registros.
      *
-     * @Route("/ordenar", name="categorias_ordenar")
+     * @Route("/ordenar", name="publicaciones_ordenar")
      */
     public function ordenarGaleriaAction()
     {
         $request=$this->getRequest();
         if ($request->isXmlHttpRequest()) {
-            $categoria = $this->getDoctrine()->getRepository('CategoriasGaleriaBundle:Categorias')->find($request->request->get("categoria"));
+            $categoria = $this->getDoctrine()->getRepository('PublicacionesBundle:CategoriasPublicacion')->find($request->request->get("categoria"));
             $registro_order = $request->query->get('registro');
             $em=$this->getDoctrine()->getEntityManager();
             $result['ok']="ok";
             foreach($registro_order as $order=>$id)
             {
-                $registro=  $this->getDoctrine()->getRepository('CategoriasGaleriaBundle:Galerias')->find($id);
+                $registro=  $this->getDoctrine()->getRepository('PublicacionesBundle:Publicacion')->find($id);
                 if($registro->getPosicion()!=($order+1)){
                     try{
                         $registro->setPosicion($order+1);
@@ -403,16 +396,16 @@ class CategoriasController extends Controller
     /**
      * Subir registro de Categorias.
      *
-     * @Route("/{id}/up", name="categorias_up")
+     * @Route("/{id}/up", name="publicaciones_up")
      * @Method("GET")
      */
     public function upAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $registroUp = $em->getRepository('CategoriasGaleriaBundle:Categorias')->find($id);
+        $registroUp = $em->getRepository('PublicacionesBundle:CategoriasPublicacion')->find($id);
         
         if ($registroUp) {
-            $registroDown=$em->getRepository('CategoriasGaleriaBundle:Categorias')->getRegistroUpOrDown($registroUp->getPosicion(),true);
+            $registroDown=$em->getRepository('PublicacionesBundle:CategoriasPublicacion')->getRegistroUpOrDown($registroUp->getPosicion(),true);
             if ($registroDown) {
                 $posicion=$registroUp->getPosicion();
                 $registroUp->setPosicion($registroDown->getPosicion());
@@ -421,7 +414,7 @@ class CategoriasController extends Controller
             }
         }
         
-        return $this->redirect($this->generateUrl('categorias',array(
+        return $this->redirect($this->generateUrl('publicaciones',array(
             'page'=>$this->getRequest()->query->get('page', 1)
         )));
     }
@@ -429,16 +422,16 @@ class CategoriasController extends Controller
     /**
      * Subir registro de Categorias.
      *
-     * @Route("/{id}/down", name="categorias_down")
+     * @Route("/{id}/down", name="publicaciones_down")
      * @Method("GET")
      */
     public function downAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $registroDown = $em->getRepository('CategoriasGaleriaBundle:Categorias')->find($id);
+        $registroDown = $em->getRepository('PublicacionesBundle:CategoriasPublicacion')->find($id);
         
         if ($registroDown) {
-            $registroUp=$em->getRepository('CategoriasGaleriaBundle:Categorias')->getRegistroUpOrDown($registroDown->getPosicion(),false);
+            $registroUp=$em->getRepository('PublicacionesBundle:CategoriasPublicacion')->getRegistroUpOrDown($registroDown->getPosicion(),false);
             if ($registroUp) {
                 $posicion=$registroUp->getPosicion();
                 $registroUp->setPosicion($registroDown->getPosicion());
@@ -447,7 +440,7 @@ class CategoriasController extends Controller
             }
         }
         
-        return $this->redirect($this->generateUrl('categorias',array(
+        return $this->redirect($this->generateUrl('publicaciones',array(
             'page'=>$this->getRequest()->query->get('page', 1)
         )));
     }

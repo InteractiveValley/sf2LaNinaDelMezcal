@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Richpolis\GalMonBundle\DataFixtures\ORM;
+namespace Richpolis\CategoriasGaleriaBundle\DataFixtures\ORM;
  
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
@@ -12,24 +12,31 @@ class LoadCategoriasData extends AbstractFixture implements OrderedFixtureInterf
 {
   public function load(ObjectManager $em)
   {
-    $galeria = new Categorias();
-    $galeria->setCategoria('Galerias');
-    $galeria->setTipoCategoria(Categorias::$GALERIA);
-    $galeria->setPosicion(1);
+    $principal = new Categorias();
+    $principal->setCategoria('Galeria Principal');
+    $principal->setTipoCategoria(Categorias::$GALERIA_PRINCIPAL);
+    $principal->setPosicion(1);
  
-    $recomendaciones = new Categorias();
-    $recomendaciones->setCategoria('Recomendaciones');
-    $recomendaciones->setTipoCategoria(Categorias::$RECOMENDACIONES);
-    $recomendaciones->setPosicion(2);
+    $about = new Categorias();
+    $about->setCategoria('Galeria About');
+    $about->setTipoCategoria(Categorias::$GALERIA_ABOUT);
+    $about->setPosicion(2);
     
-    $publicaciones = new Categorias();
-    $publicaciones->setCategoria('Publicaciones');
-    $publicaciones->setTipoCategoria(Categorias::$PUBLICACIONES);
-    $publicaciones->setPosicion(3);
+    $distribuidores = new Categorias();
+    $distribuidores->setCategoria('Galeria Distribuidores Nacionales');
+    $distribuidores->setTipoCategoria(Categorias::$GALERIA_DISTRIBUIDORES);
+    $distribuidores->setPosicion(3);
     
-    $em->persist($galeria);
-    $em->persist($recomendaciones);
-    $em->persist($publicaciones);
+    $distribuidores2 = new Categorias();
+    $distribuidores2->setCategoria('Galeria Distribuidores USA');
+    $distribuidores2->setTipoCategoria(Categorias::$GALERIA_DISTRIBUIDORES);
+    $distribuidores2->setPosicion(4);
+    
+    
+    $em->persist($principal);
+    $em->persist($about);
+    $em->persist($distribuidores);
+    $em->persist($distribuidores2);
     
     $em->flush();
  

@@ -61,10 +61,46 @@ class DefaultController extends Controller {
      */
     public function mezcalAction()
     {
-        return array();
+        return $this->redirect("/mezcal/espadin");
         
     }
-     
+
+    /**
+     * Pantalla de the_mezcal - botella espadin.
+     *
+     * @Route("/mezcal/espadin", name="botella_espadin")
+     * @Template("FrontendBundle:Default:botella.html.twig")
+     */
+    public function espadinAction()
+    {
+        return array(
+            "pagina_actual"=>"espadin",
+            "app_angular"=>"js/app/espadin.js",
+            "botella_anterior"=>"botella_primario",
+            "botella_siguiente"=>"botella_primario",
+            );
+        
+    }
+
+    /**
+     * Pantalla de the_mezcal - botella primario.
+     *
+     * @Route("/mezcal/primario", name="botella_primario")
+     * @Template("FrontendBundle:Default:botella.html.twig")
+     */
+    public function primarioAction()
+    {
+        return array(
+            "pagina_actual"=>"primario-mezcal",
+            "app_angular"=>"js/app/primario.js",
+            "botella_anterior"=>"botella_espadin",
+            "botella_siguiente"=>"botella_espadin",
+            );
+        
+    }
+
+
+         
     /**
      * Pantalla de find_la_nina.
      *

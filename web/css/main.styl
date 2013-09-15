@@ -1,3 +1,10 @@
+transition()
+	-webkit-transition arguments
+	-moz-transition arguments
+	-ms-transition arguments
+	-o-transition arguments
+	transition arguments
+
 box-sizing()
 	-moz-box-sizing arguments
 	-webkit-box-sizing arguments
@@ -109,24 +116,52 @@ nav
 	background url('/images/keyarts/menu.png')
 	background-position top center
 	background-repeat no-repeat
-	height 75px
-	& ul
+
+	& > a
+		display none
+	& a
+		color white
+		text-decoration none
+		text-transform uppercase
+		display block
+		padding 10px 15px
+		&:hover
+		&:active
+			text-decoration underline
+	& li
+		position relative
+	& li:hover > ul
+		max-height 300px
+	& > ul
+		height 75px
 		list-style none
-		& li
+		padding 0
+
+		& > li
 			display inline-block
-			margin-right 1em
-			margin-top .7em
 			vertical-align top
-			& a
-				color white
-				text-decoration none
-				text-transform uppercase
-				&:hover
-				&:active
-					text-decoration underline
+			& > ul
+				left -40px
+				top 100%
+				position absolute
+				max-height 0px
+				overflow hidden
+				transition max-height 1s linear
+				width 250px
+				z-index 2000
+				& > li
+					background url('/images/keyarts/menu.png')
+					background-position top center
+					background-repeat no-repeat
+					list-style none
+					margin-bottom 1px solid red
+					text-align left
+
+
 #boton-comprar
 	text-align left
-	& a
+	position relative
+	& > a
 		background url('/images/keyarts/comprar.png') no-repeat center right
 		color white
 		height 24px
@@ -135,6 +170,30 @@ nav
 		text-transform uppercase
 		padding 1em
 		width 150px
+	&:hover ul.menu-comprar
+		max-height 300px
+	& ul.menu-comprar
+		position absolute
+		bottom 6px
+		left -35px
+		max-height 0px
+		overflow hidden
+		transition max-height 1s linear
+		width 250px
+		z-index 2000
+		& li
+			background url('/images/keyarts/menu.png')
+			background-position top center
+			background-repeat no-repeat
+			list-style none
+			margin-bottom 1px solid red
+			text-align left
+			& a
+				color white
+				text-decoration none
+				text-transform uppercase
+				display block
+				padding 10px 15px
 
 #contenedor
 	margin 0 auto
@@ -222,9 +281,11 @@ nav
 			display inline-block
 			vertical-align top
 			& a
-				font-size .9em
+				font-size .8em
 				text-transform uppercase
 				text-decoration none
+				margin-left .1em
+			& a.active	
 			& a:hover
 				text-decoration underline
 
@@ -243,14 +304,7 @@ nav
 		display inline-block
 		vertical-align top
 
-.botella 
-	position relative
-	& .texto-floante-derecha
-		position absolute
-		right 0px
-		top 0px
-
-.botellas
+#botella 
 	position relative
 	& .descripcion-botella
 		left 0px
@@ -271,6 +325,20 @@ nav
 		& p
 			border-left 6px solid red
 			padding-left 5px
+	& .mensaje-toltip
+		font-size 1em;
+		text-transform capitalize
+		position absolute
+		&.right
+			text-align right
+			right 125px
+		&.left
+			text-align left
+			left 95px
+
+
+.botellas
+	position relative
 	& #redes-sociales-pagina
 		text-align right
 
@@ -347,6 +415,7 @@ nav
 		right 100%
 		top 50%
 		position absolute
+		z-index 1000
 		& a
 			background url('/images/arrow_left.png') no-repeat center center
 			box-sizing border-box
@@ -359,6 +428,7 @@ nav
 		margin -23px 0 0 -25px
 		top 50%
 		position absolute
+		z-index 1000
 		& a
 			background url('/images/arrow_right.png') no-repeat center center
 			box-sizing border-box
@@ -374,4 +444,6 @@ nav
 		& figure.control-galeria-derecha
 			margin 0 0 0 -25px
 			top 1em	
+
+
 

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>menu css</title>
+	<style type="text/css">
+		*{
+			padding: 0px;
+			margin: 0px;
+		}
+		nav{
+			margin: auto;
+			width: 500px;
+
+		}
+		ul,ol{
+			list-style: none;
+
+		}
+		nav li a{
+			background-color: black;
+			color: white;
+			text-decoration: none;
+			padding: 10px 15px;
+			display: block;
+
+		}
+		nav li a:hover{
+			background-color: #434343;
+		}
+		nav > li {
+			float: left;
+			position: relative;
+		}
+		nav li ul{
+			display: none;
+			top: 100%;
+			positiion: absolute;
+			transition: 1s all ease;
+		}
+		nav li:hover > ul{
+			display: block;
+		}
+		
+
+	</style>
+</head>
+<body>
+	<nav>
+		<li><a href="">Inicio</a></li>
+		<li>
+			<a href="">Servicios</a>
+			<ul>
+				<li><a href="">texto</a></li>
+				<li><a href="">texto</a></li>
+				<li><a href="">texto</a></li>
+				<li><a href="">texto</a></li>
+				<li><a href="">texto</a></li>
+			</ul>
+		</li>
+
+		<li>
+			<a href="">Otro dato</a>
+				<ul>
+					<li><a href="">otro sub</a></li>
+					<li><a href="">otro sub</a></li>
+					<li><a href="">otro sub</a></li>
+					<li><a href="">otro sub</a></li>
+					<li><a href="">otro sub</a></li>
+				</ul>		
+		</li>
+		<li>
+			<a href="">Portafolio</a>
+			<ul>
+				<li><a href="">texto</a></li>
+				<li><a href="">texto</a></li>
+				<li><a href="">texto</a></li>
+				<li><a href="">texto</a></li>
+				<li><a href="">texto</a></li>
+			</ul>
+		</li>
+		<li><a href="">Contacto</a></li>
+	</nav>
+</body>
+</html>

@@ -524,12 +524,12 @@ class Galerias
     }
     public function getWidth(){
         switch($this->getCategoria()->getTipoCategoria()){
-            case Categorias::$GALERIA: //300x225
-            case Categorias::$RECOMENDACIONES: //300x225
+            case Categorias::$GALERIA_PRINCIPAL: //680x320
+            case Categorias::$GALERIA_ABOUT: //300x225
                 $resp= 300;
                 break;
-            case Categorias::$PUBLICACIONES: //
-                $resp= 150;
+            case Categorias::$GALERIA_DISTRIBUIDORES: //195x146
+                $resp= 195;
                 break;
             default :
                 $resp= 300;
@@ -540,12 +540,12 @@ class Galerias
     }
     public function getHeight(){
         switch($this->getCategoria()->getTipoCategoria()){
-            case Categorias::$GALERIA: //300x225
-            case Categorias::$RECOMENDACIONES: //300x225
-                $resp=225;
+            case Categorias::$GALERIA_PRINCIPAL: //680x320
+            case Categorias::$GALERIA_ABOUT: //300x225
+                $resp= 225;
                 break;
-            case Categorias::$PUBLICACIONES:
-                $resp= 100;
+            case Categorias::$GALERIA_DISTRIBUIDORES: //195x146
+                $resp= 146;
                 break;
             default :
                 $resp= 225;

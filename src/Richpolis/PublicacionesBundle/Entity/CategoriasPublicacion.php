@@ -1,6 +1,6 @@
 <?php
 
-namespace Richpolis\CategoriasGaleriaBundle\Entity;
+namespace Richpolis\PublicacionesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -8,11 +8,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Categorias
  *
- * @ORM\Table(name="categorias_galerias")
- * @ORM\Entity(repositoryClass="Richpolis\CategoriasGaleriaBundle\Repository\CategoriasRepository")
+ * @ORM\Table(name="categorias_publicacion")
+ * @ORM\Entity(repositoryClass="Richpolis\PublicacionesBundle\Repository\CategoriasPublicacionRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Categorias
+class CategoriasPublicacion
 {
     /**
      * @var integer
@@ -89,26 +89,24 @@ class Categorias
     private $updatedAt;
     
     /**
-     * @ORM\OneToMany(targetEntity="Galerias", mappedBy="categoria")
+     * @ORM\OneToMany(targetEntity="Publicacion", mappedBy="categoria")
      */
-    protected $galerias;
+    protected $publicaciones;
     
-    static public $GALERIA_PRINCIPAL=1;
-    static public $GALERIA_ABOUT=2;
-    static public $GALERIA_DISTRIBUIDORES=3;
+    static public $ABOUT=1;
+    static public $DISTRIBUIDORES=2;
     
     
     static private $sCategorias=array(
-        1=>'Galeria Principal',
-        2=>'Galeria About',
-        3=>'Galeria Distribuidores',
+        1=>'Publicaciones de about',
+        2=>'Publicaciones de distribuidores',
     );
     
     public function __construct() {
         $this->isActive = true;
         $this->isCategoria = true;
-        $this->tipoCategoria=self::$GALERIA_PRINCIPAL;
-        $this->galerias =new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tipoCategoria=self::$ABOUT;
+        $this->publicaciones =new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     public function getStringTipoCategoria(){
@@ -120,7 +118,7 @@ class Categorias
     }
 
     static function getPreferedTipoCategoria(){
-        return array(self::$GALERIA_PRINCIPAL);
+        return array(self::$ABOUT);
     }
 
     public function __toString()
@@ -346,38 +344,6 @@ class Categorias
         return $this->updatedAt;
     }
 
-    /**
-     * Add galerias
-     *
-     * @param \Richpolis\CategoriasGaleriaBundle\Entity\Galerias $galerias
-     * @return Categorias
-     */
-    public function addGaleria(\Richpolis\CategoriasGaleriaBundle\Entity\Galerias $galerias)
-    {
-        $this->galerias[] = $galerias;
-    
-        return $this;
-    }
-
-    /**
-     * Remove galerias
-     *
-     * @param \Richpolis\CategoriasGaleriaBundle\Entity\Galerias $galerias
-     */
-    public function removeGaleria(\Richpolis\CategoriasGaleriaBundle\Entity\Galerias $galerias)
-    {
-        $this->galerias->removeElement($galerias);
-    }
-
-    /**
-     * Get galerias
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getGalerias()
-    {
-        return $this->galerias;
-    }
     
     /*
      * Slugable
@@ -418,5 +384,38 @@ class Categorias
     public function setUpdatedAtValue()
     {
         $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * Add publicaciones
+     *
+     * @param \Richpolis\PublicacionesBundle\Entity\Publicacion $publicaciones
+     * @return CategoriasPublicacion
+     */
+    public function addPublicacione(\Richpolis\PublicacionesBundle\Entity\Publicacion $publicaciones)
+    {
+        $this->publicaciones[] = $publicaciones;
+    
+        return $this;
+    }
+
+    /**
+     * Remove publicaciones
+     *
+     * @param \Richpolis\PublicacionesBundle\Entity\Publicacion $publicaciones
+     */
+    public function removePublicacione(\Richpolis\PublicacionesBundle\Entity\Publicacion $publicaciones)
+    {
+        $this->publicaciones->removeElement($publicaciones);
+    }
+
+    /**
+     * Get publicaciones
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPublicaciones()
+    {
+        return $this->publicaciones;
     }
 }

@@ -17,7 +17,7 @@ use Richpolis\BackendBundle\Utils\qqFileUploader;
 /**
  * Galerias controller.
  *
- * @Route("/galerias")
+ * @Route("/backend/galerias")
  */
 class GaleriasController extends Controller
 {
