@@ -30,7 +30,7 @@ class GaleriasLinkVideoType extends AbstractType
             ))
             ->add('tipoArchivo','hidden')
            
-            ->add('isActive',null,array('label'=>'Activo?'))
+            ->add('isActive',null,array('label'=>'Activo?','required'=>false))
             
         ;
     }

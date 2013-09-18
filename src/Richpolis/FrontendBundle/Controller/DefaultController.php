@@ -18,37 +18,54 @@ use Richpolis\BackendBundle\Form\ContactoType;
  */
 class DefaultController extends Controller {
     
+    protected function lenguajePagina($request){
+        $lang=$request->query->get('lang',0);
+        if($lang){
+            if($lang=="es"){
+                $request->setLocale('es');
+            }elseif($lang=="en"){
+                $request->setLocale('en');
+            }else{
+                $request->setLocale('es');
+            }    
+        }
+    }
+    
     /**
      * Lists all Frontend entities.
      *
-     * @Route("/inicio", name="homepage")
+     * @Route("/{_locale}/inicio", name="homepage",defaults={"_locale" = "en"}, requirements={"_locale" = "en|es"})
      * @Template("FrontendBundle:Default:index.html.twig")
      */
     public function indexAction()
     {
+        $this->lenguajePagina($this->getRequest());
         return array();
     }
     
     /**
      * Pantalla de splash.
-     *
-     * @Route("/", name="splash")
+     * @Route("/{_locale}/", name="splash", defaults={"_locale" = "en"}, requirements={"_locale" = "en|es"})
+     * @Route("/")
      * @Template("FrontendBundle:Default:pagina1.html.twig")
      */
     public function splashAction()
     {
+        $this->lenguajePagina($this->getRequest());
+        
         return array();
         
     }
     
     /**
      * Pantalla de about_la_nina.
-     *
-     * @Route("/about", name="about_la_nina")
+     * @Route("/{_locale}/about", name="about_la_nina", defaults={"_locale" = "en"}, requirements={"_locale" = "en|es"})
+     * @Route("/about")
      * @Template("FrontendBundle:Default:about.html.twig")
      */
     public function aboutAction()
     {
+        $this->lenguajePagina($this->getRequest());
         return array();
         
     }
@@ -56,11 +73,12 @@ class DefaultController extends Controller {
     /**
      * Pantalla de the_mezcal.
      *
-     * @Route("/mezcal", name="the_mezcal")
+     * @Route("/{_locale}/mezcal", name="the_mezcal", defaults={"_locale" = "en"}, requirements={"_locale" = "en|es"}))
      * @Template("FrontendBundle:Default:botella.html.twig")
      */
     public function mezcalAction()
     {
+        $this->lenguajePagina($this->getRequest());
         return $this->redirect("/mezcal/espadin");
         
     }
@@ -68,11 +86,13 @@ class DefaultController extends Controller {
     /**
      * Pantalla de the_mezcal - botella espadin.
      *
-     * @Route("/mezcal/espadin", name="botella_espadin")
+     * @Route("/{_locale}/mezcal/espadin", name="botella_espadin", defaults={"_locale" = "en"}, requirements={"_locale" = "en|es"})
+     * @Route("/mezcal/espadin")
      * @Template("FrontendBundle:Default:botella.html.twig")
      */
     public function espadinAction()
     {
+        $this->lenguajePagina($this->getRequest());
         return array(
             "pagina_actual"=>"espadin",
             "app_angular"=>"js/app/espadin.js",
@@ -85,11 +105,13 @@ class DefaultController extends Controller {
     /**
      * Pantalla de the_mezcal - botella primario.
      *
-     * @Route("/mezcal/primario", name="botella_primario")
+     * @Route("/{_locale}/mezcal/primario", name="botella_primario", defaults={"_locale" = "en"}, requirements={"_locale" = "en|es"})
+     * @Route("/mezcal/primario")
      * @Template("FrontendBundle:Default:botella.html.twig")
      */
     public function primarioAction()
     {
+        $this->lenguajePagina($this->getRequest());
         return array(
             "pagina_actual"=>"primario-mezcal",
             "app_angular"=>"js/app/primario.js",
@@ -104,21 +126,25 @@ class DefaultController extends Controller {
     /**
      * Pantalla de find_la_nina.
      *
-     * @Route("/find", name="find_la_nina")
+     * @Route("/{_locale}/find", name="find_la_nina", defaults={"_locale" = "en"}, requirements={"_locale" = "en|es"})
+     * @Route("/find")
      * @Template("FrontendBundle:Default:find.html.twig")
      */
     public function findAction()
     {
+        $this->lenguajePagina($this->getRequest());
         return array();
         
     }
 
     /**
-     * @Route("/contacto", name="frontend_contacto")
+     * @Route("/{_locale}/contacto", name="frontend_contacto", defaults={"_locale" = "en"}, requirements={"_locale" = "en|es"})
+     * @Route("/contacto")
      * @Method({"GET", "POST"})
      * @Template("FrontendBundle:Default:contacto.html.twig")
      */
     public function contactoAction() {
+        $this->lenguajePagina($this->getRequest());
         $contacto = new Contacto();
         $form = $this->createForm(new ContactoType(), $contacto);
         $request = $this->getRequest();
@@ -168,6 +194,33 @@ class DefaultController extends Controller {
         );
     }
     
+    /**
+     * Lista los ultimos tweets.
+     *
+     * @Route("/last-tweets/{username}/", name="last_tweets")
+     */
+    public function lastTweetsAction($username, $limit = 10, $age = null)
+    {
+        /* @var $twitter FetcherInterface */
+        $twitter = $this->get('knp_last_tweets.last_tweets_fetcher');
+
+        try {
+            $tweets = $twitter->fetch($username, $limit);
+        } catch (TwitterException $e) {
+            $tweets = array();
+        }
+
+        $response = $this->render('FrontendBundle:Default:lastTweets.html.twig', array(
+            'username' => $username,
+            'tweets'   => $tweets,
+        ));
+
+        if ($age) {
+            $response->setSharedMaxAge($age);
+        }
+
+        return $response;
+    }
     
 }
 

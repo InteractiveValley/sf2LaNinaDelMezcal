@@ -32,12 +32,22 @@ class LoadCategoriasData extends AbstractFixture implements OrderedFixtureInterf
     $distribuidores2->setTipoCategoria(Categorias::$GALERIA_DISTRIBUIDORES);
     $distribuidores2->setPosicion(4);
     
+    $espadin = new Categorias();
+    $espadin->setCategoria('Espadin');
+    $espadin->setTipoCategoria(Categorias::$GALERIA_HOWTOMIX);
+    $espadin->setPosicion(5);
+    
+    $primario = new Categorias();
+    $primario->setCategoria('Primario Mezcal Joven');
+    $primario->setTipoCategoria(Categorias::$GALERIA_HOWTOMIX);
+    $primario->setPosicion(6);
     
     $em->persist($principal);
     $em->persist($about);
     $em->persist($distribuidores);
     $em->persist($distribuidores2);
-    
+    $em->persist($espadin);
+    $em->persist($primario);
     $em->flush();
  
 

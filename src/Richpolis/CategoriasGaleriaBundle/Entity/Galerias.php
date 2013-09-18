@@ -380,7 +380,7 @@ class Galerias
     
     
     /*
-     * 
+     * Para guardar videos de youtube o vimeo
      * 
      */
     

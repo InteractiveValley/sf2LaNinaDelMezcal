@@ -1,0 +1,70 @@
+{% extends "BackendBundle::backend.html.twig" %}
+
+{% block menu_horizontal %}
+    {% include 'BackendBundle:Default:menu_horizontal.html.twig' with {'pagina': 'botellas'} %}
+{% endblock %}
+
+{% block siderbar %}  
+    {% include 'BackendBundle:Default:siderbar.html.twig' with {'pagina': 'mensajes'} %}
+{% endblock %}
+
+{% block body %}
+
+<h1>Mensaje "{{entity.titulo}}"</h1>
+    <table class="record_properties table table-bordered">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Titulo</th>
+                <td>{{ entity.titulo }}</td>
+            </tr>
+            <tr>
+                <th>Mensaje</th>
+                <td>{{ entity.mensaje | raw }}</td>
+            </tr>
+            <tr>
+                <th>Imagen</th>
+                <td>{{ entity.imagen }}</td>
+            </tr>
+            <tr>
+                <th>Clase</th>
+                <td>{{ entity.clase }}</td>
+            </tr>
+            <tr>
+                <th>Style</th>
+                <td>{{ entity.style }}</td>
+            </tr>
+            <tr>
+                <th>How To Mix</th>
+                <td>{{ entity.isHowToMix  | isActive | raw}}</td>
+            </tr>
+            <tr>
+                <th>Activa?</th>
+                <td>{{ entity.isActive  | isActive | raw}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <ul class="record_actions nav nav-pills">
+        <li>
+            <button class="btn" onclick="location.href='{{ path('mensajes') }}'">
+                Regresar
+            </button>
+        </li>
+        <li>&nbsp;</li>
+        <li>
+            <button class="btn btn-success" onclick="location.href='{{ path('mensajes_edit', { 'id': entity.id }) }}'">
+                Editar
+            </button>
+        </li>
+        <li>&nbsp;</li>
+        <li>
+            <form action="{{ path('mensajes_delete', { 'id': entity.id }) }}" method="post">
+                    {{ form_widget(delete_form) }}
+                    <button class="btn btn-danger" type="submit">Eliminar</button>
+            </form>
+        </li>
+    </ul>
+{% endblock %}

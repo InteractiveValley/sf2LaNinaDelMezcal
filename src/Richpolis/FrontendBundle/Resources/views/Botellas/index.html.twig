@@ -1,0 +1,72 @@
+{% extends "BackendBundle::backend.html.twig" %}
+
+{% block menu_horizontal %}
+    {% include 'BackendBundle:Default:menu_horizontal.html.twig' with {'pagina': 'botellas'} %}
+{% endblock %}
+
+{% block siderbar %}  
+    {% include 'BackendBundle:Default:siderbar.html.twig' with {'pagina': 'botellas'} %}
+{% endblock %}
+
+{% block body -%}
+
+{% if app.request.page is not defined %}
+    {% set page=1 %}
+{% else %}
+    {% set page=app.request.page %}
+{% endif %}
+
+    <h1>Botellas</h1>
+
+<table class="table table-hover records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Botella</th>
+                <th>Descripcion</th>
+                <th>Activa?</th>
+                <th>Actualización</th>
+                <th>Actiones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in pagination %}
+            <tr>
+                <td><a href="{{ path('botellas_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.botella }}</td>
+                <td>{{ entity.descripcion | raw}}</td>
+                <td>{{ entity.isActive | isActive | raw }}</td>
+                <td>{% if entity.updatedat %}{{ entity.updatedat|date('d/m/Y H:i') }}{% endif%}</td>
+                <td>
+                <ul class="nav">
+                    <li>
+                        <a class="btn btn-mini" href="{{ path('botellas_show', { 'id': entity.id }) }}" title="Mostrar registro">
+                            <i class="icon-eye-open"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn btn-mini" href="{{ path('botellas_edit', { 'id': entity.id }) }}" title="Editar registro">
+                            <i class="icon-edit"></i>
+                        </a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="span4">    
+            <ul class="btn-group">
+                <li>
+                    <a class="btn btn-primary" href="{{ path('botellas_new') }}">
+                        Nueva botella
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="span4">
+            <div class="navigation"> {{ knp_pagination_render(pagination) }} </div>
+        </div>   
+    </div>
+    {% endblock %}

@@ -2,65 +2,85 @@
 
 {% block stylesheets %}
  {{parent()}}
- <link rel="stylesheet" href="{{ asset('css/slides/animation.css') }}">
- <link rel="stylesheet" href="{{ asset('css/slides/style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/slides/animation.css') }}">
+<link rel="stylesheet" href="{{ asset('css/slides/style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/tweets.css') }}">
 {% endblock %}
 
 {% block body %}
 <section id="contenido">
-    <div id="content-slider">
+    <article id="content-slider">
         <div id="slider">
             <div id="mask">
-            <ul>
-            <li id="first" class="firstanimation">
-            <a href="#">
-            <img src="/images/demo/img_1.jpg" alt="Cougar"/>
-            </a>
-            <div class="tooltip">
-            <h1>Cougar</h1>
-            </div>
-            </li>
+                <ul>
+                    <li id="first" class="firstanimation">
+                        <a href="#">
+                            <img src="/images/demo/img_1.jpg" alt="Cougar"/>
+                        </a>
+                        <div class="tooltip">
+                            <h1>Cougar</h1>
+                        </div>
+                    </li>
 
-            <li id="second" class="secondanimation">
-            <a href="#">
-            <img src="/images/demo/img_2.jpg" alt="Lions"/>
-            </a>
-            <div class="tooltip">
-            <h1>Lions</h1>
-            </div>
-            </li>
-            
-            <li id="third" class="thirdanimation">
-            <a href="#">
-            <img src="/images/demo/img_3.jpg" alt="Snowalker"/>
-            </a>
-            <div class="tooltip">
-            <h1>Snowalker</h1>
-            </div>
-            </li>
-                        
-            <li id="fourth" class="fourthanimation">
-            <a href="#">
-            <img src="/images/demo/img_4.jpg" alt="Howling"/>
-            </a>
-            <div class="tooltip">
-            <h1>Howling</h1>
-            </div>
-            </li>
-                        
-            <li id="fifth" class="fifthanimation">
-            <a href="#">
-            <img src="/images/demo/img_5.jpg" alt="Sunbathing"/>
-            </a>
-            <div class="tooltip">
-            <h1>Sunbathing</h1>
-            </div>
-            </li>
-            </ul>
+                    <li id="second" class="secondanimation">
+                        <a href="#">
+                            <img src="/images/demo/img_2.jpg" alt="Lions"/>
+                        </a>
+                        <div class="tooltip">
+                            <h1>Lions</h1>
+                        </div>
+                    </li>
+
+                    <li id="third" class="thirdanimation">
+                        <a href="#">
+                            <img src="/images/demo/img_3.jpg" alt="Snowalker"/>
+                        </a>
+                        <div class="tooltip">
+                            <h1>Snowalker</h1>
+                        </div>
+                    </li>
+
+                    <li id="fourth" class="fourthanimation">
+                        <a href="#">
+                            <img src="/images/demo/img_4.jpg" alt="Howling"/>
+                        </a>
+                        <div class="tooltip">
+                            <h1>Howling</h1>
+                        </div>
+                    </li>
+
+                    <li id="fifth" class="fifthanimation">
+                        <a href="#">
+                            <img src="/images/demo/img_5.jpg" alt="Sunbathing"/>
+                        </a>
+                        <div class="tooltip">
+                            <h1>Sunbathing</h1>
+                        </div>
+                    </li>
+                </ul>
             </div>
             <div class="progress-bar"></div>
         </div>
-    </div>    
+    </article>    
+    <article id="tweets-contenedor">
+    {{ render(controller("FrontendBundle:Default:lastTweets",{'username': 'LaNinadelMezcal'})) }}
+    </article>
+
 </section>
 
+{% endblock %}
+{% block javascripts %}
+    {{parent()}}
+    <script>
+    jQuery.iniciarCircle=function(){
+        $('ul.tweets-lista li:first-child').slideUp("slow",function(){
+            $('ul.tweets-lista').append($(this).slideDown("fast"));
+        });
+                    
+        setTimeout(function(){
+            $.iniciarCircle();
+        },6000);
+    }
+    $(document).on("ready",$.iniciarCircle);
+    </script>
 {% endblock %}

@@ -14,9 +14,11 @@ class ConfiguracionesTextType extends AbstractType
     {
         $builder
             ->add('configuracion')
-            ->add('texto','genemu_tinymce',array(
-                    'attr'=>array('cols' => 50,'rows' => 10,))
-                 )
+            ->add('texto','textarea', array(
+                'attr' => array(
+                   'class' => 'tinymce',
+                   'data-theme' => 'advanced' // Skip it if you want to use default theme
+                 )))
             ->add('slug','hidden')
             ->add('tipoConfiguracion','hidden') 
             

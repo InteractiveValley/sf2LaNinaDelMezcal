@@ -1,17 +1,19 @@
 {% extends "BackendBundle::backend.html.twig" %}
 
 {% block menu_horizontal %}
-    {% include 'BackendBundle:Default:menu_horizontal.html.twig' with {'pagina': 'publicacion'} %}
+    {% include 'BackendBundle:Default:menu_horizontal.html.twig' with {'pagina': 'publicaciones'} %}
 {% endblock %}
 
 
 {% block body %}
-<h1>Seleccionar tipo de publicacion</h1>
+<h1>Seleccionar categoria de publicacion</h1>
 <ul class="nav nav-list">
     <li class="nav-header">Publicaciones</li>
-    {% for key,value in tipos %}
-    <li class="tipo-publicacion" tipo="{{key}}">
-        <a href="{{path('publicacion_por_tipo',{'tipo': key })}}">{{value}}</a>
+    {% for categoria in categorias %}
+    <li class="categoria-publicacion" categoria="{{categoria.id}}">
+        <a href="{{path('publicacion_por_categoria',{'categoria': categoria.id })}}">
+        	{{categoria}}
+        </a>
     </li>
     {% endfor %}    
 </ul>

@@ -3,15 +3,24 @@
 {% block stylesheets %}
 {{parent()}}
 <link rel="stylesheet" href="{{ asset('css/jquery.bxslider.css') }}">
+<style type="text/css">
+.bx-wrapper .bx-viewport{
+  background: none;
+  border: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+</style>
 {% endblock %}
 
 {% block body %}
 <section id="contenido">
    <article>
-         <h2 class="titulo-article">where to find la niña</h2>
+         <h2 class="titulo-article">{% trans %}where to find la niña{% endtrans %}</h2>
          <h2 class="titulo-galeria" style="margin: 16px 0 24px 0;">
              méxico
-             <span>retail</span>
+             <span>{% trans %}retail{% endtrans %}</span>
          </h2>
          <div id="galeria-mexico" class="galeria">
                <div class="contenedor-galeria">
@@ -29,7 +38,7 @@
                </figure>
          </div>
          <h2 class="titulo-galeria">
-             restaurants & bars
+             {% trans %}restaurants & bars{% endtrans %}
          </h2>
          <div id="galeria-mexico-distribuidores" class="galeria distribuidores">
                <div class="contenedor-galeria">
@@ -60,7 +69,7 @@
    <article>
          <h2 class="titulo-galeria titulo-galeria-find">
             USA
-            <span>retail</span>
+            <span>{% trans %}retail{% endtrans %}</span>
          </h2>
          <div id="galeria-usa" class="galeria">
                <div class="contenedor-galeria">
@@ -78,7 +87,7 @@
                </figure>
          </div>
          <h2 class="titulo-galeria">
-                  restaurants & bars
+             {% trans %}restaurants & bars{% endtrans %}
          </h2>
          <div id="galeria-usa-distribuidores" class="galeria distribuidores">
                <div class="contenedor-galeria">
@@ -108,7 +117,7 @@
    </article>
    <article>
          <h2 class="titulo-galeria titulo-galeria-find">
-             distribution
+             {% trans %}distribution{% endtrans %}
          </h2>
          <div id="galeria-distribution-distribuidores" class="galeria distribuidores">
                <div class="contenedor-galeria">

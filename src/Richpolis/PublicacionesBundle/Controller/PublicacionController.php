@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Richpolis\PublicacionesBundle\Entity\Publicacion;
 use Richpolis\PublicacionesBundle\Form\PublicacionType; 
-
+use Richpolis\PublicacionesBundle\Entity\CategoriasPublicacion;
 
 /**
  * Publicacion controller.
@@ -18,10 +18,42 @@ use Richpolis\PublicacionesBundle\Form\PublicacionType;
  */
 class PublicacionController extends Controller
 {
+    private $categorias = null;
     protected function getFilters()
     {
         $filters=$this->get('session')->get('filters', array());
         return $filters;
+    }
+
+    protected function getCategoriaDefault(){
+        $filters = $this->getFilters();
+        if(isset($filters['publicaciones'])){
+            return $filters['publicaciones'];
+        }else{
+            $this->getCategoriasPublicacion();
+            return $this->categorias[0];
+        }
+    }
+
+    protected function getCategoriasPublicacion(){
+        $em = $this->getDoctrine()->getManager();
+        if($this->categorias == null){
+            $this->categorias = $em->getRepository('PublicacionesBundle:CategoriasPublicacion')
+                                   ->getCategoriasPublicacionActivas();
+        }
+        return $this->categorias;
+    }
+
+    protected function getCategoriaActual($categoriaId){
+        $categorias= $this->getCategoriasPublicacion();
+        $categoriaActual=null;
+        foreach($categorias as $categoria){
+            if($categoria->getId()==$categoriaId){
+                $categoriaActual=$categoria;
+                break;
+            }
+        }
+        return $categoriaActual;
     }
     
     /**
@@ -32,9 +64,15 @@ class PublicacionController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
-        $query = $em->getRepository("PublicacionesBundle:Publicacion")->getQueryPublicacionActivas();
+        $filters = $this->getFilters();
+
+        if(!isset($filters['publicaciones']))
+            return $this->redirect($this->generateUrl('publicacion_seleccionar_categoria'));
+
+        $query = $em->getRepository("PublicacionesBundle:Publicacion")
+                    ->getQueryPublicacionPorCategoriaActivas($filters['publicaciones']);
 
         $paginator = $this->get('knp_paginator');
         
@@ -45,10 +83,52 @@ class PublicacionController extends Controller
         );
 
         return array(
-            'pagination' => $pagination,
+            'categorias'      =>$this->getCategoriasPublicacion(),
+            'categoria_actual'=>$this->getCategoriaActual($filters['publicaciones']),
+            'pagination'      =>$pagination,
         );
     }
     
+    /**
+     * Seleccionar un tipo de categoria.
+     *
+     * @Route("/seleccionar/categoria", name="publicacion_seleccionar_categoria")
+     */
+    public function selectAction()
+    {
+        $filters = $this->getFilters();
+        
+        if(isset($filters['publicaciones'])){
+            return $this->redirect($this->generateUrl('publicacion'));
+        }else{
+            return $this->render('PublicacionesBundle:Publicacion:select.html.twig', array(
+                'categorias'  => $this->getCategoriasPublicacion(),
+            ));
+        }
+    }
+    
+    /**
+     * Mostrar por categoria
+     *
+     * @Route("/list/{categoria}/categoria", name="publicacion_por_categoria")
+     */
+    public function porCategoriaAction($categoria)
+    {
+        $filters = $this->getFilters();
+        if($categoria){
+            $filters['publicaciones']=$categoria;
+            $this->get('session')->set('filters',$filters);
+            return $this->redirect($this->generateUrl('publicacion'));
+        }else{
+            if(isset($filters['publicaciones'])){
+                return $this->redirect($this->generateUrl('publicacion'));
+            }else{
+                return $this->render('PublicacionesBundle:Publicacion:select.html.twig', array(
+                    'categorias'  => $this->getCategoriasPublicacion(),
+                ));
+            }
+        }        
+    }
     
     /**
      * Finds and displays a Publicacion entity.
@@ -74,6 +154,58 @@ class PublicacionController extends Controller
         );
     }
 
+    public function publicacionesAboutAction(){
+        $em = $this->getDoctrine()->getManager();
+        $filters = $this->getFilters();
+        $categoria = $em->getRepository('PublicacionesBundle:CategoriasPublicacion')
+                        ->findOneBySlug('publicaciones-about');
+        if($categoria==null){
+            $categoria=$this->getCategoriaDefault();
+        }                
+        $filters['publicaciones']=$categoria->getId();
+        $this->get('session')->set('filters',$filters);
+        return $this->redirect($this->generateUrl('publicacion'));
+    }
+    
+    public function whereToFindMexicoAction(){
+        $em = $this->getDoctrine()->getManager();
+        $filters = $this->getFilters();
+        $categoria = $em->getRepository('PublicacionesBundle:CategoriasPublicacion')
+                        ->findOneBySlug('where-to-find-mexico');
+        if($categoria==null){
+            $categoria=$this->getCategoriaDefault();
+        }                
+        $filters['publicaciones']=$categoria->getId();
+        $this->get('session')->set('filters',$filters);
+        return $this->redirect($this->generateUrl('publicacion'));
+    }
+
+    public function whereToFindUsaAction(){
+        $em = $this->getDoctrine()->getManager();
+        $filters = $this->getFilters();
+        $categoria = $em->getRepository('PublicacionesBundle:CategoriasPublicacion')
+                        ->findOneBySlug('where-to-find-usa');
+        if($categoria==null){
+            $categoria=$this->getCategoriaDefault();
+        }                
+        $filters['publicaciones']=$categoria->getId();
+        $this->get('session')->set('filters',$filters);
+        return $this->redirect($this->generateUrl('publicacion'));
+    }
+
+    public function whereToFindDistribuidoresAction(){
+        $em = $this->getDoctrine()->getManager();
+        $filters = $this->getFilters();
+        $categoria = $em->getRepository('PublicacionesBundle:CategoriasPublicacion')
+                        ->findOneBySlug('where-to-find-distribuidores');
+        if($categoria==null){
+            $categoria=$this->getCategoriaDefault();
+        }                
+        $filters['publicaciones']=$categoria->getId();
+        $this->get('session')->set('filters',$filters);
+        return $this->redirect($this->generateUrl('publicacion'));
+    }
+
     /**
      * Displays a form to create a new Publicacion entity.
      *
@@ -85,12 +217,20 @@ class PublicacionController extends Controller
         $entity = new Publicacion();
         
         $max=$this->getDoctrine()->getRepository('PublicacionesBundle:Publicacion')->getMaxPosicion();
+
         if(!is_null($max)){
             $entity->setPosicion($max+1);
         }else{
             $entity->setPosicion(1);
         }
-       
+        
+        $categoriaId=$this->getRequest()->query->get('categoria',$this->getCategoriaDefault());
+        
+        $categoria=$this->getDoctrine()->getRepository('PublicacionesBundle:CategoriasPublicacion')
+                                        ->find($categoriaId);
+
+        $entity->setCategoria($categoria);                                
+
         $form   = $this->createForm(new PublicacionType(), $entity);
 
         return array(

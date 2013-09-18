@@ -15,9 +15,11 @@ class GaleriasType extends AbstractType
     {
         $builder
             ->add('titulo')
-            ->add('descripcion','genemu_tinymce',array(
-                    'attr'=>array('cols' => 50,'rows' => 10,))
-                 )    
+            ->add('descripcion','textarea', array(
+                'attr' => array(
+                   'class' => 'tinymce',
+                   'data-theme' => 'advanced' // Skip it if you want to use default theme
+                 )))    
             ->add('file','file',array('label'=>'Imagen'))
             ->add('thumbnail','hidden')
             ->add('posicion','hidden')
@@ -33,7 +35,7 @@ class GaleriasType extends AbstractType
             ))
             ->add('tipoArchivo','hidden')
            
-            ->add('isActive',null,array('label'=>'Activo?'))
+            ->add('isActive',null,array('label'=>'Activo?','required'=>false))
             
         ;
     }

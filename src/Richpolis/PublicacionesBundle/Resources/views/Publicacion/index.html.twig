@@ -1,11 +1,24 @@
 {% extends "BackendBundle::backend.html.twig" %}
 
 {% block menu_horizontal %}
-    {% include 'BackendBundle:Default:menu_horizontal.html.twig' with {'pagina': 'publicacion'} %}
+    {% include 'BackendBundle:Default:menu_horizontal.html.twig' with {'pagina': 'publicaciones'} %}
 {% endblock %}
 
 {% block siderbar %}  
-    {% include 'BackendBundle:Default:siderbar.html.twig' with {'pagina': 'platillos'} %}
+<ul class="nav nav-list">
+    <li class="nav-header">Publicaciones</li>
+    {% for categoria in categorias %}
+    {% if categoria.id != categoria_actual.id %}    
+    <li class="categoria-publicacion" categoria="{{categoria.id}}">
+        <a href="{{path('publicacion_por_categoria',{'categoria': categoria.id })}}">{{categoria}}</a>
+    </li>
+    {% else %}
+    <li class="categoria-publicacion active" categoria="{{categoria.id}}">
+        <a href="#">{{categoria}}</a>
+    </li>
+    {% endif %}
+    {% endfor %}    
+</ul>
 {% endblock %}    
 
 {% block body %}
@@ -17,7 +30,7 @@
 {% endif %}
 
 
-<h1>Platillos</h1>
+<h1>{{categoria_actual}}</h1>
 
 <table class="table table-hover records_list">
     <thead>
@@ -77,7 +90,7 @@
             <ul class="btn-group">
                 <li>
                     <a class="btn btn-primary" href="{{ path('publicacion_new' )}}">
-                        Nueva platillo
+                        Nuevo registro
                     </a>
                 </li>
              </ul>

@@ -28,8 +28,8 @@
         {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
         <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{{ asset('css/fuentes.css') }}">
         <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/superfish.css') }}">
         {% endblock %}
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -43,10 +43,27 @@
         <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.
         </p>
         <![endif]-->
+        {% set locale = app.request.locale %}
+        {% set route = app.request.get('_route') %}
+        {% set about_la_nina = "" %}
+        {% set mezcal = "" %}
+        {% set find_la_nina = "" %}
+        {% set frontend_contact = "" %}
+        {% if route == "about_la_nina" %}
+            {% set about_la_nina = "class='active'" %}
+        {% elseif route == "find_la_nina" %}
+            {% set find_la_nina = "class='active'" %}
+        {% elseif route == "botella_espadin" or route == "botella_primario" %}
+            {% set mezcal = "class='active'" %}
+        {% elseif route == "frontend_contacto" %}
+            {% set frontend_contact = "class='active'" %}
+        {% endif %}
+
+
         <div id="contenedor">
             <header>
                 <figure id="logo">
-                    <a href="{{path('homepage')}}">
+                    <a href="{{path('homepage',{'_locale':locale})}}">
                         <img src="{{asset('images/keyarts/logo_header.png')}}" alt="">
                     </a>
                 </figure>
@@ -55,26 +72,30 @@
                 </span>
                 <nav>
                     <ul>
-                        <li><a href="{{path('about_la_nina')}}">about la niña</a></li>
                         <li>
-                            <a href="?mezcal">the mezcal</a>
+                            <a href="{{path('about_la_nina',{'_locale':locale})}}" {{about_la_nina|raw}}>{% trans %}about la niña{% endtrans %}</a>
+                        </li>
+                        <li>
+                            <a href="?mezcal" {{mezcal|raw}}>{% trans %}the mezcal{% endtrans %}</a>
                             <ul>
-                                <li><a href="{{path('botella_espadin')}}">Espadin</a></li>
-                                <li><a href="{{path('botella_primario')}}}">Primario mazcal joven</a></li>
+                                <li><a href="{{path('botella_espadin',{'_locale':locale})}}">Espadin</a></li>
+                                <li><a href="{{path('botella_primario',{'_locale':locale})}}">Primario mazcal joven</a></li>
                             </ul>    
                         </li>
-                        <li><a href="#">the blog</a></li>
-                        <li><a href="#">events</a></li>
-                        <li><a href="{{path('find_la_nina')}}">find la niña</a></li>
                         <li>
-                            <a href="?shop">shop online</a>
+                            <a href="#">{% trans %}the blog{% endtrans %}</a>
+                        </li>
+                        <li><a href="#">{% trans %}events{% endtrans %}</a></li>
+                        <li><a href="{{path('find_la_nina',{'_locale':locale})}}"  {{find_la_nina|raw}}>{% trans %}find la niña{% endtrans %}</a></li>
+                        <li>
+                            <a href="?shop">{% trans %}shop online{% endtrans %}</a>
                             <ul>
-                                <li><a href="#">Shirts</a></li>
-                                <li><a href="#">Jackets</a></li>
+                                <li><a target="_blank" href="http://bacus-3.myshopify.com/products/la-ni-a-del-mezcal-espadin">México</a></li>
+                                <li><a target="_blank" href="http://www.klwines.com/detail.asp?sku=1120562">USA</a></li>
                             </ul>
                         </li>
 
-                        <li><a href="{{path('frontend_contacto')}}">contact</a></li>
+                        <li><a href="{{path('frontend_contacto',{'_locale':locale})}}"  {{frontend_contact|raw}}>{% trans %}contact{% endtrans %}</a></li>
                     </ul>
                 </nav>
                 <span id="nav-right">
@@ -82,24 +103,24 @@
                 </span>
                 <div id="lenguajes">
                     <span id="lenguaje-es">
-                        <a href="">
-                            español    
+                        <a href="#" onclick="javascript:setLenguajePagina('es');">
+                            {% trans %}spanish{% endtrans %}    
                         </a>
                     </span>
                     <span id="lenguaje-en">
-                        <a href="">
-                            english    
+                        <a href="#" onclick="javascript:setLenguajePagina('en');">
+                            {% trans %}english{% endtrans %}    
                         </a>
                     </span>
                 </div>
                 <div id="redes-sociales">
                     <figure id="red-social-twitter">
-                        <a href="">
+                        <a href="https://twitter.com/LaNinadelMezcal" target="_blank">
                             <img src="{{asset('images/keyarts/twitter.png')}}" alt=""/>    
                         </a>
                     </figure>
                     <figure id="red-social-facebook">
-                        <a href="">
+                        <a href="https://www.facebook.com/ninadelmezcal" target="_blank">
                             <img src="{{asset('images/keyarts/facebook.png')}}" alt=""/>    
                         </a>
                     </figure>
@@ -112,16 +133,16 @@
                 </div>
                 <figure id="desarrollado">
                     <a href="mailto:rafael@interactivevalley.com">
-                        <img src="{{asset('images/developed_negro.png')}}" alt="developed for Interactive Valley">
+                        <img src="{{asset('images/interactivevalley.png')}}" alt="developed for Interactive Valley">
                     </a>
                 </figure>
                 <figure id="facebook-footer">
-                    <a href="">
+                    <a href="https://www.facebook.com/ninadelmezcal" target="_blank">
                         <img src="{{ asset('images/keyarts/facebook.png') }}" alt="facebook">
                     </a>
                 </figure>
                 <figure id="twitter-footer">
-                    <a href="">
+                    <a href="https://twitter.com/LaNinadelMezcal" target="_blank">
                         <img src="{{ asset('images/keyarts/twitter.png') }}" alt="twitter">
                     </a>
                 </figure>
@@ -129,7 +150,7 @@
         </div>
         {% block javascripts %}
         <script type="text/javascript" src="{{asset('js/jquery-1.8.3.min.js')}}"></script>
-
+        <script type="text/javascript" src="{{asset('js/main.js')}}"></script>
         {% endblock %}
     </body>
 </html>

@@ -6,17 +6,20 @@
 <link rel="stylesheet" href="{{ asset('css/prettyPhoto.css') }}">
 {% endblock %}
 
+{% set locale = app.request.locale %}
+
 {% block body %}
 <section id="contenido" class="botellas" ng-controller="BotellasController">
    <div class="galeria">
       <figure class="control-galeria-izquierda">
-          <a class="bx-prev" href="{{path(botella_anterior)}}">&nbsp;</a>
+          <a class="bx-prev" href="{{path(botella_anterior,{'_locale':locale})}}">&nbsp;</a>
       </figure>
       <article id="botella">
-      {% raw %}
+      
             <div class="descripcion-botella">
                <header>
-                  <h1>bottle tour</h1>
+                  <h1>{% trans %}bottle tour{% endtrans %}</h1>
+                  {% raw %}
                   <h2 class="{{botella.clase}}">{{botella.botella}}</h2>   
                </header>
                <p>
@@ -36,12 +39,12 @@
       {% endraw %}
       </article>
       <figure class="control-galeria-derecha">
-            <a class="bx-next" href="{{path(botella_siguiente)}}">&nbsp;</a>
+            <a class="bx-next" href="{{path(botella_siguiente,{'_locale':locale})}}">&nbsp;</a>
       </figure>   
    </div>
    <figure id="boton-comprar">
       <a href="">
-         comprar
+         {% trans %}buy now{% endtrans %}
       </a>
       <ul class="menu-comprar">
         <li><a href="">mexico</a></li>

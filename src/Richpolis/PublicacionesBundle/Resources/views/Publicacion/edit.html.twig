@@ -2,25 +2,21 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link href="{{ asset('css/uploadify/uploadify.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/Jcrop/jquery.Jcrop.css') }}" rel="stylesheet" />
     {{ form_stylesheet(edit_form) }}
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/tiny_mce/tiny_mce.js') }}"></script>
-    <script src="{{ asset('js/uploadify/jquery.uploadify.min.js') }}"></script>
-    <script src="{{ asset('js/Jcrop/jquery.Jcrop.min.js') }}"></script>
+    {{ tinymce_init() }}
     {{ form_javascript(edit_form) }}
 {% endblock %}
 
 {% block menu_horizontal %}
-    {% include 'BackendBundle:Default:menu_horizontal.html.twig' with {'pagina': 'publicacion'} %}
+    {% include 'BackendBundle:Default:menu_horizontal.html.twig' with {'pagina': 'publicaciones'} %}
 {% endblock %}
     
 {% block siderbar %}  
-    {% include 'BackendBundle:Default:siderbar.html.twig' with {'pagina': 'platillos'} %}
+    {% include 'BackendBundle:Default:siderbar.html.twig' with {'pagina': entity.categoria.slug} %}
 {% endblock %}    
 
 {% block body %}

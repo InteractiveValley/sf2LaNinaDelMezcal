@@ -1,5 +1,7 @@
 {% extends "FrontendBundle::splash.html.twig" %}
 
+{% set locale = app.request.locale %}
+
 {% block body %}
 	<section id="contenedor">
 		<article>
@@ -14,12 +16,12 @@
 			</figure>
 			<div id="botones" class="splash">
 				<figure id="boton-yes">
-					<a href="{{path('homepage')}}">
+					<a href="{{path('homepage',{'_locale':locale})}}">
 						<img src="{{asset('images/keyarts/yes.png')}}" alt="yes">
 					</a>
 				</figure>
 				<figure id="boton-no">
-					<a href="{{path('splash')}}">
+					<a href="{{path('splash',{'_locale':locale})}}">
 						<img src="{{asset('images/keyarts/no.png')}}" alt="no">		
 					</a>
 				</figure>
@@ -33,10 +35,14 @@
 	    	Copyright 2013 La Niña del Mezcal info@laniñadelmezcal.com	
 	    </div>
 	    <figure id="facebook-footer">
-	        <img src="{{ asset('images/keyarts/facebook.png') }}" alt="facebook">
-	    </figure>
-	    <figure id="twitter-footer">
-	    	<img src="{{ asset('images/keyarts/twitter.png') }}" alt="twitter">
-	    </figure>
+            <a href="https://www.facebook.com/ninadelmezcal" target="_blank">
+               <img src="{{ asset('images/keyarts/facebook.png') }}" alt="facebook">
+            </a>
+        </figure>
+        <figure id="twitter-footer">
+            <a href="https://twitter.com/LaNinadelMezcal" target="_blank">
+                <img src="{{ asset('images/keyarts/twitter.png') }}" alt="twitter">
+            </a>
+        </figure>
     </footer>
 {% endblock %}

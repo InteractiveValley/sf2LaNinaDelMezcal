@@ -1,0 +1,22 @@
+<?php
+return array(
+                "about la niña"=>"la niña",
+                "the mezcal"=>"el mezcal",
+                "events"=>"eventos",
+                "find la niña"=>"busca a la niña",
+                "shop online"=>"compra en linea",
+                "contact"=>"contacto",
+                "spanish"=>"español",
+                "english"=>"ingles",
+                "buy now"=>"comprar",
+                "bottle tour"=>"tour de botellas",
+                "retail"=>"tiendas",
+                "retail"=>"tiendas",
+                "where to find la niña"=>"donde encontrar a la niña",
+                "restaurants & bars"=>"restaurantes & bares",
+                "distribution"=>"distribución",
+                "Name"=>"Nombre",
+                "Telephone"=>"Teléfono",
+                "Message"=>"Mensaje",
+                "Send"=>"Enviar",
+);

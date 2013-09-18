@@ -21,6 +21,9 @@ class Contacto
     
     protected $body;
     
+    public function __contruct(){
+        $this->subject="De la pagina";
+    }
     
 
     public function getName()

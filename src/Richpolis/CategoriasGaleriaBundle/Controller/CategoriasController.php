@@ -33,19 +33,13 @@ class CategoriasController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $filters = $this->getFilters();
 
         if(!isset($filters['categorias']))
-            $filters['categorias']=Categorias::$GALERIA;
+            $filters['categorias']=Categorias::$GALERIA_PRINCIPAL;
         
-        if($filters['categorias']==Categorias::$GALERIA){
-            $galeriaoficial=true;
-        }else{
-            $galeriaoficial=false;
-        }
-
         $query = $em->getRepository('CategoriasGaleriaBundle:Categorias')
                             ->getQueryCategoriasPorTipoYActivas($filters['categorias'],true);
         
@@ -56,14 +50,10 @@ class CategoriasController extends Controller
             $this->getRequest()->query->get('page', 1),
             10
         );
-
-
-        
         return array(
             'tipos'         =>  Categorias::getArrayTipoCategorias(),
             'tipo_categoria'=>  $filters['categorias'],
             'pagination' => $pagination,
-            'galeriaoficial'=>$galeriaoficial,
         );
     }
     
@@ -171,20 +161,32 @@ class CategoriasController extends Controller
         );
     }
     
-    public function oficialAction(){
+    public function galeriasPrincipalAction(){
         return $this->forward(
                 'CategoriasGaleriaBundle:Categorias:showCategoria', 
-                array('tipo'=>  Categorias::$GALERIA)
+                array('tipo'=>  Categorias::$GALERIA_PRINCIPAL)
                 );
     }
     
-    public function recomendacionesAction(){
+    public function galeriasDistribuidoresAction(){
         return $this->forward(
                 'CategoriasGaleriaBundle:Categorias:showCategoria', 
-                array('tipo'=>  Categorias::$RECOMENDACIONES)
+                array('tipo'=>  Categorias::$GALERIA_DISTRIBUIDORES)
                 );
     }
     
+    public function galeriasAboutAction(){
+        return $this->forward(
+                'CategoriasGaleriaBundle:Categorias:showCategoria', 
+                array('tipo'=>  Categorias::$GALERIA_ABOUT)
+                );
+    }
+    public function galeriasHowToMixAction(){
+        return $this->forward(
+                'CategoriasGaleriaBundle:Categorias:showCategoria', 
+                array('tipo'=>  Categorias::$GALERIA_HOWTOMIX)
+                );
+    }
 
     /**
      * Displays a form to create a new Categorias entity.

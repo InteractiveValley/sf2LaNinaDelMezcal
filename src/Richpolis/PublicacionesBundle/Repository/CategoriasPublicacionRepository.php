@@ -113,13 +113,9 @@ class CategoriasPublicacionRepository extends EntityRepository
         return $query->getResult();
     }
     
-    public function getQueryCategoriasGaleriaActivas($tipoCategoria,$todas=false){
+    public function getQueryCategoriasPublicacionActivas($todas=false){
         $query=$this->createQueryBuilder('c')
-                    //->leftJoin('c.galerias', 'g') 
-                    ->where('c.tipoCategoria=:tipo')
-                    ->setParameter('tipo', $tipoCategoria)
                     ->orderBy('c.posicion', 'DESC');
-                    //->addOrderBy('g.posicion','DESC'); 
         if(!$todas){
             $query->andWhere('c.isActive=:active')
                   ->setParameter('active', true);
@@ -127,8 +123,8 @@ class CategoriasPublicacionRepository extends EntityRepository
         return $query->getQuery();
     }
     
-    public function getCategoriasGaleriaActivas($tipo,$todas=false){
-        $query=$this->getQueryCategoriasGaleriaActivas($tipo, $todas);
+    public function getCategoriasPublicacionActivas($todas=false){
+        $query=$this->getQueryCategoriasPublicacionActivas($todas);
         return $query->getResult();
     }
     

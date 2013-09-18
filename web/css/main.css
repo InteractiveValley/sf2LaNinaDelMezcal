@@ -9,18 +9,19 @@ body {
   font-size: 16px;
 }
 footer {
-  background: #000;
-  bottom: 0px;
+  background-color: #222222;
+  bottom: 0px; 
   color: #fff;
-  font-size: 0.7em;
-  height: 30px;
+  font-family: 'GeorgiaRegular', Arial, Helvetica, sans-serif;
+  font-size:.7em; 
+  height: 42px; 
   position: relative;
   width: 100%;
 }
 footer #desarrollado {
+  bottom: 100%;
   position: absolute;
-  top: 100%;
-  margin: -25px 0 0 0;
+  margin: 0 0 -35px 0;
   right: 130px;
 }
 footer #facebook-footer {
@@ -59,7 +60,7 @@ h2.titulo-galeria {
   font-weight: normal;
   letter-spacing: -1.5px;
   line-height: 0.7em;
-  margin: 16px 0;
+  margin: 32px 0 16px 0;
   padding: 0;
   position: relative;
   text-shadow: 2px 2px 0px #ccc;
@@ -74,7 +75,7 @@ h2.titulo-galeria span {
   font-style: normal;
   font-weight: normal;
   letter-spacing: -1.5px;
-  right: 2em;
+  right: 3.2em;
   text-transform: uppercase;
   position: absolute;
 }
@@ -83,7 +84,7 @@ h2.titulo-galeria.titulo-galeria-find {
   background-repeat: repeat-x;
   background-position: top left;
   margin: 16px 0 24px 0;
-  padding-top: 26px;
+  padding-top: 32px;
 }
 header {
   margin: 1em auto;
@@ -95,6 +96,7 @@ nav {
   background: url("/images/keyarts/menu.png");
   background-position: top center;
   background-repeat: no-repeat;
+  font-family: 'CenturyGothicRegular', Arial, Helvetica, sans-serif;
 }
 nav > a {
   display: none;
@@ -107,7 +109,7 @@ nav a {
   padding: 10px 15px;
 }
 nav a:hover,
-nav a:active {
+nav a.active {
   text-decoration: underline;
 }
 nav li {
@@ -214,18 +216,20 @@ nav > ul > li > ul > li {
   text-transform: uppercase;
 }
 #contenido-footer {
-  padding: 0.7em;
+  padding: 1.1em;
 }
 #desarrollado img {
-  opacity: 0.7;
-  -webkit-transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -ms-transition: all 1s ease;
-  -o-transition: all 1s ease;
-  transition: all 1s ease;
+  opacity: 0.1;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=10);
+  -webkit-transition: all .5s ease-in;
+  -moz-transition: all .5s ease-in;
+  -ms-transition: all .5s ease-in;
+  -o-transition: all .5s ease-in;
+  transition: all .5s ease-in;
 }
 #desarrollado:hover img {
   opacity: 1;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
 }
 #foto-la-nina {
   margin: 0 auto;
@@ -258,8 +262,8 @@ nav > ul > li > ul > li {
   color: #808080;
   text-decoration: none;
   text-transform: uppercase;
-  text-shadow: 0 0 0.1em #808080;
   font-size: 0.7em;
+  font-weight: bold;
 }
 #lenguajes span:first-child {
   border-right: 1px solid #808080;
@@ -349,6 +353,7 @@ nav > ul > li > ul > li {
   font-size: 3em;
 }
 #botella .descripcion-botella p {
+  font-family: 'GeorgiaRegular', Arial, Helvetica, sans-serif;
   border-left: 6px solid #f00;
   padding-left: 5px;
 }
@@ -439,7 +444,7 @@ nav > ul > li > ul > li {
 }
 .galeria ul li.item-distribuidores {
   background: url("/images/keyarts/separadorvertical.png") no-repeat top right;
-  height: 422px;
+  height: 560px;
   width: 300px;
 }
 .galeria ul li a {
@@ -494,4 +499,8 @@ nav > ul > li > ul > li {
 .galeria.distribuidores figure.control-galeria-derecha {
   margin: 0 0 0 -25px;
   top: 1em;
+}
+.informaciones p,.mensaje-toltip,.qtip-content
+{
+  font-family: 'GeorgiaRegular', Arial, Helvetica, sans-serif;
 }

@@ -35,7 +35,6 @@ class Categorias
      * @var string
      *
      * @ORM\Column(name="descripcion", type="text", nullable=true)
-     * @Assert\NotBlank()
      */
     private $descripcion;
 
@@ -96,12 +95,14 @@ class Categorias
     static public $GALERIA_PRINCIPAL=1;
     static public $GALERIA_ABOUT=2;
     static public $GALERIA_DISTRIBUIDORES=3;
+    static public $GALERIA_HOWTOMIX=4;
     
     
     static private $sCategorias=array(
         1=>'Galeria Principal',
         2=>'Galeria About',
         3=>'Galeria Distribuidores',
+        4=>'Galeria How To Mix',
     );
     
     public function __construct() {

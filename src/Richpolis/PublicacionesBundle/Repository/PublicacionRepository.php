@@ -37,6 +37,23 @@ class PublicacionRepository extends EntityRepository
         $query=$this->getQueryPublicacionActivas($todas);
         return $query->getResult();
     }
+
+    public function getQueryPublicacionPorCategoriaActivas($categoria,$todas=false){
+        $query=$this->createQueryBuilder('p')
+                    ->where('p.categoria=:categoria')
+                    ->setParameter('categoria',$categoria)
+                    ->orderBy('p.posicion', 'DESC');
+        if(!$todas){
+            $query->andWhere('p.isActive=:active')
+                  ->setParameter('active', true);
+        }
+        return $query->getQuery();
+    }
+    
+    public function getPublicacionPorCategoriaActivas($categoria,$todas=false){
+        $query=$this->getQueryPublicacionPorCategoriaActivas($categoria,$todas);
+        return $query->getResult();
+    }
     
     public function getRegistroUpOrDown($posicionRegistro,$up=true){
         // $up = true, $up = false is down

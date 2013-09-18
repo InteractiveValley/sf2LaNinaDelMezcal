@@ -13,9 +13,12 @@ class CategoriasType extends AbstractType
     {
         $builder
             ->add('categoria')
-            ->add('descripcion','genemu_tinymce',array(
-                    'attr'=>array('cols' => 50,'rows' => 10,))
-                 )
+            ->add('descripcion','textarea', array(
+                    'attr' => array(
+                        'class' => 'tinymce',
+                        'data-theme' => 'advanced' // Skip it if you want to use default theme
+                    )
+                ))
             ->add('tipoCategoria','choice',array(
                 'label'=>'Tipo',
                 'empty_value'=>false,
@@ -23,8 +26,8 @@ class CategoriasType extends AbstractType
                 'preferred_choices'=>Categorias::getPreferedTipoCategoria()
                 ))
             ->add('posicion',"hidden")
-            ->add('isActive',null,array('label'=>'Activo?'))
-            ->add('isCategoria',null,array('label'=>'Categorias?'))    
+            ->add('isActive',null,array('label'=>'Activo?','required'=>false))
+            ->add('isCategoria',null,array('label'=>'Categorias?','required'=>false))    
         ;
     }
 

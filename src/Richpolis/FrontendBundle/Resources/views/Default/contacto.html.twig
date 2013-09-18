@@ -16,6 +16,8 @@
 {%if mensaje is not defined%}
     {%set mensaje=""%}
 {%endif%}
+
+{% set locale = app.request.locale %}
 <section>
     <article class="contacto">
         <figure id="logo-contacto">
@@ -26,9 +28,9 @@
         </div>
     </article>
     <article class="form contacto">
-        <form onsubmit="return false;" action="{{path('frontend_contacto')}}" method="post" class="form-contacto {%if error == true%}invalid{%endif%} {%if ok == true%}sent{%endif%}" novalidate="novalidate">
+        <form onsubmit="return false;" action="{{path('frontend_contacto',{'_locale':locale})}}" method="post" class="form-contacto {%if error == true%}invalid{%endif%} {%if ok == true%}sent{%endif%}" novalidate="novalidate">
           <div>
-             {{ form_label(form.name) }}
+             <label for="richpolis_backendbundle_contactotype_name" class="required">{% trans %}Name{% endtrans %}</label>
              <span class="form-contacto-control-wrap Name {%if form.name.vars.errors  | length > 0%}form-not-valid{%endif%}">
                  {{ form_widget(form.name, {'attr': {'class': 'form-contacto-control form-text form-validates-as-required','size':'40','aria-requiered':'true'}}) }}
              </span>
@@ -46,16 +48,7 @@
              </span>    
          </div>
           <div>
-             {{ form_label(form.subject) }} 
-             <span class="form-contacto-control-wrap subject {%if form.subject.vars.errors  | length > 0%}form-not-valid{%endif%}">
-                 {{ form_widget(form.subject, {'attr': {'class': 'form-contacto-control form-text form-validates-as-required','size':'40','aria-requiered':'true'}}) }}
-             </span>
-             <span class="form-not-valid-tip-no-ajax"> 
-                 {{ form_errors(form.subject) }}
-             </span>
-         </div>
-         <div>
-             {{ form_label(form.telefono) }} 
+             <label for="richpolis_backendbundle_contactotype_telefono" class="required">{% trans %}Telephone{% endtrans %}</label> 
              <span class="form-contacto-control-wrap telefono {%if form.telefono.vars.errors  | length > 0%}form-not-valid{%endif%}">
                  {{ form_widget(form.telefono, {'attr': {'class': 'form-contacto-control form-text form-validates-as-required','size':'40','aria-requiered':'true'}}) }}
              </span>
@@ -64,7 +57,7 @@
              </span>
          </div>    
          <div>
-             {{ form_label(form.body) }}
+             <label for="richpolis_backendbundle_contactotype_body" class="required">{% trans %}Message{% endtrans %}</label>
              <span class="form-contacto-control-wrap message {%if form.body.vars.errors  | length > 0%}form-not-valid{%endif%}">
                  {{ form_widget(form.body, {'attr': {'class': 'form-contacto-control form-textarea form-validates-as-required','size':'40','aria-requiered':'true'}}) }}
              </span>
@@ -73,7 +66,7 @@
              </span>
          </div>
          <div>
-             <input type="submit" value="Enviar" class="form-contacto-control form-submit">
+             <input type="submit" value="{% trans %}Send{% endtrans %}" class="form-contacto-control form-submit">
              <img class="ajax-loader" src="/images/ajax-loader.gif" alt="Enviando ..." style="visibility: hidden;">
          </div>
          {% if ok == true and error == false %}    
@@ -98,7 +91,7 @@ $(document).ready( function() {
     $("input.form-submit").click( function() {
         $('img.ajax-loader').css({visibility: 'visible'});
         $("img.ajax-loader").fadeIn("fast",function(){
-            $.post("{{path('frontend_contacto')}}",$("form.form-contacto").serialize(),
+            $.post("{{path('frontend_contacto',{'_locale':locale})}}",$("form.form-contacto").serialize(),
             function(data){
                 $("#contacts").html(data).fadeIn("fast");
             });    

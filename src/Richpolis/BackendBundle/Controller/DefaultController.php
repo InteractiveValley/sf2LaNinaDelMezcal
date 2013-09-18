@@ -38,35 +38,35 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/galerias", name="backend_galerias_oficial")
+     * @Route("/galeria/principal", name="backend_galerias_principal")
      */
-    public function galeriaOficialAction()
+    public function galeriaPrincipalAction()
     {
-        return $this->forward('CategoriasGaleriaBundle:Categorias:oficial');
+        return $this->forward('CategoriasGaleriaBundle:Categorias:galeriasPrincipal');
     }
     
     /**
-     * @Route("/galeria/recomendaciones", name="backend_galerias_recomendaciones")
+     * @Route("/galeria/about", name="backend_galerias_about")
      */
-    public function galeriaRecomendacionesAction()
+    public function galeriaAboutAction()
     {
-        return $this->forward('CategoriasGaleriaBundle:Categorias:recomendaciones');
+        return $this->forward('CategoriasGaleriaBundle:Categorias:galeriasAbout');
     }
     
     /**
-     * @Route("/ubicaciones", name="backend_ubicaciones")
+     * @Route("/galeria/distribuidores", name="backend_galerias_distribuidores")
      */
-    public function ubicacionesAction()
+    public function galeriaDistribuidoresAction()
     {
-        return $this->forward('ElbuenBurguesBundle:Ubicaciones:index');
+        return $this->forward('CategoriasGaleriaBundle:Categorias:galeriasDistribuidores');
     }
-    
+
     /**
-     * @Route("/ubicacion/actual", name="backend_ubicacion_actual")
+     * @Route("/galeria/howtomix", name="backend_galerias_howtomix")
      */
-    public function ubicacionActualAction()
+    public function galeriaHowToMixAction()
     {
-        return $this->forward('ElbuenBurguesBundle:Ubicaciones:actual');
+        return $this->forward('CategoriasGaleriaBundle:Categorias:galeriasHowToMix');
     }
     
     
@@ -79,11 +79,35 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/publicacion", name="backend_publicacion")
+     * @Route("/publicacion/about", name="publicaciones_about")
      */
-    public function publicacionAction()
+    public function publicacionesAboutAction()
     {
-        return $this->forward('PublicacionesBundle:Publicacion:index');
+        return $this->forward('PublicacionesBundle:Publicacion:publicacionesAbout');
+    }
+    
+    /**
+     * @Route("/where/to/find/mexico", name="publicaciones_wheretofindmexico")
+     */
+    public function whereToFindMexicoAction()
+    {
+        return $this->forward('PublicacionesBundle:Publicacion:whereToFindMexico');
+    }
+    
+    /**
+     * @Route("/where/to/find/usa", name="publicaciones_wheretofindusa")
+     */
+    public function whereToFindUsaAction()
+    {
+        return $this->forward('PublicacionesBundle:Publicacion:whereToFindUsa');
+    }
+    
+    /**
+     * @Route("/where/to/find/distribuidores", name="publicaciones_wheretofinddistribuidores")
+     */
+    public function whereToFindDistribuidoresAction()
+    {
+        return $this->forward('PublicacionesBundle:Publicacion:whereToFindDistribuidores');
     }
     
     /**

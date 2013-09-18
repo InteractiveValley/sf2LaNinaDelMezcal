@@ -1,30 +1,17 @@
 @font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Open Sans'), local('OpenSans'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+    font-family: 'GeorgiaRegular';
+    src: url('/fonts/georgia/georgia.eot');
+    src: url('/fonts/georgia/georgia.eot') format('embedded-opentype'),
+         url('/fonts/georgia/georgia.woff') format('woff'),
+         url('/fonts/georgia/georgia.ttf') format('truetype'),
+         url('/fonts/georgia/georgia.svg#GeorgiaRegular') format('svg');
 }
+
 @font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff) format('woff');
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 800;
-  src: local('Open Sans Extrabold'), local('OpenSans-Extrabold'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/EInbV5DfGHOiMmvb1Xr-hnhCUOGz7vYGh680lGh-uXM.woff) format('woff');
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: italic;
-  font-weight: 400;
-  src: local('Open Sans Italic'), local('OpenSans-Italic'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/xjAJXh38I15wypJXxuGMBobN6UDyHWBl620a-IRfuBk.woff) format('woff');
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: italic;
-  font-weight: 800;
-  src: local('Open Sans Extrabold Italic'), local('OpenSans-ExtraboldItalic'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/PRmiXeptR36kaC0GEAetxkCDe67GEgBv_HnyvHTfdew.woff) format('woff');
+    font-family: 'CenturyGothicRegular';
+    src: url('/fonts/gothic/gothic.eot');
+    src: url('/fonts/gothic/gothic.eot') format('embedded-opentype'),
+         url('/fonts/gothic/gothic.woff') format('woff'),
+         url('/fonts/gothic/gothic.ttf') format('truetype'),
+         url('/fonts/gothic/gothic.svg#CenturyGothicRegular') format('svg');
 }

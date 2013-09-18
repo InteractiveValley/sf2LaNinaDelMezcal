@@ -1,0 +1,21 @@
+{% extends "BackendBundle::backend.html.twig" %}
+
+{% block menu_horizontal %}
+    {% include 'BackendBundle:Default:menu_horizontal.html.twig' with {'pagina': 'botellas'} %}
+{% endblock %}
+
+
+{% block body %}
+<h1>Seleccionar botella</h1>
+<ul class="nav nav-list">
+    <li class="nav-header">Botellas</li>
+    {% for botella in botellas %}
+    <li class="botella-publicacion" botella="{{botella.id}}">
+        <a href="{{path('mensajes_por_botella',{'botella': botella.id })}}">
+        	{{botella}}
+        </a>
+    </li>
+    {% endfor %}    
+</ul>
+{% endblock %}
+

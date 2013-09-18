@@ -5,34 +5,30 @@
 {% endblock %}
 
 {% block siderbar %}
-     {% if galeria == "Galerias" %}
-        {% include 'BackendBundle:Default:siderbar.html.twig' with {'pagina': 'galeria_oficial'} %}
-     {% elseif galeria == "Recomendaciones" %}
-        {% include 'BackendBundle:Default:siderbar.html.twig' with {'pagina': 'galeria_recomendaciones'} %}
+     {% if galeria == "Galeria Principal" %}
+        {% include 'BackendBundle:Default:siderbar.html.twig' with {'pagina': 'galerias_principal'} %}
+     {% elseif galeria == "Galeria About" %}
+        {% include 'BackendBundle:Default:siderbar.html.twig' with {'pagina': 'galerias_about'} %}
+     {% elseif galeria == "Galeria Distribuidores" %}
+        {% include 'BackendBundle:Default:siderbar.html.twig' with {'pagina': 'galerias_distribuidores'} %}
+     {% elseif galeria == "Galeria How To Mix" %}
+        {% include 'BackendBundle:Default:siderbar.html.twig' with {'pagina': 'galerias_howtomix'} %}   
      {% endif %}
 {% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
-
-    <link href="{{ asset('css/uploadify/uploadify.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/Jcrop/jquery.Jcrop.css') }}" rel="stylesheet" />
-
     {{ form_stylesheet(form) }}
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    
-    <script src="{{ asset('js/tiny_mce/tiny_mce.js') }}"></script>
-    <script src="{{ asset('js/uploadify/jquery.uploadify.min.js') }}"></script>
-    <script src="{{ asset('js/Jcrop/jquery.Jcrop.min.js') }}"></script>
-
+    {{ tinymce_init() }}
     {{ form_javascript(form) }}
 {% endblock %}
 
 {% block body %}
-<h1>Nueva categoria</h1>
+<h1>Nueva galeria </h1>
 
 <form action="{{ path('categorias_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}

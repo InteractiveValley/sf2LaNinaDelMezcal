@@ -1,3 +1,6 @@
 /vendor/
 /app/logs/
 /app/cache/
+/web/uploads/botellas/
+/web/uploads/galerias/
+/web/uploads/publicaciones/
