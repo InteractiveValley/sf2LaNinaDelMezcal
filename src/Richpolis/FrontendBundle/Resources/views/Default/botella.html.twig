@@ -8,6 +8,26 @@
 
 {% set locale = app.request.locale %}
 
+{% block redes_sociales %}
+        <meta property="og:title" content="La niña del mezcal" />
+        <meta property="og:type" content="album" />
+        <meta property="og:url" content="{{url(pagina_actual,{'_locale':locale})}}" />
+        <meta property="og:image" content="{{asset('images/keyarts/logo_header.png')}}" />
+        <meta property="og:site_name" content="laninadelmezcal.com" />
+        <!--meta property="fb:admins" content="USER_ID1,USER_ID2"/-->
+        <meta property="og:description" content="La niña del mezcal." />
+
+        <meta name="twitter:card" value="summary">
+        <meta name="twitter:url" value="{{url(pagina_actual,{'_locale':locale})}}"/>
+        <meta name="twitter:title" value="La niña del mezcal">
+        <meta name="twitter:description" value="La niña del mezcal."/>
+        <meta name="twitter:image" value="{{asset('images/keyarts/logo_header.png')}}"/>
+        <meta name="twitter:site" value="@laninadelmezcal"/>
+        <meta name="twitter:creator" value="@richpolis"/>
+{% endblock %}
+
+
+  
 {% block body %}
 <section id="contenido" class="botellas" ng-controller="BotellasController">
    <div class="galeria">
@@ -19,24 +39,27 @@
             <div class="descripcion-botella">
                <header>
                   <h1>{% trans %}bottle tour{% endtrans %}</h1>
-                  {% raw %}
                   <h2 class="{{botella.clase}}">{{botella.botella}}</h2>   
                </header>
-               <p>
-                  {{botella.descripcion}}
-               </p>
+               <div id="descripcion-botella-cuerpo">
+                  {{botella.descripcion(locale) | raw }}  
+               </div>
             </div>
             <figure class="botella">
-                <img src="{{botella.imagen}}" alt="{{botella.titulo}}">
+                <img src="{{botella.webPath}}" alt="{{botella.botella}}">
             </figure>
-              <div ng-repeat="mensaje in botella.mensajes" class="mensaje-toltip {{botella.clase}} {{mensaje.clase}}" rel="tip" title="{{mensaje.mensaje}}" style="{{mensaje.style}}">
-                      {{mensaje.titulo}}
-              </div>  
-            <div id="howToMix" class="mensaje-toltip {{botella.clase}} {{botella.howToMix.clase}}" style="{{botella.howToMix.style}}">
-                <span onclick="javascript:generarHowToMix({{botella.howToMix.imagenes}})" style="cursor:pointer;">{{botella.howToMix.titulo}}</span>
-            </div>
-
-      {% endraw %}
+              {% for mensaje in botella.mensajes %}
+                {% if not mensaje.isHowToMix %}
+                <div class="mensaje-toltip espadin {{mensaje.clase}}" rel="tip" title="{{mensaje.mensaje(locale)|raw}}" style="{{mensaje.style}}">
+                      {{mensaje.titulo(locale)}}
+                </div>
+                {% else %}
+                <div id="howToMix" class="mensaje-toltip espadin {{mensaje.clase}}" style="{{mensaje.style}}">
+                    <span onclick="javascript:generarHowToMix({{galerias|raw}})" style="cursor:pointer;">{{mensaje.titulo(locale)}}</span>
+                </div>
+                {% endif %}
+              {% endfor %}
+              
       </article>
       <figure class="control-galeria-derecha">
             <a class="bx-next" href="{{path(botella_siguiente,{'_locale':locale})}}">&nbsp;</a>
@@ -47,27 +70,31 @@
          {% trans %}buy now{% endtrans %}
       </a>
       <ul class="menu-comprar">
-        <li><a href="">mexico</a></li>
-        <li><a href="">usa</a></li>
+        <li><a href="{{botella.linkShopMexico}}" target="_blank">méxico</a></li>
+        <li><a href="{{botella.linkShopUsa}}" target="_blank">usa</a></li>
       </ul>
    </figure>
 
    <div id="redes-sociales-pagina" class="derecha">
          <figure id="red-social-pagina-facebook">
-               <img src="{{asset('images/keyarts/facebook_share.png')}}" alt="compartir en facebook">
+            <a target="_blank" href="http://www.facebook.com/sharer.php?u={{url(pagina_actual,{'_locale':locale})}}&t={{ "sitio interesante para brindar por ello"|url_encode(true) }}">
+                <img src="{{asset('images/keyarts/facebook_share.png')}}" alt="compartir en facebook">     
+            </a>
          </figure>
          <figure id="red-social-pagina-twitter">
-               <img src="{{asset('images/keyarts/twitter_share.png')}}" alt="compartir en twitter">
+              <a href="http://twitter.com/home?status={{ "Estoy leyendo "|url_encode(true) }}{{url(pagina_actual,{'_locale':locale})}}{{ "en el sitio www.laninadelmezcal.com"|url_encode(true) }}." target="_blank">
+                  <img src="{{asset('images/keyarts/twitter_share.png')}}" alt="compartir en twitter">
+              </a>
          </figure>
    </div>
    <figure id="menus-botellas">
       <ul>
-         <li><a href="{{path('botella_espadin')}}" class="{%if(pagina_actual=='espadin')%}active{%endif%} espadin">espadin</a></li>
+         <li><a href="{{path('botella_espadin',{'_locale':locale})}}" class="{%if(pagina_actual=='botella_espadin')%}active{%endif%} espadin">espadin</a></li>
          <li><a href="" class="{%if(pagina_actual=='madrecuixe')%}active{%endif%} madrecuixe">madrecuixe</a></li>
          <li><a href="" class="{%if(pagina_actual=='tobala')%}active{%endif%} tobala">tobala</a></li>
          <li><a href="" class="{%if(pagina_actual=='tepextate')%}active{%endif%} tepextate">tepextate</a></li>
          <li><a href="" class="{%if(pagina_actual=='pechuga')%}active{%endif%} pechuga">pechuga</a></li>
-         <li><a href="{{path('botella_primario')}}" class="{%if(pagina_actual=='primario-mezcal')%}active{%endif%} primario-mezcal">primario mezcal</a></li>
+         <li><a href="{{path('botella_primario',{'_locale':locale})}}" class="{%if(pagina_actual=='botella_primario')%}active{%endif%} primario-mezcal">primario mezcal</a></li>
          <li><a href="" class="{%if(pagina_actual=='primario-licor')%}active{%endif%} primario-licor">primario licor</a></li>
       </ul>
    </figure>
@@ -77,9 +104,9 @@
 
 {% block javascripts %}
    {{parent()}}
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js">
+<!--script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js">
    </script>
-<script src="{{asset(app_angular)}}"></script>   
+<script src="{{asset(app_angular)}}"></script-->   
 <script src="{{asset('js/jquery.qtip.min.js')}}"></script>
 <script src="{{asset('js/jquery.prettyPhoto.js')}}"></script>  
 <script src="{{asset('js/sfrichpolis.js')}}"></script>  

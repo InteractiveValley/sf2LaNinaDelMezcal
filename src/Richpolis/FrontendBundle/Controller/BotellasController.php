@@ -144,7 +144,7 @@ class BotellasController extends Controller
      * Edits an existing Botellas entity.
      *
      * @Route("/{id}", name="botellas_update")
-     * @Method("PUT")
+     * @Method("POST")
      * @Template("FrontendBundle:Botellas:edit.html.twig")
      */
     public function updateAction(Request $request, $id)

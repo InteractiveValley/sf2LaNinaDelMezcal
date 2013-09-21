@@ -14,11 +14,17 @@ class PublicacionType extends AbstractType
     {
         $builder
             ->add('titulo')
-            ->add('descripcion','textarea', array(
+            ->add('descripcionEn','textarea', array(
                     'attr' => array(
                         'class' => 'tinymce',
                         'data-theme' => 'advanced' // Skip it if you want to use default theme
-                    )
+                    ),'label'=>'Descripcion Ingles'
+                ))    
+            ->add('descripcionEs','textarea', array(
+                    'attr' => array(
+                        'class' => 'tinymce',
+                        'data-theme' => 'advanced' // Skip it if you want to use default theme
+                    ),'label'=>'Descripcion Español'
                 ))
             ->add('file','file',array(
                 'label'=>'Imagen',
@@ -35,6 +41,7 @@ class PublicacionType extends AbstractType
                 'multiple'  => false
             ))
             ->add('posicion','hidden')
+            ->add('slug','hidden')
             ->add('thumbnail','hidden')
             ->add('isActive',null,array('label'=>'Activo?','required'=>false))
         ;

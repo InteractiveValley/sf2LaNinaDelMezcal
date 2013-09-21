@@ -27,4 +27,15 @@ class BotellasRepository extends EntityRepository
         $query=$this->getQueryBotellasActivas($todas);
         return $query->getResult();
     }
+    
+    public function getBotellaYMensajesPorSlug($slug){
+        $query=$this->getEntityManager()->createQueryBuilder();
+                $query->select('b,m')
+                    ->from('Richpolis\FrontendBundle\Entity\Botellas', 'b')
+                    ->leftJoin('b.mensajes', 'm')
+                    ->where('b.slug=:slug')
+                    ->setParameter('slug', $slug)
+                ;
+        return $query->getQuery()->getOneOrNullResult();
+    }
 }

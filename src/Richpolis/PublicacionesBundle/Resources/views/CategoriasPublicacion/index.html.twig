@@ -4,20 +4,6 @@
     {% include 'BackendBundle:Default:menu_horizontal.html.twig' with {'pagina': 'galerias'} %}
 {% endblock %}
 
-{# block siderbar %}
-     {% for key,value in tipos %}
-        {% if key == tipo_categoria %}    
-            {% set galeria = value %}
-        {% endif %}
-    {% endfor %}
-
-     {% if galeria == "Galerias" %}
-        {% include 'BackendBundle:Default:siderbar.html.twig' with {'pagina': 'galeria_oficial'} %}
-     {% elseif galeria == "Recomendaciones" %}
-        {% include 'BackendBundle:Default:siderbar.html.twig' with {'pagina': 'galeria_recomendaciones'} %}
-     {% endif %}
-{% endblock #}
-
 {% block siderbar %}  
 <ul class="nav nav-list">
     <li class="nav-header">Categorias</li>
@@ -32,10 +18,6 @@
     </li>
     {% endif %}
     {% endfor %}    
-    <li class="nav-header">Papelera</li>
-    <li id="papelera">
-        <img src="{{asset('images/trash_grande.png')}}"/>
-    </li>
 </ul>
 {% endblock %}
 
@@ -59,7 +41,7 @@
             <th>Activa?</th>
             <th>Creada</th>
             <th>Actualizacion</th>
-            <th>Actiones</th>
+            <th>Acc</th>
         </tr>
     </thead>
     <tbody>

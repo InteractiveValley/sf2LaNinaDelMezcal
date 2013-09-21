@@ -22,9 +22,14 @@
             <td>{{ entity.titulo }}</td>
         </tr>
         <tr>
-            <th>Descripcion</th>
-            <td>{{ entity.descripcion | raw }}</td>
+            <th>Descripcion Ingles</th>
+            <td>{{ entity.descripcionEn | raw }}</td>
         </tr>
+        <tr>
+            <th>Descripcion Español</th>
+            <td>{{ entity.descripcionEs | raw }}</td>
+        </tr>
+        {% if entity.archivo | length > 0 %}
         <tr>
             <th>Imagen</th>
             <td><img src="{{entity.webPath | apply_filter('platillos_imagen')}}"/></td>
@@ -33,6 +38,7 @@
             <th>Thumbnail</th>
             <td><img src="{{ entity.ThumbnailWebPath }}" /></td>
         </tr>
+        {% endif %}
         <tr>
             <th>Posicion</th>
             <td>{{ entity.posicion }}</td>

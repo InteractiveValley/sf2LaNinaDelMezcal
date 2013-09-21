@@ -12,11 +12,17 @@ class BotellasType extends AbstractType
     {
         $builder
             ->add('botella')
-            ->add('descripcion','textarea', array(
+            ->add('descripcionEn','textarea', array(
                     'attr' => array(
                         'class' => 'tinymce',
                         'data-theme' => 'advanced' // Skip it if you want to use default theme
-                    )
+                    ),'label'=>'Descripcion Ingles'
+                ))    
+            ->add('descripcionEs','textarea', array(
+                    'attr' => array(
+                        'class' => 'tinymce',
+                        'data-theme' => 'advanced' // Skip it if you want to use default theme
+                    ),'label'=>'Descripcion Español'
                 ))
             ->add('clase')
             ->add('style')
@@ -27,9 +33,8 @@ class BotellasType extends AbstractType
             ->add('linkShopMexico','text',array('label'=>'Shop México'))
             ->add('linkShopUsa','text',array('label'=>'Shop USA'))
             ->add('isActive',null,array('label'=>'Activo?','required'=>false))
+            ->add('slug','hidden')    
             ->add('imagen','hidden')
-            ->add('createdAt','hidden')
-            ->add('updatedAt','hidden')
         ;
     }
 

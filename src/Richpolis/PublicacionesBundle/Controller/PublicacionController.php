@@ -373,7 +373,7 @@ class PublicacionController extends Controller
         $registroUp = $em->getRepository('PublicacionesBundle:Publicacion')->find($id);
         
         if ($registroUp) {
-            $registroDown=$em->getRepository('PublicacionesBundle:Publicacion')->getRegistroUpOrDown($registroUp->getPosicion(),true);
+            $registroDown=$em->getRepository('PublicacionesBundle:Publicacion')->getRegistroUpOrDown($registroUp,true);
             if ($registroDown) {
                 $posicion=$registroUp->getPosicion();
                 $registroUp->setPosicion($registroDown->getPosicion());
@@ -399,7 +399,7 @@ class PublicacionController extends Controller
         $registroDown = $em->getRepository('PublicacionesBundle:Publicacion')->find($id);
         
         if ($registroDown) {
-            $registroUp=$em->getRepository('PublicacionesBundle:Publicacion')->getRegistroUpOrDown($registroDown->getPosicion(),false);
+            $registroUp=$em->getRepository('PublicacionesBundle:Publicacion')->getRegistroUpOrDown($registroDown,false);
             if ($registroUp) {
                 $posicion=$registroUp->getPosicion();
                 $registroUp->setPosicion($registroDown->getPosicion());

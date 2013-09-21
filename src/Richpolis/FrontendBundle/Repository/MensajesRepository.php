@@ -15,7 +15,7 @@ class MensajesRepository extends EntityRepository
     public function getQueryMensajesActivas($todas=false){
 		$query=$this->createQueryBuilder('p')
                     ->orderBy('p.botella', 'ASC')
-                    ->addOrderBy('p.titulo','ASC');
+                    ->addOrderBy('p.tituloEn','ASC');
         if(!$todas){
             $query->andWhere('p.isActive=:active')
                   ->setParameter('active', true);
@@ -33,7 +33,7 @@ class MensajesRepository extends EntityRepository
 		$query=$this->createQueryBuilder('p')
                     ->where('p.botella=:botella')
                     ->setParameter('botella', $botella)
-                    ->addOrderBy('p.titulo','ASC');
+                    ->addOrderBy('p.tituloEn','ASC');
         if(!$todas){
             $query->andWhere('p.isActive=:active')
                   ->setParameter('active', true);

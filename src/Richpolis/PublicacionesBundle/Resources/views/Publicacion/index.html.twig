@@ -37,7 +37,7 @@
         <tr>
             <th>Orden</th>
             <th>Titulo</th>
-            <th>Descripcion</th>
+            <th>slug</th>
             <th>Imagen</th>
             <th>Activo</th>
             <th>Creado</th>
@@ -50,9 +50,13 @@
         <tr class="list-registro">
             <td class="list-registro-posicion"><a href="{{ path('publicacion_show', { 'id': entity.id }) }}">{{ entity.posicion }}</a></td>
             <td class="list-registro-titulo">{{ entity.titulo }}</td>
-            <td class="list-registro-descripcion">{{ entity.descripcion | raw }}</td>
+            <td class="list-registro-slug">{{ entity.slug }}</td>
             <td class="list-registro-imagen">
+                {% if entity.archivo | length > 0 %}
                 <img src="{{ entity.thumbnailWebPath }}" style="max-height: 120px; max-width: 120px;"/>
+                {% else %}
+                    Sin imagen
+                {% endif %}
             </td>
             <td>{{ entity.isactive | isActive | raw }}</td>
             <td>{% if entity.createdat %}{{ entity.createdat|date('d-m-Y H:i:s') }}{% endif%}</td>

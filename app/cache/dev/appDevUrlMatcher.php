@@ -202,47 +202,260 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        if (0 === strpos($pathinfo, '/backend/botellas')) {
+            // botellas
+            if (rtrim($pathinfo, '/') === '/backend/botellas') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_botellas;
+                }
+
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'botellas');
+                }
+
+                return array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\BotellasController::indexAction',  '_route' => 'botellas',);
+            }
+            not_botellas:
+
+            // botellas_create
+            if ($pathinfo === '/backend/botellas/') {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_botellas_create;
+                }
+
+                return array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\BotellasController::createAction',  '_route' => 'botellas_create',);
+            }
+            not_botellas_create:
+
+            // botellas_new
+            if ($pathinfo === '/backend/botellas/new') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_botellas_new;
+                }
+
+                return array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\BotellasController::newAction',  '_route' => 'botellas_new',);
+            }
+            not_botellas_new:
+
+            // botellas_show
+            if (preg_match('#^/backend/botellas/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_botellas_show;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'botellas_show')), array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\BotellasController::showAction',));
+            }
+            not_botellas_show:
+
+            // botellas_edit
+            if (preg_match('#^/backend/botellas/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_botellas_edit;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'botellas_edit')), array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\BotellasController::editAction',));
+            }
+            not_botellas_edit:
+
+            // botellas_update
+            if (preg_match('#^/backend/botellas/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_botellas_update;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'botellas_update')), array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\BotellasController::updateAction',));
+            }
+            not_botellas_update:
+
+            // botellas_delete
+            if (preg_match('#^/backend/botellas/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if ($this->context->getMethod() != 'DELETE') {
+                    $allow[] = 'DELETE';
+                    goto not_botellas_delete;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'botellas_delete')), array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\BotellasController::deleteAction',));
+            }
+            not_botellas_delete:
+
+        }
+
         // homepage
-        if ($pathinfo === '/inicio') {
-            return array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\DefaultController::indexAction',  '_route' => 'homepage',);
+        if (preg_match('#^/(?P<_locale>en|es)/inicio$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'homepage')), array (  '_locale' => 'en',  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\DefaultController::indexAction',));
         }
 
         // splash
-        if (rtrim($pathinfo, '/') === '') {
+        if (preg_match('#^/(?P<_locale>en|es)/?$#s', $pathinfo, $matches)) {
             if (substr($pathinfo, -1) !== '/') {
                 return $this->redirect($pathinfo.'/', 'splash');
             }
 
-            return array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\DefaultController::splashAction',  '_route' => 'splash',);
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'splash')), array (  '_locale' => 'en',  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\DefaultController::splashAction',));
+        }
+
+        // richpolis_frontend_default_splash
+        if (rtrim($pathinfo, '/') === '') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'richpolis_frontend_default_splash');
+            }
+
+            return array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\DefaultController::splashAction',  '_route' => 'richpolis_frontend_default_splash',);
         }
 
         // about_la_nina
+        if (preg_match('#^/(?P<_locale>en|es)/about$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'about_la_nina')), array (  '_locale' => 'en',  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\DefaultController::aboutAction',));
+        }
+
+        // richpolis_frontend_default_about
         if ($pathinfo === '/about') {
-            return array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\DefaultController::aboutAction',  '_route' => 'about_la_nina',);
+            return array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\DefaultController::aboutAction',  '_route' => 'richpolis_frontend_default_about',);
         }
 
         // the_mezcal
-        if ($pathinfo === '/mezcal') {
-            return array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\DefaultController::mezcalAction',  '_route' => 'the_mezcal',);
+        if (preg_match('#^/(?P<_locale>en|es)/mezcal$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'the_mezcal')), array (  '_locale' => 'en',  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\DefaultController::mezcalAction',));
+        }
+
+        // botella_espadin
+        if (preg_match('#^/(?P<_locale>en|es)/mezcal/espadin$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'botella_espadin')), array (  '_locale' => 'en',  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\DefaultController::espadinAction',));
+        }
+
+        // richpolis_frontend_default_espadin
+        if ($pathinfo === '/mezcal/espadin') {
+            return array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\DefaultController::espadinAction',  '_route' => 'richpolis_frontend_default_espadin',);
+        }
+
+        // botella_primario
+        if (preg_match('#^/(?P<_locale>en|es)/mezcal/primario$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'botella_primario')), array (  '_locale' => 'en',  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\DefaultController::primarioAction',));
+        }
+
+        // richpolis_frontend_default_primario
+        if ($pathinfo === '/mezcal/primario') {
+            return array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\DefaultController::primarioAction',  '_route' => 'richpolis_frontend_default_primario',);
         }
 
         // find_la_nina
+        if (preg_match('#^/(?P<_locale>en|es)/find$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'find_la_nina')), array (  '_locale' => 'en',  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\DefaultController::findAction',));
+        }
+
+        // richpolis_frontend_default_find
         if ($pathinfo === '/find') {
-            return array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\DefaultController::findAction',  '_route' => 'find_la_nina',);
+            return array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\DefaultController::findAction',  '_route' => 'richpolis_frontend_default_find',);
         }
 
         // frontend_contacto
-        if ($pathinfo === '/contacto') {
+        if (preg_match('#^/(?P<_locale>en|es)/contacto$#s', $pathinfo, $matches)) {
             if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
                 $allow = array_merge($allow, array('GET', 'POST', 'HEAD'));
                 goto not_frontend_contacto;
             }
 
-            return array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\DefaultController::contactoAction',  '_route' => 'frontend_contacto',);
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'frontend_contacto')), array (  '_locale' => 'en',  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\DefaultController::contactoAction',));
         }
         not_frontend_contacto:
 
+        // richpolis_frontend_default_contacto
+        if ($pathinfo === '/contacto') {
+            if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
+                $allow = array_merge($allow, array('GET', 'POST', 'HEAD'));
+                goto not_richpolis_frontend_default_contacto;
+            }
+
+            return array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\DefaultController::contactoAction',  '_route' => 'richpolis_frontend_default_contacto',);
+        }
+        not_richpolis_frontend_default_contacto:
+
+        // last_tweets
+        if (0 === strpos($pathinfo, '/last-tweets') && preg_match('#^/last\\-tweets/(?P<username>[^/]++)/?$#s', $pathinfo, $matches)) {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'last_tweets');
+            }
+
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'last_tweets')), array (  'limit' => 10,  'age' => NULL,  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\DefaultController::lastTweetsAction',));
+        }
+
         if (0 === strpos($pathinfo, '/backend')) {
+            if (0 === strpos($pathinfo, '/backend/mensajes')) {
+                // mensajes
+                if (rtrim($pathinfo, '/') === '/backend/mensajes') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'mensajes');
+                    }
+
+                    return array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\MensajesController::indexAction',  '_route' => 'mensajes',);
+                }
+
+                // mensajes_seleccionar_botella
+                if ($pathinfo === '/backend/mensajes/seleccionar/botella') {
+                    return array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\MensajesController::selectAction',  '_route' => 'mensajes_seleccionar_botella',);
+                }
+
+                // mensajes_por_botella
+                if (0 === strpos($pathinfo, '/backend/mensajes/list') && preg_match('#^/backend/mensajes/list/(?P<botella>[^/]++)/botella$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'mensajes_por_botella')), array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\MensajesController::porCategoriaAction',));
+                }
+
+                // mensajes_show
+                if (preg_match('#^/backend/mensajes/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'mensajes_show')), array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\MensajesController::showAction',));
+                }
+
+                // mensajes_new
+                if ($pathinfo === '/backend/mensajes/new') {
+                    return array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\MensajesController::newAction',  '_route' => 'mensajes_new',);
+                }
+
+                // mensajes_create
+                if ($pathinfo === '/backend/mensajes/create') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_mensajes_create;
+                    }
+
+                    return array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\MensajesController::createAction',  '_route' => 'mensajes_create',);
+                }
+                not_mensajes_create:
+
+                // mensajes_edit
+                if (preg_match('#^/backend/mensajes/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'mensajes_edit')), array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\MensajesController::editAction',));
+                }
+
+                // mensajes_update
+                if (preg_match('#^/backend/mensajes/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_mensajes_update;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'mensajes_update')), array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\MensajesController::updateAction',));
+                }
+                not_mensajes_update:
+
+                // mensajes_delete
+                if (preg_match('#^/backend/mensajes/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_mensajes_delete;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'mensajes_delete')), array (  '_controller' => 'Richpolis\\FrontendBundle\\Controller\\MensajesController::deleteAction',));
+                }
+                not_mensajes_delete:
+
+            }
+
             if (0 === strpos($pathinfo, '/backend/categorias')) {
                 // categorias
                 if (rtrim($pathinfo, '/') === '/backend/categorias') {
@@ -448,9 +661,116 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
             }
 
-            if (0 === strpos($pathinfo, '/backend/backend/publicacion')) {
+            if (0 === strpos($pathinfo, '/backend/publicacion')) {
+                if (0 === strpos($pathinfo, '/backend/publicaciones')) {
+                    // publicaciones
+                    if (rtrim($pathinfo, '/') === '/backend/publicaciones') {
+                        if (substr($pathinfo, -1) !== '/') {
+                            return $this->redirect($pathinfo.'/', 'publicaciones');
+                        }
+
+                        return array (  '_controller' => 'Richpolis\\PublicacionesBundle\\Controller\\CategoriasPublicacionController::indexAction',  '_route' => 'publicaciones',);
+                    }
+
+                    // publicaciones_seleccionar
+                    if ($pathinfo === '/backend/publicaciones/seleccionar') {
+                        return array (  '_controller' => 'Richpolis\\PublicacionesBundle\\Controller\\CategoriasPublicacionController::selectAction',  '_route' => 'publicaciones_seleccionar',);
+                    }
+
+                    // publicaciones_por_tipo
+                    if (0 === strpos($pathinfo, '/backend/publicaciones/list') && preg_match('#^/backend/publicaciones/list/(?P<tipo>[^/]++)/tipo$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'publicaciones_por_tipo')), array (  '_controller' => 'Richpolis\\PublicacionesBundle\\Controller\\CategoriasPublicacionController::porTipoAction',));
+                    }
+
+                    // publicaciones_show
+                    if (preg_match('#^/backend/publicaciones/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'publicaciones_show')), array (  '_controller' => 'Richpolis\\PublicacionesBundle\\Controller\\CategoriasPublicacionController::showAction',));
+                    }
+
+                    // publicaciones_show_tipo
+                    if (0 === strpos($pathinfo, '/backend/publicaciones/show') && preg_match('#^/backend/publicaciones/show/(?P<tipo>[^/]++)/tipo$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'publicaciones_show_tipo')), array (  '_controller' => 'Richpolis\\PublicacionesBundle\\Controller\\CategoriasPublicacionController::showCategoriaAction',));
+                    }
+
+                    // publicaciones_new
+                    if ($pathinfo === '/backend/publicaciones/new') {
+                        return array (  '_controller' => 'Richpolis\\PublicacionesBundle\\Controller\\CategoriasPublicacionController::newAction',  '_route' => 'publicaciones_new',);
+                    }
+
+                    // publicaciones_create
+                    if ($pathinfo === '/backend/publicaciones/create') {
+                        if ($this->context->getMethod() != 'POST') {
+                            $allow[] = 'POST';
+                            goto not_publicaciones_create;
+                        }
+
+                        return array (  '_controller' => 'Richpolis\\PublicacionesBundle\\Controller\\CategoriasPublicacionController::createAction',  '_route' => 'publicaciones_create',);
+                    }
+                    not_publicaciones_create:
+
+                    // publicaciones_edit
+                    if (preg_match('#^/backend/publicaciones/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'publicaciones_edit')), array (  '_controller' => 'Richpolis\\PublicacionesBundle\\Controller\\CategoriasPublicacionController::editAction',));
+                    }
+
+                    // publicaciones_update
+                    if (preg_match('#^/backend/publicaciones/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
+                        if ($this->context->getMethod() != 'POST') {
+                            $allow[] = 'POST';
+                            goto not_publicaciones_update;
+                        }
+
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'publicaciones_update')), array (  '_controller' => 'Richpolis\\PublicacionesBundle\\Controller\\CategoriasPublicacionController::updateAction',));
+                    }
+                    not_publicaciones_update:
+
+                    // publicaciones_delete
+                    if (preg_match('#^/backend/publicaciones/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                        if ($this->context->getMethod() != 'POST') {
+                            $allow[] = 'POST';
+                            goto not_publicaciones_delete;
+                        }
+
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'publicaciones_delete')), array (  '_controller' => 'Richpolis\\PublicacionesBundle\\Controller\\CategoriasPublicacionController::deleteAction',));
+                    }
+                    not_publicaciones_delete:
+
+                    // publicaciones_galeria
+                    if (0 === strpos($pathinfo, '/backend/publicaciones/galeria') && preg_match('#^/backend/publicaciones/galeria/(?P<categoria>[^/]++)/(?P<isActive>[^/]++)$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'publicaciones_galeria')), array (  '_controller' => 'Richpolis\\PublicacionesBundle\\Controller\\CategoriasPublicacionController::galeriaAction',));
+                    }
+
+                    // publicaciones_ordenar
+                    if ($pathinfo === '/backend/publicaciones/ordenar') {
+                        return array (  '_controller' => 'Richpolis\\PublicacionesBundle\\Controller\\CategoriasPublicacionController::ordenarGaleriaAction',  '_route' => 'publicaciones_ordenar',);
+                    }
+
+                    // publicaciones_up
+                    if (preg_match('#^/backend/publicaciones/(?P<id>[^/]++)/up$#s', $pathinfo, $matches)) {
+                        if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                            $allow = array_merge($allow, array('GET', 'HEAD'));
+                            goto not_publicaciones_up;
+                        }
+
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'publicaciones_up')), array (  '_controller' => 'Richpolis\\PublicacionesBundle\\Controller\\CategoriasPublicacionController::upAction',));
+                    }
+                    not_publicaciones_up:
+
+                    // publicaciones_down
+                    if (preg_match('#^/backend/publicaciones/(?P<id>[^/]++)/down$#s', $pathinfo, $matches)) {
+                        if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                            $allow = array_merge($allow, array('GET', 'HEAD'));
+                            goto not_publicaciones_down;
+                        }
+
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'publicaciones_down')), array (  '_controller' => 'Richpolis\\PublicacionesBundle\\Controller\\CategoriasPublicacionController::downAction',));
+                    }
+                    not_publicaciones_down:
+
+                }
+
                 // publicacion
-                if (rtrim($pathinfo, '/') === '/backend/backend/publicacion') {
+                if (rtrim($pathinfo, '/') === '/backend/publicacion') {
                     if (substr($pathinfo, -1) !== '/') {
                         return $this->redirect($pathinfo.'/', 'publicacion');
                     }
@@ -458,18 +778,28 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     return array (  '_controller' => 'Richpolis\\PublicacionesBundle\\Controller\\PublicacionController::indexAction',  '_route' => 'publicacion',);
                 }
 
+                // publicacion_seleccionar_categoria
+                if ($pathinfo === '/backend/publicacion/seleccionar/categoria') {
+                    return array (  '_controller' => 'Richpolis\\PublicacionesBundle\\Controller\\PublicacionController::selectAction',  '_route' => 'publicacion_seleccionar_categoria',);
+                }
+
+                // publicacion_por_categoria
+                if (0 === strpos($pathinfo, '/backend/publicacion/list') && preg_match('#^/backend/publicacion/list/(?P<categoria>[^/]++)/categoria$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'publicacion_por_categoria')), array (  '_controller' => 'Richpolis\\PublicacionesBundle\\Controller\\PublicacionController::porCategoriaAction',));
+                }
+
                 // publicacion_show
-                if (preg_match('#^/backend/backend/publicacion/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                if (preg_match('#^/backend/publicacion/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
                     return $this->mergeDefaults(array_replace($matches, array('_route' => 'publicacion_show')), array (  '_controller' => 'Richpolis\\PublicacionesBundle\\Controller\\PublicacionController::showAction',));
                 }
 
                 // publicacion_new
-                if ($pathinfo === '/backend/backend/publicacion/new') {
+                if ($pathinfo === '/backend/publicacion/new') {
                     return array (  '_controller' => 'Richpolis\\PublicacionesBundle\\Controller\\PublicacionController::newAction',  '_route' => 'publicacion_new',);
                 }
 
                 // publicacion_create
-                if ($pathinfo === '/backend/backend/publicacion/create') {
+                if ($pathinfo === '/backend/publicacion/create') {
                     if ($this->context->getMethod() != 'POST') {
                         $allow[] = 'POST';
                         goto not_publicacion_create;
@@ -480,12 +810,12 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 not_publicacion_create:
 
                 // publicacion_edit
-                if (preg_match('#^/backend/backend/publicacion/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                if (preg_match('#^/backend/publicacion/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
                     return $this->mergeDefaults(array_replace($matches, array('_route' => 'publicacion_edit')), array (  '_controller' => 'Richpolis\\PublicacionesBundle\\Controller\\PublicacionController::editAction',));
                 }
 
                 // publicacion_update
-                if (preg_match('#^/backend/backend/publicacion/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
+                if (preg_match('#^/backend/publicacion/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
                     if ($this->context->getMethod() != 'POST') {
                         $allow[] = 'POST';
                         goto not_publicacion_update;
@@ -496,7 +826,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 not_publicacion_update:
 
                 // publicacion_delete
-                if (preg_match('#^/backend/backend/publicacion/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                if (preg_match('#^/backend/publicacion/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
                     if ($this->context->getMethod() != 'POST') {
                         $allow[] = 'POST';
                         goto not_publicacion_delete;
@@ -507,7 +837,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 not_publicacion_delete:
 
                 // publicacion_up
-                if (preg_match('#^/backend/backend/publicacion/(?P<id>[^/]++)/up$#s', $pathinfo, $matches)) {
+                if (preg_match('#^/backend/publicacion/(?P<id>[^/]++)/up$#s', $pathinfo, $matches)) {
                     if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
                         $allow = array_merge($allow, array('GET', 'HEAD'));
                         goto not_publicacion_up;
@@ -518,7 +848,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 not_publicacion_up:
 
                 // publicacion_down
-                if (preg_match('#^/backend/backend/publicacion/(?P<id>[^/]++)/down$#s', $pathinfo, $matches)) {
+                if (preg_match('#^/backend/publicacion/(?P<id>[^/]++)/down$#s', $pathinfo, $matches)) {
                     if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
                         $allow = array_merge($allow, array('GET', 'HEAD'));
                         goto not_publicacion_down;
@@ -615,27 +945,24 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             }
 
             if (0 === strpos($pathinfo, '/backend/galeria')) {
-                // backend_galerias_oficial
-                if ($pathinfo === '/backend/galerias') {
-                    return array (  '_controller' => 'Richpolis\\BackendBundle\\Controller\\DefaultController::galeriaOficialAction',  '_route' => 'backend_galerias_oficial',);
+                // backend_galerias_principal
+                if ($pathinfo === '/backend/galeria/principal') {
+                    return array (  '_controller' => 'Richpolis\\BackendBundle\\Controller\\DefaultController::galeriaPrincipalAction',  '_route' => 'backend_galerias_principal',);
                 }
 
-                // backend_galerias_recomendaciones
-                if ($pathinfo === '/backend/galeria/recomendaciones') {
-                    return array (  '_controller' => 'Richpolis\\BackendBundle\\Controller\\DefaultController::galeriaRecomendacionesAction',  '_route' => 'backend_galerias_recomendaciones',);
+                // backend_galerias_about
+                if ($pathinfo === '/backend/galeria/about') {
+                    return array (  '_controller' => 'Richpolis\\BackendBundle\\Controller\\DefaultController::galeriaAboutAction',  '_route' => 'backend_galerias_about',);
                 }
 
-            }
-
-            if (0 === strpos($pathinfo, '/backend/ubicacion')) {
-                // backend_ubicaciones
-                if ($pathinfo === '/backend/ubicaciones') {
-                    return array (  '_controller' => 'Richpolis\\BackendBundle\\Controller\\DefaultController::ubicacionesAction',  '_route' => 'backend_ubicaciones',);
+                // backend_galerias_distribuidores
+                if ($pathinfo === '/backend/galeria/distribuidores') {
+                    return array (  '_controller' => 'Richpolis\\BackendBundle\\Controller\\DefaultController::galeriaDistribuidoresAction',  '_route' => 'backend_galerias_distribuidores',);
                 }
 
-                // backend_ubicacion_actual
-                if ($pathinfo === '/backend/ubicacion/actual') {
-                    return array (  '_controller' => 'Richpolis\\BackendBundle\\Controller\\DefaultController::ubicacionActualAction',  '_route' => 'backend_ubicacion_actual',);
+                // backend_galerias_howtomix
+                if ($pathinfo === '/backend/galeria/howtomix') {
+                    return array (  '_controller' => 'Richpolis\\BackendBundle\\Controller\\DefaultController::galeriaHowToMixAction',  '_route' => 'backend_galerias_howtomix',);
                 }
 
             }
@@ -645,9 +972,27 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'Richpolis\\BackendBundle\\Controller\\DefaultController::configuracionesAction',  '_route' => 'backend_configuraciones',);
             }
 
-            // backend_publicacion
-            if ($pathinfo === '/backend/publicacion') {
-                return array (  '_controller' => 'Richpolis\\BackendBundle\\Controller\\DefaultController::publicacionAction',  '_route' => 'backend_publicacion',);
+            // publicaciones_about
+            if ($pathinfo === '/backend/publicacion/about') {
+                return array (  '_controller' => 'Richpolis\\BackendBundle\\Controller\\DefaultController::publicacionesAboutAction',  '_route' => 'publicaciones_about',);
+            }
+
+            if (0 === strpos($pathinfo, '/backend/where/to/find')) {
+                // publicaciones_wheretofindmexico
+                if ($pathinfo === '/backend/where/to/find/mexico') {
+                    return array (  '_controller' => 'Richpolis\\BackendBundle\\Controller\\DefaultController::whereToFindMexicoAction',  '_route' => 'publicaciones_wheretofindmexico',);
+                }
+
+                // publicaciones_wheretofindusa
+                if ($pathinfo === '/backend/where/to/find/usa') {
+                    return array (  '_controller' => 'Richpolis\\BackendBundle\\Controller\\DefaultController::whereToFindUsaAction',  '_route' => 'publicaciones_wheretofindusa',);
+                }
+
+                // publicaciones_wheretofinddistribuidores
+                if ($pathinfo === '/backend/where/to/find/distribuidores') {
+                    return array (  '_controller' => 'Richpolis\\BackendBundle\\Controller\\DefaultController::whereToFindDistribuidoresAction',  '_route' => 'publicaciones_wheretofinddistribuidores',);
+                }
+
             }
 
             if (0 === strpos($pathinfo, '/backend/log')) {

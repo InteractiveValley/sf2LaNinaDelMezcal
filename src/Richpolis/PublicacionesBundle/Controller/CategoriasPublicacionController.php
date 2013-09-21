@@ -37,8 +37,8 @@ class CategoriasPublicacionController extends Controller
 
         $filters = $this->getFilters();
 
-        if(!isset($filters['publicaciones']))
-            $filters['publicaciones']=  CategoriasPublicacion::$ABOUT;
+        if(!isset($filters['categorias_publicaciones']))
+            $filters['categorias_publicaciones']=  CategoriasPublicacion::$ABOUT;
         
         $query = $em->getRepository('PublicacionesBundle:CategoriasPublicacion')
                             ->getQueryCategoriasPorTipoYActivas($filters['publicaciones'],true);
@@ -55,7 +55,7 @@ class CategoriasPublicacionController extends Controller
         
         return array(
             'tipos'         =>  CategoriasPublicacion::getArrayTipoCategorias(),
-            'tipo_categoria'=>  $filters['publicaciones'],
+            'tipo_categoria'=>  $filters['categorias_publicaciones'],
             'pagination' => $pagination,
         );
     }
@@ -69,7 +69,7 @@ class CategoriasPublicacionController extends Controller
     {
         $filters = $this->getFilters();
         
-        if(isset($filters['publicaciones'])){
+        if(isset($filters['categorias_publicaciones'])){
             return $this->redirect($this->generateUrl('publicaciones'));
         }else{
             return $this->render('PublicacionesBundle:CategoriasPublicacion:select.html.twig', array(
@@ -87,11 +87,11 @@ class CategoriasPublicacionController extends Controller
     {
         $filters = $this->getFilters();
         if($tipo){
-            $filters['publicaciones']=$tipo;
+            $filters['categorias_publicaciones']=$tipo;
             $this->get('session')->set('filters',$filters);
             return $this->redirect($this->generateUrl('publicaciones'));
         }else{
-            if(isset($filters['publicaciones'])){
+            if(isset($filters['categorias_publicaciones'])){
                 return $this->redirect($this->generateUrl('publicaciones'));
             }else{
                 return $this->render('PublicacionesBundle:CategoriasPublicacion:select.html.twig', array(

@@ -62,7 +62,9 @@ class GaleriasRepository extends EntityRepository
     }
     
     public function getQueryGaleriaPorTipoCategoria($tipo,$todas=false){
-        $query=$this->createQueryBuilder('g')
+        $query=$this->getEntityManager()->createQueryBuilder();
+               $query->select('g,c')
+                    ->from('Richpolis\CategoriasGaleriaBundle\Entity\Galerias', 'g')
                     ->leftJoin('g.categoria', 'c') 
                     ->where('c.tipoCategoria=:tipo')
                     ->setParameter('tipo', $tipo)
@@ -77,5 +79,16 @@ class GaleriasRepository extends EntityRepository
     public function getGaleriaPorTipoCategoria($tipo,$todas=false){
         $query=$this->getQueryGaleriaPorTipoCategoria($tipo, $todas=false);
         return $query->getResult();
+    }
+    
+    public function getGaleriaPorCategoriaSlug($slug){
+        $query=$this->getEntityManager()->createQueryBuilder();
+               $query->select('g,c')
+                    ->from('Richpolis\CategoriasGaleriaBundle\Entity\Galerias', 'g')
+                    ->leftJoin('g.categoria', 'c') 
+                    ->where('c.slug=:slug')
+                    ->setParameter('slug', $slug)
+                    ->orderBy('g.posicion', 'DESC'); 
+        return $query->getQuery()->getResult();
     }
 }

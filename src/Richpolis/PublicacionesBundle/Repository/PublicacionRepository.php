@@ -3,6 +3,7 @@
 namespace Richpolis\PublicacionesBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Richpolis\PublicacionesBundle\Entity\Publicacion;
 
 /**
  * PublicacionesRepository
@@ -25,7 +26,7 @@ class PublicacionRepository extends EntityRepository
     
     public function getQueryPublicacionActivas($todas=false){
         $query=$this->createQueryBuilder('p')
-                    ->orderBy('p.posicion', 'DESC');
+                    ->orderBy('p.posicion', 'ASC');
         if(!$todas){
             $query->andWhere('p.isActive=:active')
                   ->setParameter('active', true);
@@ -42,7 +43,7 @@ class PublicacionRepository extends EntityRepository
         $query=$this->createQueryBuilder('p')
                     ->where('p.categoria=:categoria')
                     ->setParameter('categoria',$categoria)
-                    ->orderBy('p.posicion', 'DESC');
+                    ->orderBy('p.posicion', 'ASC');
         if(!$todas){
             $query->andWhere('p.isActive=:active')
                   ->setParameter('active', true);
@@ -55,20 +56,43 @@ class PublicacionRepository extends EntityRepository
         return $query->getResult();
     }
     
-    public function getRegistroUpOrDown($posicionRegistro,$up=true){
+    public function getQueryPublicacionPorTipoCategoriaActivas($tipoCategoria,$todas=false){
+        $query=$this->getEntityManager()->createQueryBuilder();
+                $query->select('p,c')
+                    ->from('Richpolis\PublicacionesBundle\Entity\Publicacion', 'p')
+                    ->leftJoin('p.categoria', 'c')
+                    ->where('c.tipoCategoria=:tipo')
+                    ->setParameter('tipo',$tipoCategoria)
+                    ->orderBy('p.posicion', 'ASC');
+        if(!$todas){
+            $query->andWhere('p.isActive=:active')
+                  ->setParameter('active', true);
+        }
+        return $query->getQuery();
+    }
+    
+    public function getPublicacionPorTipoCategoriaActivas($tipoCategoria,$todas=false){
+        $query=$this->getQueryPublicacionPorTipoCategoriaActivas($tipoCategoria,$todas);
+        return $query->getResult();
+    }
+    public function getRegistroUpOrDown(Publicacion $publicacion,$up=true){
         // $up = true, $up = false is down
         if($up){
             //up
             $query=$this->createQueryBuilder('p')
-                    ->where('p.posicion>:posicion')
-                    ->setParameter('posicion', $posicionRegistro)
+                    ->where('p.posicion<:posicion')
+                    ->setParameter('posicion', $publicacion->getPosicion())
+                    ->andWhere('p.categoria=:categoria')
+                    ->setParameter('categoria',$publicacion->getCategoria()->getId())
                     ->orderBy('p.posicion', 'DESC');
         }else{
             //down
             $query=$this->createQueryBuilder('p')
-                    ->where('p.posicion<:posicion')
-                    ->setParameter('posicion', $posicionRegistro)
-                    ->orderBy('p.posicion', 'DESC');
+                    ->where('p.posicion>:posicion')
+                    ->setParameter('posicion', $publicacion->getPosicion())
+                    ->andWhere('p.categoria=:categoria')
+                    ->setParameter('categoria',$publicacion->getCategoria()->getId())
+                    ->orderBy('p.posicion', 'ASC');
         }
         
         return $query->getQuery()->setMaxResults(1)->getOneOrNullResult();

@@ -15,46 +15,46 @@
                 <ul>
                     <li id="first" class="firstanimation">
                         <a href="#">
-                            <img src="/images/demo/img_1.jpg" alt="Cougar"/>
+                            <img src="{{galerias[0].webPath}}" alt="{{galerias[0].titulo}}"/>
                         </a>
                         <div class="tooltip">
-                            <h1>Cougar</h1>
+                            <h1>{{galerias[0].titulo}}</h1>
                         </div>
                     </li>
 
                     <li id="second" class="secondanimation">
                         <a href="#">
-                            <img src="/images/demo/img_2.jpg" alt="Lions"/>
+                            <img src="{{galerias[1].webPath}}" alt="{{galerias[1].titulo}}"/>
                         </a>
                         <div class="tooltip">
-                            <h1>Lions</h1>
+                            <h1>{{galerias[1].titulo}}</h1>
                         </div>
                     </li>
 
                     <li id="third" class="thirdanimation">
                         <a href="#">
-                            <img src="/images/demo/img_3.jpg" alt="Snowalker"/>
+                            <img src="{{galerias[2].webPath}}" alt="{{galerias[2].titulo}}"/>
                         </a>
                         <div class="tooltip">
-                            <h1>Snowalker</h1>
+                            <h1>{{galerias[2].titulo}}</h1>
                         </div>
                     </li>
 
                     <li id="fourth" class="fourthanimation">
                         <a href="#">
-                            <img src="/images/demo/img_4.jpg" alt="Howling"/>
+                            <img src="{{galerias[3].webPath}}" alt="{{galerias[3].titulo}}"/>
                         </a>
                         <div class="tooltip">
-                            <h1>Howling</h1>
+                            <h1>{{galerias[3].titulo}}</h1>
                         </div>
                     </li>
 
                     <li id="fifth" class="fifthanimation">
                         <a href="#">
-                            <img src="/images/demo/img_5.jpg" alt="Sunbathing"/>
+                            <img src="{{galerias[4].webPath}}" alt="{{galerias[4].titulo}}"/>
                         </a>
                         <div class="tooltip">
-                            <h1>Sunbathing</h1>
+                            <h1>{{galerias[4].titulo}}</h1>
                         </div>
                     </li>
                 </ul>
@@ -76,11 +76,37 @@
         $('ul.tweets-lista li:first-child').slideUp("slow",function(){
             $('ul.tweets-lista').append($(this).slideDown("fast"));
         });
-                    
+
         setTimeout(function(){
             $.iniciarCircle();
         },6000);
     }
-    $(document).on("ready",$.iniciarCircle);
+
+    jQuery.mostrarTooltip=function() {
+        $("#slider li .tooltip").animate({'left':'0px','opacity':1},'fast',function(){
+            $("#slider li, #slider .progress-bar").css({"-moz-animation-play-state":"paused","-webkit-animation-play-state":"paused"});
+        });
+
+        setTimeout(function(){
+            $.ocultarTooltip();
+        },5000);
+    }
+
+    jQuery.ocultarTooltip=function() {
+        $("#slider li .tooltip").animate({'left':'-320px','opacity':0},'fast',function(){
+            $("#slider li, #slider .progress-bar").css({"-moz-animation-play-state":"running","-webkit-animation-play-state":"running"});
+        });
+
+        setTimeout(function(){
+            $.mostrarTooltip();
+        },5000);
+    }
+
+    jQuery.iniciar=function(){
+        $.iniciarCircle();
+        $.mostrarTooltip();
+    }
+    
+    $(document).on("ready",$.iniciar);
     </script>
 {% endblock %}

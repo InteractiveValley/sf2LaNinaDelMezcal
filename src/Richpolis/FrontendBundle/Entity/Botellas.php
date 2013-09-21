@@ -34,10 +34,18 @@ class Botellas
     /**
      * @var string
      *
-     * @ORM\Column(name="descripcion", type="text")
+     * @ORM\Column(name="descripcion_es", type="text")
      * @Assert\NotBlank()
      */
-    private $descripcion;
+    private $descripcionEs;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion_en", type="text")
+     * @Assert\NotBlank()
+     */
+    private $descripcionEn;
 
     /**
      * @var string
@@ -58,10 +66,6 @@ class Botellas
      * @var string
      *
      * @ORM\Column(name="imagen", type="string", length=255)
-     * @Assert\File(
-     *   maxSize = "2048k",
-     *   maxSizeMessage = "El archivo es muy grande ({{ size }}). Solo es permitido {{ limit }}"
-     * )
      */
     private $imagen;
 
@@ -78,11 +82,6 @@ class Botellas
      * @ORM\Column(name="link_shop_usa", type="string", length=255, nullable=true)
      */
     private $linkShopUsa;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Mensajes", mappedBy="botella")
-     */
-    private $mensajes;
 
     /**
      * @var boolean
@@ -112,6 +111,11 @@ class Botellas
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Mensajes", mappedBy="botella")
+     */
+    private $mensajes;
+
     
     /**
      * Constructor
@@ -119,6 +123,8 @@ class Botellas
     public function __construct()
     {
         $this->mensajes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
         $this->isActive = true;
     }
     
@@ -163,26 +169,34 @@ class Botellas
     }
 
     /**
-     * Set descripcion
+     * Set descripcion, segun el locale de la aplicacion 
      *
      * @param string $descripcion
      * @return Botellas
      */
-    public function setDescripcion($descripcion)
+    public function setDescripcion($locale,$descripcion)
     {
-        $this->descripcion = $descripcion;
+        if($locale=="es"){
+            $this->descripcionEs = $descripcion;
+        }else{
+            $this->descripcionEn = $descripcion;
+        }
     
         return $this;
     }
 
     /**
-     * Get descripcion
+     * Get descripcion, segun el locale de la aplicacion
      *
      * @return string 
      */
-    public function getDescripcion()
+    public function getDescripcion($locale)
     {
-        return $this->descripcion;
+        if($locale=="es"){
+            return $this->descripcionEs;
+        }else{
+            return $this->descripcionEn;
+        }
     }
 
     /**
@@ -470,8 +484,8 @@ class Botellas
     
     public $file;
     
-    /**
-    ** @ORM\PrePersist
+   /**
+    * @ORM\PrePersist
     * @ORM\PreUpdate
     */
     public function preUpload()
@@ -530,5 +544,51 @@ class Botellas
     public function getAbsolutePath()
     {
         return null === $this->imagen ? null : $this->getUploadRootDir().'/'.$this->imagen;
+    }
+
+    /**
+     * Set descripcionEs
+     *
+     * @param string $descripcionEs
+     * @return Botellas
+     */
+    public function setDescripcionEs($descripcionEs)
+    {
+        $this->descripcionEs = $descripcionEs;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcionEs
+     *
+     * @return string 
+     */
+    public function getDescripcionEs()
+    {
+        return $this->descripcionEs;
+    }
+
+    /**
+     * Set descripcionEn
+     *
+     * @param string $descripcionEn
+     * @return Botellas
+     */
+    public function setDescripcionEn($descripcionEn)
+    {
+        $this->descripcionEn = $descripcionEn;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcionEn
+     *
+     * @return string 
+     */
+    public function getDescripcionEn()
+    {
+        return $this->descripcionEn;
     }
 }

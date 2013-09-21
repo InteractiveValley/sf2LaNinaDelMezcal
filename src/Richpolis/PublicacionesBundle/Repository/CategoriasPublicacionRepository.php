@@ -78,11 +78,11 @@ class CategoriasPublicacionRepository extends EntityRepository
     public function getQueryCategoriasPorTipoCategoria($tipoCategoria,$categoria_actual=0,$active=true){
         $em=$this->getEntityManager();
         $query=$em->createQuery('
-                    SELECT p FROM PublicacionesBundle:CategoriasPublicacion p
-                    WHERE p.tipoCategoria = :tipo 
-                    AND p.id <> :actual 
-                    AND p.isActive = :active 
-                    ORDER BY p.posicion DESC 
+                    SELECT c FROM PublicacionesBundle:CategoriasPublicacion c
+                    WHERE c.tipoCategoria = :tipo 
+                    AND c.id <> :actual 
+                    AND c.isActive = :active 
+                    ORDER BY c.posicion ASC 
                 ')->setParameters(array(
                     'tipo'=> $tipoCategoria,
                     "actual"=>$categoria_actual,
@@ -97,10 +97,15 @@ class CategoriasPublicacionRepository extends EntityRepository
     }
     
     public function getQueryCategoriasPorTipoYActivas($tipoCategoria,$todas=false){
-        $query=$this->createQueryBuilder('c')
+        $query = $this->getEntityManager()->createQueryBuilder();
+                $query->select('c,p')
+                    ->from('Richpolis\PublicacionesBundle\Entity\CategoriasPublicacion', 'c')
+                    ->leftJoin('c.publicaciones', 'p')
                     ->where('c.tipoCategoria=:tipo')
                     ->setParameter('tipo', $tipoCategoria)
-                    ->orderBy('c.posicion', 'DESC'); 
+                    ->orderBy('c.posicion', 'ASC')
+                    ->addOrderBy('p.posicion','DESC')
+                ; 
         if(!$todas){
             $query->andWhere('c.isActive=:active')
                   ->setParameter('active', true);
@@ -131,12 +136,12 @@ class CategoriasPublicacionRepository extends EntityRepository
     public function getCategoriasActuales(){
         $em=$this->getEntityManager();
         $query=$em->createQuery('
-                    SELECT DISTINCT c,g 
+                    SELECT DISTINCT c,p 
                     FROM PublicacionesBundle:CategoriasPublicacion c 
-                    LEFT JOIN c.galerias g 
+                    LEFT JOIN c.publicaciones p 
                     WHERE c.isActive=:active 
                     AND g.isActive=:activeGaleria 
-                    ORDER BY c.tipoCategoria,c.posicion DESC, g.posicion DESC 
+                    ORDER BY c.tipoCategoria,c.posicion ASC, p.posicion DESC 
                 ')->setParameters(array('active'=>true,'activeGaleria'=>true));
         return $query->getResult();
     }
@@ -159,16 +164,16 @@ class CategoriasPublicacionRepository extends EntityRepository
         // $up = true, $up = false is down
         if($up){
             //up
-            $query=$this->createQueryBuilder('p')
-                    ->where('p.posicion>:posicion')
+            $query=$this->createQueryBuilder('c')
+                    ->where('c.posicion>:posicion')
                     ->setParameter('posicion', $posicionRegistro)
-                    ->orderBy('p.posicion', 'DESC');
+                    ->orderBy('c.posicion', 'DESC');
         }else{
             //down
-            $query=$this->createQueryBuilder('p')
-                    ->where('p.posicion<:posicion')
+            $query=$this->createQueryBuilder('c')
+                    ->where('c.posicion<:posicion')
                     ->setParameter('posicion', $posicionRegistro)
-                    ->orderBy('p.posicion', 'DESC');
+                    ->orderBy('c.posicion', 'DESC');
         }
         
         return $query->getQuery()->setMaxResults(1)->getOneOrNullResult();

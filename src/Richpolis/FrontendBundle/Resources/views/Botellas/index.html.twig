@@ -23,7 +23,9 @@
             <tr>
                 <th>Id</th>
                 <th>Botella</th>
-                <th>Descripcion</th>
+                <th>Slug</th>
+                <th>Ingles</th>
+                <th>Español</th>
                 <th>Activa?</th>
                 <th>Actualización</th>
                 <th>Actiones</th>
@@ -34,7 +36,9 @@
             <tr>
                 <td><a href="{{ path('botellas_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.botella }}</td>
-                <td>{{ entity.descripcion | raw}}</td>
+                <td>{{ entity.slug }}</td>
+                <td>{{ entity.descripcionEn | raw}}</td>
+                <td>{{ entity.descripcionEs | raw}}</td>
                 <td>{{ entity.isActive | isActive | raw }}</td>
                 <td>{% if entity.updatedat %}{{ entity.updatedat|date('d/m/Y H:i') }}{% endif%}</td>
                 <td>

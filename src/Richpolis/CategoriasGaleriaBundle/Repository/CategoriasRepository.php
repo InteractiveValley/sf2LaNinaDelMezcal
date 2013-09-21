@@ -97,10 +97,14 @@ class CategoriasRepository extends EntityRepository
     }
     
     public function getQueryCategoriasPorTipoYActivas($tipoCategoria,$todas=false){
-        $query=$this->createQueryBuilder('c')
+        $query= $this->getEntityManager()->createQueryBuilder();
+                $query->select('c,g')
+                    ->from('Richpolis\CategoriasGaleriaBundle\Entity\Categorias', 'c')
+                    ->leftJoin('c.galerias', 'g')
                     ->where('c.tipoCategoria=:tipo')
                     ->setParameter('tipo', $tipoCategoria)
-                    ->orderBy('c.posicion', 'DESC'); 
+                    ->orderBy('c.posicion', 'DESC')
+                    ->addOrderBy('g.posicion', 'DESC'); 
         if(!$todas){
             $query->andWhere('c.isActive=:active')
                   ->setParameter('active', true);

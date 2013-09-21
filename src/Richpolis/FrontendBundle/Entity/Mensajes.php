@@ -26,17 +26,32 @@ class Mensajes
     /**
      * @var string
      *
-     * @ORM\Column(name="titulo", type="string", length=255)
+     * @ORM\Column(name="titulo_es", type="string", length=255)
      * @Assert\NotBlank()
      */
-    private $titulo;
+    private $tituloEs;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="titulo_en", type="string", length=255)
+     * @Assert\NotBlank()
+     */
+    private $tituloEn;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="mensaje", type="text",nullable=true)
+     * @ORM\Column(name="mensaje_es", type="text",nullable=true)
      */
-    private $mensaje;
+    private $mensajeEs;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mensaje_en", type="text",nullable=true)
+     */
+    private $mensajeEn;
 
     /**
      * @var string
@@ -102,13 +117,16 @@ class Mensajes
     /**
      * Set titulo
      *
-     * @param string $titulo
+     * @param string $titulo, segun el locale de la aplicacion
      * @return Mensajes
      */
-    public function setTitulo($titulo)
+    public function setTitulo($locale,$titulo)
     {
-        $this->titulo = $titulo;
-    
+        if($locale == "es"){
+            $this->tituloEs = $titulo;
+        }else{
+            $this->tituloEn = $titulo;
+        }
         return $this;
     }
 
@@ -117,32 +135,44 @@ class Mensajes
      *
      * @return string 
      */
-    public function getTitulo()
+    public function getTitulo($locale)
     {
-        return $this->titulo;
+        if($locale == "es"){
+            return $this->tituloEs;
+        }else{
+            return $this->tituloEn;
+        }
     }
 
     /**
-     * Set mensaje
+     * Set mensaje, segun el locale de la aplicacion
      *
      * @param string $mensaje
      * @return Mensajes
      */
-    public function setMensaje($mensaje)
+    public function setMensaje($locale,$mensaje)
     {
-        $this->mensaje = $mensaje;
-    
+        if($locale == "es"){
+            $this->mensajeEs = $mensaje;
+        }else{
+            $this->mensajeEn = $mensaje;
+        }
         return $this;
     }
 
     /**
-     * Get mensaje
+     * Get mensaje, segun el locale de la aplicacion
      *
      * @return string 
      */
-    public function getMensaje()
+    public function getMensaje($locale)
     {
-        return $this->mensaje;
+        if($locale == "es"){
+            return $this->mensajeEs;
+        }else{
+            return $this->mensajeEn;
+        }
+        
     }
 
     /**
@@ -287,8 +317,8 @@ class Mensajes
     
     public $file;
     
-    /**
-    ** @ORM\PrePersist
+   /**
+    * @ORM\PrePersist
     * @ORM\PreUpdate
     */
     public function preUpload()
@@ -347,5 +377,97 @@ class Mensajes
     public function getAbsolutePath()
     {
         return null === $this->imagen ? null : $this->getUploadRootDir().'/'.$this->imagen;
+    }
+
+    /**
+     * Set tituloEs
+     *
+     * @param string $tituloEs
+     * @return Mensajes
+     */
+    public function setTituloEs($tituloEs)
+    {
+        $this->tituloEs = $tituloEs;
+
+        return $this;
+    }
+
+    /**
+     * Get tituloEs
+     *
+     * @return string 
+     */
+    public function getTituloEs()
+    {
+        return $this->tituloEs;
+    }
+
+    /**
+     * Set tituloEn
+     *
+     * @param string $tituloEn
+     * @return Mensajes
+     */
+    public function setTituloEn($tituloEn)
+    {
+        $this->tituloEn = $tituloEn;
+
+        return $this;
+    }
+
+    /**
+     * Get tituloEn
+     *
+     * @return string 
+     */
+    public function getTituloEn()
+    {
+        return $this->tituloEn;
+    }
+
+    /**
+     * Set mensajeEs
+     *
+     * @param string $mensajeEs
+     * @return Mensajes
+     */
+    public function setMensajeEs($mensajeEs)
+    {
+        $this->mensajeEs = $mensajeEs;
+
+        return $this;
+    }
+
+    /**
+     * Get mensajeEs
+     *
+     * @return string 
+     */
+    public function getMensajeEs()
+    {
+        return $this->mensajeEs;
+    }
+
+    /**
+     * Set mensajeEn
+     *
+     * @param string $mensajeEn
+     * @return Mensajes
+     */
+    public function setMensajeEn($mensajeEn)
+    {
+        $this->mensajeEn = $mensajeEn;
+
+        return $this;
+    }
+
+    /**
+     * Get mensajeEn
+     *
+     * @return string 
+     */
+    public function getMensajeEn()
+    {
+        return $this->mensajeEn;
     }
 }

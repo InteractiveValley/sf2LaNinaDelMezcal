@@ -6,23 +6,26 @@
     <head>
         <meta charset="utf-8">
         <title>{% block title %}La Niña del Mezcal{% endblock %}</title>
+        
+       {% set locale = app.request.locale %}
 
+        {% block redes_sociales %}
         <meta property="og:title" content="La niña del mezcal" />
         <meta property="og:type" content="album" />
-        <meta property="og:url" content="{{url('homepage')}}" />
-        <meta property="og:image" content="{{asset('images/logo_header.jpg')}}" />
+        <meta property="og:url" content="{{url('homepage',{'_locale':locale})}}" />
+        <meta property="og:image" content="{{asset('images/keyarts/logo_header.png')}}" />
         <meta property="og:site_name" content="laninadelmezcal.com" />
         <!--meta property="fb:admins" content="USER_ID1,USER_ID2"/-->
         <meta property="og:description" content="La niña del mezcal." />
 
         <meta name="twitter:card" value="summary">
-        <meta name="twitter:url" value="{{url('homepage')}}"/>
+        <meta name="twitter:url" value="{{url('homepage',{'_locale':locale})}}"/>
         <meta name="twitter:title" value="La niña del mezcal">
         <meta name="twitter:description" value="La niña del mezcal."/>
-        <meta name="twitter:image" value="{{asset('images/logo_header.jpg')}}"/>
+        <meta name="twitter:image" value="{{asset('images/keyarts/logo_header.png')}}"/>
         <meta name="twitter:site" value="@laninadelmezcal"/>
         <meta name="twitter:creator" value="@richpolis"/>
-
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
         {% block stylesheets %}
@@ -43,7 +46,7 @@
         <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.
         </p>
         <![endif]-->
-        {% set locale = app.request.locale %}
+
         {% set route = app.request.get('_route') %}
         {% set about_la_nina = "" %}
         {% set mezcal = "" %}
@@ -76,11 +79,11 @@
                             <a href="{{path('about_la_nina',{'_locale':locale})}}" {{about_la_nina|raw}}>{% trans %}about la niña{% endtrans %}</a>
                         </li>
                         <li>
-                            <a href="?mezcal" {{mezcal|raw}}>{% trans %}the mezcal{% endtrans %}</a>
-                            <ul>
+                            <a href="{{path('botella_espadin',{'_locale':locale})}}" {{mezcal|raw}}>{% trans %}the mezcal{% endtrans %}</a>
+                            <!--ul>
                                 <li><a href="{{path('botella_espadin',{'_locale':locale})}}">Espadin</a></li>
                                 <li><a href="{{path('botella_primario',{'_locale':locale})}}">Primario mazcal joven</a></li>
-                            </ul>    
+                            </ul-->    
                         </li>
                         <li>
                             <a href="#">{% trans %}the blog{% endtrans %}</a>
@@ -103,13 +106,13 @@
                 </span>
                 <div id="lenguajes">
                     <span id="lenguaje-es">
-                        <a href="#" onclick="javascript:setLenguajePagina('es');">
-                            {% trans %}spanish{% endtrans %}    
+                        <a href="{{path(route,{'_locale':'es'})}}" style="cursor: pointer;">
+                            español  
                         </a>
                     </span>
                     <span id="lenguaje-en">
-                        <a href="#" onclick="javascript:setLenguajePagina('en');">
-                            {% trans %}english{% endtrans %}    
+                        <a href="{{path(route,{'_locale':'en'})}}" style="cursor: pointer;">
+                            english
                         </a>
                     </span>
                 </div>
@@ -129,7 +132,7 @@
         {% block body %}{% endblock %}
             <footer>
                 <div id="contenido-footer">
-                    Copyright 2013 La Niña del Mezcal info@laniñadelmezcal.com  
+                    Copyright © 2013 La Niña del Mezcal  • <a href="mailto:info@laninadelmezcal.com">info@laninadelmezcal.com</a>
                 </div>
                 <figure id="desarrollado">
                     <a href="mailto:rafael@interactivevalley.com">

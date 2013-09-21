@@ -132,6 +132,19 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'buzz' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Buzz\Browser A Buzz\Browser instance.
+     */
+    protected function getBuzzService()
+    {
+        return $this->services['buzz'] = new \Buzz\Browser(new \Buzz\Client\Curl(), new \Buzz\Message\Factory\Factory());
+    }
+
+    /**
      * Gets the 'cache_clearer' service.
      *
      * This service is shared.
@@ -296,11 +309,11 @@ class appDevDebugProjectContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return EntityManager522d3f6e59d6c_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager522d3f6e59d6c_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
+     * @return EntityManager523d0a8f891a8_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager523d0a8f891a8_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        require_once '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/cache/dev/jms_diextra/doctrine/EntityManager_522d3f6e59d6c.php';
+        require_once '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/cache/dev/jms_diextra/doctrine/EntityManager_523d0a8f891a8.php';
 
         $a = $this->get('annotation_reader');
 
@@ -313,15 +326,16 @@ class appDevDebugProjectContainer extends Container
         $d = new \Doctrine\Common\Cache\ArrayCache();
         $d->setNamespace('sf2orm_default_6addb5a3f3898e2681681ec198b25618');
 
-        $e = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($a, array(0 => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/BackendBundle/Entity', 1 => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/PublicacionesBundle/Entity', 2 => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/CategoriasGaleriaBundle/Entity'));
+        $e = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($a, array(0 => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/BackendBundle/Entity', 1 => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/PublicacionesBundle/Entity', 2 => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/CategoriasGaleriaBundle/Entity', 3 => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/FrontendBundle/Entity'));
 
         $f = new \Doctrine\ORM\Mapping\Driver\DriverChain();
         $f->addDriver($e, 'Richpolis\\BackendBundle\\Entity');
         $f->addDriver($e, 'Richpolis\\PublicacionesBundle\\Entity');
         $f->addDriver($e, 'Richpolis\\CategoriasGaleriaBundle\\Entity');
+        $f->addDriver($e, 'Richpolis\\FrontendBundle\\Entity');
 
         $g = new \Doctrine\ORM\Configuration();
-        $g->setEntityNamespaces(array('BackendBundle' => 'Richpolis\\BackendBundle\\Entity', 'PublicacionesBundle' => 'Richpolis\\PublicacionesBundle\\Entity', 'CategoriasGaleriaBundle' => 'Richpolis\\CategoriasGaleriaBundle\\Entity'));
+        $g->setEntityNamespaces(array('BackendBundle' => 'Richpolis\\BackendBundle\\Entity', 'PublicacionesBundle' => 'Richpolis\\PublicacionesBundle\\Entity', 'CategoriasGaleriaBundle' => 'Richpolis\\CategoriasGaleriaBundle\\Entity', 'FrontendBundle' => 'Richpolis\\FrontendBundle\\Entity'));
         $g->setMetadataCacheImpl($b);
         $g->setQueryCacheImpl($c);
         $g->setResultCacheImpl($d);
@@ -336,7 +350,7 @@ class appDevDebugProjectContainer extends Container
         $h = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $g);
         $this->get('doctrine.orm.default_manager_configurator')->configure($h);
 
-        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager522d3f6e59d6c_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($h, $this);
+        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager523d0a8f891a8_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($h, $this);
     }
 
     /**
@@ -1020,7 +1034,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getGenemu_Form_Core_Type_CaptchaService()
     {
-        return $this->services['genemu.form.core.type.captcha'] = new \Genemu\Bundle\FormBundle\Form\Core\Type\CaptchaType($this->get('genemu.gd.captcha'), array('enabled' => true, 'driver' => 'gd', 'width' => 100, 'height' => 30, 'length' => 4, 'format' => 'png', 'chars' => array(0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9), 'font_size' => 18, 'grayscale' => false, 'font_color' => array(0 => '252525', 1 => '8B8787', 2 => '550707', 3 => '3526E6', 4 => '88531E'), 'background_color' => 'DDDDDD', 'border_color' => '000000', 'code' => NULL));
+        return $this->services['genemu.form.core.type.captcha'] = new \Genemu\Bundle\FormBundle\Form\Core\Type\CaptchaType($this->get('genemu.gd.captcha'), array('enabled' => true, 'driver' => 'gd', 'width' => 100, 'height' => 30, 'length' => 4, 'format' => 'png', 'chars' => array(0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9), 'font_size' => 18, 'grayscale' => false, 'font_color' => array(0 => '252525', 1 => '8B8787', 2 => '550707', 3 => '3526E6', 4 => '88531E'), 'fonts' => array(0 => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../web/bundles/genemuform/fonts/akbar.ttf', 1 => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../web/bundles/genemuform/fonts/brushcut.ttf', 2 => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../web/bundles/genemuform/fonts/molten.ttf', 3 => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../web/bundles/genemuform/fonts/planetbe.ttf', 4 => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../web/bundles/genemuform/fonts/whoobub.ttf'), 'background_color' => 'DDDDDD', 'border_color' => '000000', 'code' => NULL));
     }
 
     /**
@@ -1669,6 +1683,21 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'inori_twitter_app.api' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return TwitterOAuth A TwitterOAuth instance.
+     */
+    protected function getInoriTwitterApp_ApiService()
+    {
+        require_once '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../vendor/abraham/twitteroauth/twitteroauth/twitteroauth.php';
+
+        return $this->services['inori_twitter_app.api'] = new \TwitterOAuth('CvGvq3g8R9dBqIP3QIxaUw', 'l9IlAqYPC3PKZAk3OeW8pseO73nNxYBjpYMH8d9eTw', '179341683-OzUZOQ9JtXfEcRlookJ10pMzFMIid7S2atQabo3Q', 'ufLfz9xxFrSTrm6wLjmDwmr4UnhN3iCDVs9Tx9xRItY');
+    }
+
+    /**
      * Gets the 'jms_aop.interceptor_loader' service.
      *
      * This service is shared.
@@ -1751,6 +1780,19 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'knp_last_tweets.last_tweets_fetcher.oauth' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Knp\Bundle\LastTweetsBundle\Twitter\LastTweetsFetcher\OAuthFetcher A Knp\Bundle\LastTweetsBundle\Twitter\LastTweetsFetcher\OAuthFetcher instance.
+     */
+    protected function getKnpLastTweets_LastTweetsFetcher_OauthService()
+    {
+        return $this->services['knp_last_tweets.last_tweets_fetcher.oauth'] = new \Knp\Bundle\LastTweetsBundle\Twitter\LastTweetsFetcher\OAuthFetcher($this->get('twitter_app'));
+    }
+
+    /**
      * Gets the 'knp_paginator' service.
      *
      * This service is shared.
@@ -1777,7 +1819,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getKnpPaginator_Helper_ProcessorService()
     {
-        return $this->services['knp_paginator.helper.processor'] = new \Knp\Bundle\PaginatorBundle\Helper\Processor($this->get('templating.helper.router'), $this->get('translator'));
+        return $this->services['knp_paginator.helper.processor'] = new \Knp\Bundle\PaginatorBundle\Helper\Processor($this->get('templating.helper.router'), $this->get('translator.default'));
     }
 
     /**
@@ -2465,17 +2507,26 @@ class appDevDebugProjectContainer extends Container
         $e = $this->get('http_kernel');
         $f = $this->get('security.authentication.manager');
 
-        $g = new \Symfony\Component\Security\Http\AccessMap();
+        $g = new \Symfony\Component\HttpFoundation\RequestMatcher('^/backend/botellas');
 
-        $h = new \Symfony\Component\Security\Http\HttpUtils($d, $d);
+        $h = new \Symfony\Component\HttpFoundation\RequestMatcher('^/backend/mensajes');
 
-        $i = new \Symfony\Component\Security\Http\Firewall\LogoutListener($b, $h, new \Symfony\Component\Security\Http\Logout\DefaultLogoutSuccessHandler($h, 'backend_login'), array('csrf_parameter' => '_csrf_token', 'intention' => 'logout', 'logout_path' => 'backend_logout'));
-        $i->addHandler(new \Symfony\Component\Security\Http\Logout\SessionLogoutHandler());
+        $i = new \Symfony\Component\HttpFoundation\RequestMatcher('^/backend');
 
-        $j = new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler($h, array('always_use_default_target_path' => true, 'default_target_path' => 'backend_homepage', 'login_path' => 'backend_login', 'target_path_parameter' => '_target_path', 'use_referer' => false));
-        $j->setProviderKey('secured_area');
+        $j = new \Symfony\Component\Security\Http\AccessMap();
+        $j->add($g, array(0 => 'ROLE_SUPER_ADMIN'), NULL);
+        $j->add($h, array(0 => 'ROLE_SUPER_ADMIN'), NULL);
+        $j->add($i, array(0 => 'ROLE_ADMIN'), NULL);
 
-        return $this->services['security.firewall.map.context.secured_area'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($g, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $this->get('security.user.provider.concrete.in_memory')), 'secured_area', $a, $c), 2 => $i, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $f, new \Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy('migrate'), $h, 'secured_area', $j, new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler($e, $h, array('login_path' => 'backend_login', 'failure_path' => NULL, 'failure_forward' => false, 'failure_path_parameter' => '_failure_path'), $a), array('check_path' => 'backend_check', 'use_forward' => false, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'intention' => 'authenticate', 'post_only' => true), $a, $c), 4 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $g, $f, $a)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $h, 'secured_area', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($e, $h, 'backend_login', false), NULL, NULL, $a));
+        $k = new \Symfony\Component\Security\Http\HttpUtils($d, $d);
+
+        $l = new \Symfony\Component\Security\Http\Firewall\LogoutListener($b, $k, new \Symfony\Component\Security\Http\Logout\DefaultLogoutSuccessHandler($k, 'backend_login'), array('csrf_parameter' => '_csrf_token', 'intention' => 'logout', 'logout_path' => 'backend_logout'));
+        $l->addHandler(new \Symfony\Component\Security\Http\Logout\SessionLogoutHandler());
+
+        $m = new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler($k, array('always_use_default_target_path' => true, 'default_target_path' => 'backend_homepage', 'login_path' => 'backend_login', 'target_path_parameter' => '_target_path', 'use_referer' => false));
+        $m->setProviderKey('secured_area');
+
+        return $this->services['security.firewall.map.context.secured_area'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($j, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $this->get('security.user.provider.concrete.in_memory')), 'secured_area', $a, $c), 2 => $l, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $f, new \Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy('migrate'), $k, 'secured_area', $m, new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler($e, $k, array('login_path' => 'backend_login', 'failure_path' => NULL, 'failure_forward' => false, 'failure_path_parameter' => '_failure_path'), $a), array('check_path' => 'backend_check', 'use_forward' => false, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'intention' => 'authenticate', 'post_only' => true), $a, $c), 4 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $j, $f, $a)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $k, 'secured_area', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($e, $k, 'backend_login', false), NULL, NULL, $a));
     }
 
     /**
@@ -3040,7 +3091,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getTemplating_Helper_TranslatorService()
     {
-        return $this->services['templating.helper.translator'] = new \Symfony\Bundle\FrameworkBundle\Templating\Helper\TranslatorHelper($this->get('translator'));
+        return $this->services['templating.helper.translator'] = new \Symfony\Bundle\FrameworkBundle\Templating\Helper\TranslatorHelper($this->get('translator.default'));
     }
 
     /**
@@ -3402,19 +3453,6 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
-     * Gets the 'translator' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return Symfony\Component\Translation\IdentityTranslator A Symfony\Component\Translation\IdentityTranslator instance.
-     */
-    protected function getTranslatorService()
-    {
-        return $this->services['translator'] = new \Symfony\Component\Translation\IdentityTranslator($this->get('translator.selector'));
-    }
-
-    /**
      * Gets the 'translator.default' service.
      *
      * This service is shared.
@@ -3424,7 +3462,125 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getTranslator_DefaultService()
     {
-        return $this->services['translator.default'] = new \Symfony\Bundle\FrameworkBundle\Translation\Translator($this, $this->get('translator.selector'), array('translation.loader.php' => array(0 => 'php'), 'translation.loader.yml' => array(0 => 'yml'), 'translation.loader.xliff' => array(0 => 'xlf', 1 => 'xliff'), 'translation.loader.po' => array(0 => 'po'), 'translation.loader.mo' => array(0 => 'mo'), 'translation.loader.qt' => array(0 => 'ts'), 'translation.loader.csv' => array(0 => 'csv'), 'translation.loader.res' => array(0 => 'res'), 'translation.loader.dat' => array(0 => 'dat'), 'translation.loader.ini' => array(0 => 'ini')), array('cache_dir' => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/cache/dev/translations', 'debug' => true));
+        $this->services['translator.default'] = $instance = new \Symfony\Bundle\FrameworkBundle\Translation\Translator($this, new \Symfony\Component\Translation\MessageSelector(), array('translation.loader.php' => array(0 => 'php'), 'translation.loader.yml' => array(0 => 'yml'), 'translation.loader.xliff' => array(0 => 'xlf', 1 => 'xliff'), 'translation.loader.po' => array(0 => 'po'), 'translation.loader.mo' => array(0 => 'mo'), 'translation.loader.qt' => array(0 => 'ts'), 'translation.loader.csv' => array(0 => 'csv'), 'translation.loader.res' => array(0 => 'res'), 'translation.loader.dat' => array(0 => 'dat'), 'translation.loader.ini' => array(0 => 'ini')), array('cache_dir' => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/cache/dev/translations', 'debug' => true));
+
+        $instance->setFallbackLocale('en');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.es.xlf', 'es', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.zh_CN.xlf', 'zh_CN', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.nb.xlf', 'nb', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.de.xlf', 'de', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.no.xlf', 'no', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ca.xlf', 'ca', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.pt_BR.xlf', 'pt_BR', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.cy.xlf', 'cy', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.gl.xlf', 'gl', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sk.xlf', 'sk', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.eu.xlf', 'eu', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.cs.xlf', 'cs', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sq.xlf', 'sq', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.nl.xlf', 'nl', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.he.xlf', 'he', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.fa.xlf', 'fa', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.da.xlf', 'da', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.uk.xlf', 'uk', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ar.xlf', 'ar', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.id.xlf', 'id', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ja.xlf', 'ja', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.lt.xlf', 'lt', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.fr.xlf', 'fr', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.hr.xlf', 'hr', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.et.xlf', 'et', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.en.xlf', 'en', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.hy.xlf', 'hy', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.hu.xlf', 'hu', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.it.xlf', 'it', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.pt.xlf', 'pt', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sl.xlf', 'sl', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ru.xlf', 'ru', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.tr.xlf', 'tr', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ro.xlf', 'ro', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.lb.xlf', 'lb', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sr_Latn.xlf', 'sr_Latn', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.mn.xlf', 'mn', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.af.xlf', 'af', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.bg.xlf', 'bg', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sr_Cyrl.xlf', 'sr_Cyrl', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sv.xlf', 'sv', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.fi.xlf', 'fi', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.pl.xlf', 'pl', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.es.xlf', 'es', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.zh_CN.xlf', 'zh_CN', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.nb.xlf', 'nb', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.de.xlf', 'de', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ca.xlf', 'ca', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.pt_BR.xlf', 'pt_BR', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.el.xlf', 'el', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.gl.xlf', 'gl', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sk.xlf', 'sk', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.eu.xlf', 'eu', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.cs.xlf', 'cs', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.nl.xlf', 'nl', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.he.xlf', 'he', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.fa.xlf', 'fa', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.da.xlf', 'da', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ar.xlf', 'ar', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.id.xlf', 'id', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ua.xlf', 'ua', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ja.xlf', 'ja', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.lt.xlf', 'lt', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.fr.xlf', 'fr', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.hr.xlf', 'hr', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.et.xlf', 'et', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.en.xlf', 'en', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.hy.xlf', 'hy', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.hu.xlf', 'hu', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.it.xlf', 'it', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.pt.xlf', 'pt', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sl.xlf', 'sl', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.lv.xlf', 'lv', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ru.xlf', 'ru', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ro.xlf', 'ro', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.lb.xlf', 'lb', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sr_Latn.xlf', 'sr_Latn', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.mn.xlf', 'mn', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.bg.xlf', 'bg', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sr_Cyrl.xlf', 'sr_Cyrl', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sv.xlf', 'sv', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.fi.xlf', 'fi', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.pl.xlf', 'pl', 'validators');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.sr_Cyrl.xlf', 'sr_Cyrl', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.cs.xlf', 'cs', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.pt_BR.xlf', 'pt_BR', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.ua.xlf', 'ua', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.ru.xlf', 'ru', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.ro.xlf', 'ro', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.da.xlf', 'da', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.gl.xlf', 'gl', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.sv.xlf', 'sv', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.hu.xlf', 'hu', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.nl.xlf', 'nl', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.de.xlf', 'de', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.fa.xlf', 'fa', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.pt_PT.xlf', 'pt_PT', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.sr_Latn.xlf', 'sr_Latn', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.es.xlf', 'es', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.sk.xlf', 'sk', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.pl.xlf', 'pl', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.ca.xlf', 'ca', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.en.xlf', 'en', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.it.xlf', 'it', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.tr.xlf', 'tr', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.ar.xlf', 'ar', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.fr.xlf', 'fr', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.sl.xlf', 'sl', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.no.xlf', 'no', 'security');
+        $instance->addResource('xlf', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.lb.xlf', 'lb', 'security');
+        $instance->addResource('php', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/FrontendBundle/Resources/translations/messages.es.php', 'es', 'messages');
+        $instance->addResource('yml', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Resources/translations/validators.en.yml', 'en', 'validators');
+        $instance->addResource('yml', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Resources/translations/validators.fr.yml', 'fr', 'validators');
+        $instance->addResource('yml', '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Resources/translations/validators.de.yml', 'de', 'validators');
+
+        return $instance;
     }
 
     /**
@@ -3443,7 +3599,7 @@ class appDevDebugProjectContainer extends Container
 
         $instance->addExtension(new \Symfony\Bundle\SecurityBundle\Twig\Extension\LogoutUrlExtension($this->get('templating.helper.logout_url')));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\SecurityExtension($a));
-        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\TranslationExtension($this->get('translator')));
+        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\TranslationExtension($this->get('translator.default')));
         $instance->addExtension(new \Symfony\Bundle\TwigBundle\Extension\AssetsExtension($this));
         $instance->addExtension(new \Symfony\Bundle\TwigBundle\Extension\ActionsExtension($this));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\CodeExtension(NULL, '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app', 'UTF-8'));
@@ -3460,6 +3616,8 @@ class appDevDebugProjectContainer extends Container
         $instance->addExtension($this->get('genemu.twig.extension.form'));
         $instance->addExtension($this->get('knp_paginator.twig.extension.pagination'));
         $instance->addExtension(new \Avalanche\Bundle\ImagineBundle\Templating\ImagineExtension($this->get('imagine.cache.path.resolver')));
+        $instance->addExtension($this->get('twig.extension.stfalcon_tinymce'));
+        $instance->addExtension(new \Knp\Bundle\LastTweetsBundle\Twig\Extension\TweetUrlizeTwigExtension(new \Knp\Bundle\LastTweetsBundle\Helper\TweetUrlizeHelper()));
         $instance->addExtension($this->get('twig.extension.acme.demo'));
         $instance->addGlobal('app', $this->get('templating.globals'));
 
@@ -3493,6 +3651,19 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'twig.extension.stfalcon_tinymce' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Stfalcon\Bundle\TinymceBundle\Twig\Extension\StfalconTinymceExtension A Stfalcon\Bundle\TinymceBundle\Twig\Extension\StfalconTinymceExtension instance.
+     */
+    protected function getTwig_Extension_StfalconTinymceService()
+    {
+        return $this->services['twig.extension.stfalcon_tinymce'] = new \Stfalcon\Bundle\TinymceBundle\Twig\Extension\StfalconTinymceExtension($this);
+    }
+
+    /**
      * Gets the 'twig.loader' service.
      *
      * This service is shared.
@@ -3516,6 +3687,8 @@ class appDevDebugProjectContainer extends Container
         $instance->addPath('/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/FrontendBundle/Resources/views', 'Frontend');
         $instance->addPath('/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Resources/views', 'GenemuForm');
         $instance->addPath('/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/knplabs/knp-paginator-bundle/Knp/Bundle/PaginatorBundle/Resources/views', 'KnpPaginator');
+        $instance->addPath('/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/stfalcon/tinymce-bundle/Stfalcon/Bundle/TinymceBundle/Resources/views', 'StfalconTinymce');
+        $instance->addPath('/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/knplabs/knp-last-tweets-bundle/Knp/Bundle/LastTweetsBundle/Resources/views', 'KnpLastTweets');
         $instance->addPath('/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Acme/DemoBundle/Resources/views', 'AcmeDemo');
         $instance->addPath('/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views', 'WebProfiler');
         $instance->addPath('/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/views', 'SensioDistribution');
@@ -3535,6 +3708,19 @@ class appDevDebugProjectContainer extends Container
     protected function getTwig_Translation_ExtractorService()
     {
         return $this->services['twig.translation.extractor'] = new \Symfony\Bridge\Twig\Translation\TwigExtractor($this->get('twig'));
+    }
+
+    /**
+     * Gets the 'twitter_app' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Inori\TwitterAppBundle\Services\TwitterApp A Inori\TwitterAppBundle\Services\TwitterApp instance.
+     */
+    protected function getTwitterAppService()
+    {
+        return $this->services['twitter_app'] = new \Inori\TwitterAppBundle\Services\TwitterApp($this->get('inori_twitter_app.api'));
     }
 
     /**
@@ -3586,7 +3772,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getWebProfiler_Controller_ProfilerService()
     {
-        return $this->services['web_profiler.controller.profiler'] = new \Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController($this->get('router'), $this->get('profiler'), $this->get('twig'), array('data_collector.config' => array(0 => 'config', 1 => '@WebProfiler/Collector/config.html.twig'), 'data_collector.request' => array(0 => 'request', 1 => '@WebProfiler/Collector/request.html.twig'), 'data_collector.exception' => array(0 => 'exception', 1 => '@WebProfiler/Collector/exception.html.twig'), 'data_collector.events' => array(0 => 'events', 1 => '@WebProfiler/Collector/events.html.twig'), 'data_collector.logger' => array(0 => 'logger', 1 => '@WebProfiler/Collector/logger.html.twig'), 'data_collector.time' => array(0 => 'time', 1 => '@WebProfiler/Collector/time.html.twig'), 'data_collector.memory' => array(0 => 'memory', 1 => '@WebProfiler/Collector/memory.html.twig'), 'data_collector.router' => array(0 => 'router', 1 => '@WebProfiler/Collector/router.html.twig'), 'data_collector.security' => array(0 => 'security', 1 => 'SecurityBundle:Collector:security'), 'swiftmailer.data_collector' => array(0 => 'swiftmailer', 1 => '@Swiftmailer/Collector/swiftmailer.html.twig'), 'data_collector.doctrine' => array(0 => 'db', 1 => 'DoctrineBundle:Collector:db')), 'bottom');
+        return $this->services['web_profiler.controller.profiler'] = new \Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController($this->get('router'), $this->get('profiler'), $this->get('twig'), array('data_collector.config' => array(0 => 'config', 1 => '@WebProfiler/Collector/config.html.twig'), 'data_collector.request' => array(0 => 'request', 1 => '@WebProfiler/Collector/request.html.twig'), 'data_collector.exception' => array(0 => 'exception', 1 => '@WebProfiler/Collector/exception.html.twig'), 'data_collector.events' => array(0 => 'events', 1 => '@WebProfiler/Collector/events.html.twig'), 'data_collector.logger' => array(0 => 'logger', 1 => '@WebProfiler/Collector/logger.html.twig'), 'data_collector.time' => array(0 => 'time', 1 => '@WebProfiler/Collector/time.html.twig'), 'data_collector.memory' => array(0 => 'memory', 1 => '@WebProfiler/Collector/memory.html.twig'), 'data_collector.router' => array(0 => 'router', 1 => '@WebProfiler/Collector/router.html.twig'), 'data_collector.security' => array(0 => 'security', 1 => 'SecurityBundle:Collector:security'), 'swiftmailer.data_collector' => array(0 => 'swiftmailer', 1 => '@Swiftmailer/Collector/swiftmailer.html.twig'), 'data_collector.doctrine' => array(0 => 'db', 1 => '@Doctrine/Collector/db.html.twig')), 'bottom');
     }
 
     /**
@@ -3638,7 +3824,7 @@ class appDevDebugProjectContainer extends Container
     /**
      * Gets the doctrine.orm.entity_manager service alias.
      *
-     * @return EntityManager522d3f6e59d6c_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
+     * @return EntityManager523d0a8f891a8_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
      */
     protected function getDoctrine_Orm_EntityManagerService()
     {
@@ -3656,6 +3842,16 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the knp_last_tweets.last_tweets_fetcher service alias.
+     *
+     * @return Knp\Bundle\LastTweetsBundle\Twitter\LastTweetsFetcher\OAuthFetcher An instance of the knp_last_tweets.last_tweets_fetcher.oauth service
+     */
+    protected function getKnpLastTweets_LastTweetsFetcherService()
+    {
+        return $this->get('knp_last_tweets.last_tweets_fetcher.oauth');
+    }
+
+    /**
      * Gets the mailer service alias.
      *
      * @return Swift_Mailer An instance of the swiftmailer.mailer.default service
@@ -3663,6 +3859,16 @@ class appDevDebugProjectContainer extends Container
     protected function getMailerService()
     {
         return $this->get('swiftmailer.mailer.default');
+    }
+
+    /**
+     * Gets the oauth_browser service alias.
+     *
+     * @return Inori\TwitterAppBundle\Services\TwitterApp An instance of the twitter_app service
+     */
+    protected function getOauthBrowserService()
+    {
+        return $this->get('twitter_app');
     }
 
     /**
@@ -3723,6 +3929,16 @@ class appDevDebugProjectContainer extends Container
     protected function getSwiftmailer_Transport_RealService()
     {
         return $this->get('swiftmailer.mailer.default.transport.real');
+    }
+
+    /**
+     * Gets the translator service alias.
+     *
+     * @return Symfony\Bundle\FrameworkBundle\Translation\Translator An instance of the translator.default service
+     */
+    protected function getTranslatorService()
+    {
+        return $this->get('translator.default');
     }
 
     /**
@@ -3923,8 +4139,8 @@ class appDevDebugProjectContainer extends Container
     {
         $this->services['security.user.provider.concrete.in_memory'] = $instance = new \Symfony\Component\Security\Core\User\InMemoryUserProvider();
 
-        $instance->createUser(new \Symfony\Component\Security\Core\User\User('admin', 'admin777', array(0 => 'ROLE_USER')));
-        $instance->createUser(new \Symfony\Component\Security\Core\User\User('richpolis', 'D3m3s1s1', array(0 => 'ROLE_ADMIN')));
+        $instance->createUser(new \Symfony\Component\Security\Core\User\User('admin', 'admin', array(0 => 'ROLE_ADMIN')));
+        $instance->createUser(new \Symfony\Component\Security\Core\User\User('richpolis', 'D3m3s1s1', array(0 => 'ROLE_SUPER_ADMIN')));
 
         return $instance;
     }
@@ -3983,23 +4199,6 @@ class appDevDebugProjectContainer extends Container
     protected function getTemplating_LocatorService()
     {
         return $this->services['templating.locator'] = new \Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator($this->get('file_locator'), '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/cache/dev');
-    }
-
-    /**
-     * Gets the 'translator.selector' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * This service is private.
-     * If you want to be able to request this service from the container directly,
-     * make it public, otherwise you might end up with broken code.
-     *
-     * @return Symfony\Component\Translation\MessageSelector A Symfony\Component\Translation\MessageSelector instance.
-     */
-    protected function getTranslator_SelectorService()
-    {
-        return $this->services['translator.selector'] = new \Symfony\Component\Translation\MessageSelector();
     }
 
     /**
@@ -4107,7 +4306,7 @@ class appDevDebugProjectContainer extends Container
             'kernel.root_dir' => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app',
             'kernel.environment' => 'dev',
             'kernel.debug' => true,
-            'kernel.name' => 'app',
+            'kernel.name' => 'ap_',
             'kernel.cache_dir' => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/cache/dev',
             'kernel.logs_dir' => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/logs',
             'kernel.bundles' => array(
@@ -4130,6 +4329,9 @@ class appDevDebugProjectContainer extends Container
                 'GenemuFormBundle' => 'Genemu\\Bundle\\FormBundle\\GenemuFormBundle',
                 'KnpPaginatorBundle' => 'Knp\\Bundle\\PaginatorBundle\\KnpPaginatorBundle',
                 'AvalancheImagineBundle' => 'Avalanche\\Bundle\\ImagineBundle\\AvalancheImagineBundle',
+                'StfalconTinymceBundle' => 'Stfalcon\\Bundle\\TinymceBundle\\StfalconTinymceBundle',
+                'KnpLastTweetsBundle' => 'Knp\\Bundle\\LastTweetsBundle\\KnpLastTweetsBundle',
+                'InoriTwitterAppBundle' => 'Inori\\TwitterAppBundle\\InoriTwitterAppBundle',
                 'AcmeDemoBundle' => 'Acme\\DemoBundle\\AcmeDemoBundle',
                 'WebProfilerBundle' => 'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle',
                 'SensioDistributionBundle' => 'Sensio\\Bundle\\DistributionBundle\\SensioDistributionBundle',
@@ -4530,8 +4732,8 @@ class appDevDebugProjectContainer extends Container
             ),
             'assetic.java.bin' => '/usr/bin/java',
             'assetic.node.bin' => '/usr/bin/node',
-            'assetic.ruby.bin' => '/usr/bin/ruby',
-            'assetic.sass.bin' => '/usr/bin/sass',
+            'assetic.ruby.bin' => '/usr/local/rvm/rubies/ruby-1.9.3-p392/bin/ruby',
+            'assetic.sass.bin' => '/usr/local/rvm/gems/ruby-1.9.3-p392/bin/sass',
             'assetic.filter.cssrewrite.class' => 'Assetic\\Filter\\CssRewriteFilter',
             'assetic.twig_extension.functions' => array(
 
@@ -4632,8 +4834,8 @@ class appDevDebugProjectContainer extends Container
             'jms_di_extra.cache_warmer.controller_file_blacklist' => array(
 
             ),
-            'jms_di_extra.doctrine_integration.entity_manager.file' => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/cache/dev/jms_diextra/doctrine/EntityManager_522d3f6e59d6c.php',
-            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager522d3f6e59d6c_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
+            'jms_di_extra.doctrine_integration.entity_manager.file' => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/cache/dev/jms_diextra/doctrine/EntityManager_523d0a8f891a8.php',
+            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager523d0a8f891a8_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
             'security.secured_services' => array(
 
             ),
@@ -4715,6 +4917,13 @@ class appDevDebugProjectContainer extends Container
                     2 => '550707',
                     3 => '3526E6',
                     4 => '88531E',
+                ),
+                'fonts' => array(
+                    0 => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../web/bundles/genemuform/fonts/akbar.ttf',
+                    1 => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../web/bundles/genemuform/fonts/brushcut.ttf',
+                    2 => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../web/bundles/genemuform/fonts/molten.ttf',
+                    3 => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../web/bundles/genemuform/fonts/planetbe.ttf',
+                    4 => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../web/bundles/genemuform/fonts/whoobub.ttf',
                 ),
                 'background_color' => 'DDDDDD',
                 'border_color' => '000000',
@@ -4806,6 +5015,65 @@ class appDevDebugProjectContainer extends Container
             'imagine.imagick.class' => 'Imagine\\Imagick\\Imagine',
             'imagine.gmagick.class' => 'Imagine\\Gmagick\\Imagine',
             'imagine.filter.loader.thumbnail.class' => 'Avalanche\\Bundle\\ImagineBundle\\Imagine\\Filter\\Loader\\ThumbnailFilterLoader',
+            'stfalcon_tinymce.config' => array(
+                'include_jquery' => false,
+                'tinymce_jquery' => true,
+                'selector' => '.tinymce',
+                'base_url' => 'http://localhost:8029/',
+                'language' => 'en',
+                'theme' => array(
+                    'simple' => array(
+
+                    ),
+                    'advanced' => array(
+                        'plugins' => array(
+                            0 => 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                            1 => 'searchreplace wordcount visualblocks visualchars code fullscreen',
+                            2 => 'insertdatetime media nonbreaking save table contextmenu directionality',
+                            3 => 'emoticons template paste textcolor',
+                        ),
+                        'toolbar1' => 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+                        'toolbar2' => 'print preview media | forecolor backcolor emoticons | stfalcon | example',
+                        'image_advtab' => true,
+                        'templates' => array(
+                            0 => array(
+                                'title' => 'Test template 1',
+                                'content' => 'Test 1',
+                            ),
+                            1 => array(
+                                'title' => 'Test template 2',
+                                'content' => 'Test 2',
+                            ),
+                        ),
+                    ),
+                    'bbcode' => array(
+                        'plugins' => array(
+                            0 => 'bbcode, code, link, preview',
+                        ),
+                        'menubar' => false,
+                        'toolbar1' => 'bold,italic,underline,undo,redo,link,unlink,removeformat,cleanup,code,preview',
+                    ),
+                ),
+                'tinymce_buttons' => array(
+                    'stfalcon' => array(
+                        'title' => 'Stfalcon',
+                        'image' => 'http://stfalcon.com/favicon.ico',
+                    ),
+                ),
+                'use_callback_tinymce_init' => false,
+                'external_plugins' => array(
+
+                ),
+            ),
+            'stfalcon_tinymce.twig.extension.class' => 'Stfalcon\\Bundle\\TinymceBundle\\Twig\\Extension\\StfalconTinymceExtension',
+            'knp_last_tweets.last_tweets_fetcher.oauth.class' => 'Knp\\Bundle\\LastTweetsBundle\\Twitter\\LastTweetsFetcher\\OAuthFetcher',
+            'inori_twitter_app.file' => '/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../vendor/abraham/twitteroauth/twitteroauth/twitteroauth.php',
+            'inori_twitter_app.consumer_key' => 'CvGvq3g8R9dBqIP3QIxaUw',
+            'inori_twitter_app.consumer_secret' => 'l9IlAqYPC3PKZAk3OeW8pseO73nNxYBjpYMH8d9eTw',
+            'inori_twitter_app.oauth_token' => '179341683-OzUZOQ9JtXfEcRlookJ10pMzFMIid7S2atQabo3Q',
+            'inori_twitter_app.oauth_token_secret' => 'ufLfz9xxFrSTrm6wLjmDwmr4UnhN3iCDVs9Tx9xRItY',
+            'inori_twitter_app.api.class' => 'TwitterOAuth',
+            'inori_twitter_app.service.class' => 'Inori\\TwitterAppBundle\\Services\\TwitterApp',
             'web_profiler.controller.profiler.class' => 'Symfony\\Bundle\\WebProfilerBundle\\Controller\\ProfilerController',
             'web_profiler.controller.router.class' => 'Symfony\\Bundle\\WebProfilerBundle\\Controller\\RouterController',
             'web_profiler.controller.exception.class' => 'Symfony\\Bundle\\WebProfilerBundle\\Controller\\ExceptionController',
@@ -4857,7 +5125,7 @@ class appDevDebugProjectContainer extends Container
                 ),
                 'data_collector.doctrine' => array(
                     0 => 'db',
-                    1 => 'DoctrineBundle:Collector:db',
+                    1 => '@Doctrine/Collector/db.html.twig',
                 ),
             ),
         );

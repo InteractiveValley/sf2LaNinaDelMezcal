@@ -4,7 +4,7 @@
     <parameter key="kernel.root_dir">/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app</parameter>
     <parameter key="kernel.environment">dev</parameter>
     <parameter key="kernel.debug">true</parameter>
-    <parameter key="kernel.name">app</parameter>
+    <parameter key="kernel.name">ap_</parameter>
     <parameter key="kernel.cache_dir">/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/cache/dev</parameter>
     <parameter key="kernel.logs_dir">/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/logs</parameter>
     <parameter key="kernel.bundles" type="collection">
@@ -27,6 +27,9 @@
       <parameter key="GenemuFormBundle">Genemu\Bundle\FormBundle\GenemuFormBundle</parameter>
       <parameter key="KnpPaginatorBundle">Knp\Bundle\PaginatorBundle\KnpPaginatorBundle</parameter>
       <parameter key="AvalancheImagineBundle">Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle</parameter>
+      <parameter key="StfalconTinymceBundle">Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle</parameter>
+      <parameter key="KnpLastTweetsBundle">Knp\Bundle\LastTweetsBundle\KnpLastTweetsBundle</parameter>
+      <parameter key="InoriTwitterAppBundle">Inori\TwitterAppBundle\InoriTwitterAppBundle</parameter>
       <parameter key="AcmeDemoBundle">Acme\DemoBundle\AcmeDemoBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -411,8 +414,8 @@
     <parameter key="assetic.variables" type="collection"/>
     <parameter key="assetic.java.bin">/usr/bin/java</parameter>
     <parameter key="assetic.node.bin">/usr/bin/node</parameter>
-    <parameter key="assetic.ruby.bin">/usr/bin/ruby</parameter>
-    <parameter key="assetic.sass.bin">/usr/bin/sass</parameter>
+    <parameter key="assetic.ruby.bin">/usr/local/rvm/rubies/ruby-1.9.3-p392/bin/ruby</parameter>
+    <parameter key="assetic.sass.bin">/usr/local/rvm/gems/ruby-1.9.3-p392/bin/sass</parameter>
     <parameter key="assetic.filter.cssrewrite.class">Assetic\Filter\CssRewriteFilter</parameter>
     <parameter key="assetic.twig_extension.functions" type="collection"/>
     <parameter key="assetic.controller.class">Symfony\Bundle\AsseticBundle\Controller\AsseticController</parameter>
@@ -503,8 +506,8 @@
     <parameter key="jms_di_extra.disable_grep">false</parameter>
     <parameter key="jms_di_extra.doctrine_integration">true</parameter>
     <parameter key="jms_di_extra.cache_warmer.controller_file_blacklist" type="collection"/>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/cache/dev/jms_diextra/doctrine/EntityManager_522d3f6e59d6c.php</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager522d3f6e59d6c_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/cache/dev/jms_diextra/doctrine/EntityManager_523d0a8f891a8.php</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager523d0a8f891a8_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
     <parameter key="security.secured_services" type="collection"/>
     <parameter key="security.access.method_interceptor.class">JMS\SecurityExtraBundle\Security\Authorization\Interception\MethodSecurityInterceptor</parameter>
     <parameter key="security.access.method_access_control" type="collection"/>
@@ -576,6 +579,13 @@
         <parameter>550707</parameter>
         <parameter>3526E6</parameter>
         <parameter>88531E</parameter>
+      </parameter>
+      <parameter key="fonts" type="collection">
+        <parameter>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../web/bundles/genemuform/fonts/akbar.ttf</parameter>
+        <parameter>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../web/bundles/genemuform/fonts/brushcut.ttf</parameter>
+        <parameter>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../web/bundles/genemuform/fonts/molten.ttf</parameter>
+        <parameter>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../web/bundles/genemuform/fonts/planetbe.ttf</parameter>
+        <parameter>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../web/bundles/genemuform/fonts/whoobub.ttf</parameter>
       </parameter>
       <parameter key="background_color">DDDDDD</parameter>
       <parameter key="border_color">000000</parameter>
@@ -657,6 +667,61 @@
     <parameter key="imagine.imagick.class">Imagine\Imagick\Imagine</parameter>
     <parameter key="imagine.gmagick.class">Imagine\Gmagick\Imagine</parameter>
     <parameter key="imagine.filter.loader.thumbnail.class">Avalanche\Bundle\ImagineBundle\Imagine\Filter\Loader\ThumbnailFilterLoader</parameter>
+    <parameter key="stfalcon_tinymce.config" type="collection">
+      <parameter key="include_jquery">false</parameter>
+      <parameter key="tinymce_jquery">true</parameter>
+      <parameter key="selector">.tinymce</parameter>
+      <parameter key="base_url">http://localhost:8029/</parameter>
+      <parameter key="language">en</parameter>
+      <parameter key="theme" type="collection">
+        <parameter key="simple" type="collection"/>
+        <parameter key="advanced" type="collection">
+          <parameter key="plugins" type="collection">
+            <parameter>advlist autolink lists link image charmap print preview hr anchor pagebreak</parameter>
+            <parameter>searchreplace wordcount visualblocks visualchars code fullscreen</parameter>
+            <parameter>insertdatetime media nonbreaking save table contextmenu directionality</parameter>
+            <parameter>emoticons template paste textcolor</parameter>
+          </parameter>
+          <parameter key="toolbar1">insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image</parameter>
+          <parameter key="toolbar2">print preview media | forecolor backcolor emoticons | stfalcon | example</parameter>
+          <parameter key="image_advtab">true</parameter>
+          <parameter key="templates" type="collection">
+            <parameter type="collection">
+              <parameter key="title">Test template 1</parameter>
+              <parameter key="content">Test 1</parameter>
+            </parameter>
+            <parameter type="collection">
+              <parameter key="title">Test template 2</parameter>
+              <parameter key="content">Test 2</parameter>
+            </parameter>
+          </parameter>
+        </parameter>
+        <parameter key="bbcode" type="collection">
+          <parameter key="plugins" type="collection">
+            <parameter>bbcode, code, link, preview</parameter>
+          </parameter>
+          <parameter key="menubar">false</parameter>
+          <parameter key="toolbar1">bold,italic,underline,undo,redo,link,unlink,removeformat,cleanup,code,preview</parameter>
+        </parameter>
+      </parameter>
+      <parameter key="tinymce_buttons" type="collection">
+        <parameter key="stfalcon" type="collection">
+          <parameter key="title">Stfalcon</parameter>
+          <parameter key="image">http://stfalcon.com/favicon.ico</parameter>
+        </parameter>
+      </parameter>
+      <parameter key="use_callback_tinymce_init">false</parameter>
+      <parameter key="external_plugins" type="collection"/>
+    </parameter>
+    <parameter key="stfalcon_tinymce.twig.extension.class">Stfalcon\Bundle\TinymceBundle\Twig\Extension\StfalconTinymceExtension</parameter>
+    <parameter key="knp_last_tweets.last_tweets_fetcher.oauth.class">Knp\Bundle\LastTweetsBundle\Twitter\LastTweetsFetcher\OAuthFetcher</parameter>
+    <parameter key="inori_twitter_app.file">/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../vendor/abraham/twitteroauth/twitteroauth/twitteroauth.php</parameter>
+    <parameter key="inori_twitter_app.consumer_key">CvGvq3g8R9dBqIP3QIxaUw</parameter>
+    <parameter key="inori_twitter_app.consumer_secret">l9IlAqYPC3PKZAk3OeW8pseO73nNxYBjpYMH8d9eTw</parameter>
+    <parameter key="inori_twitter_app.oauth_token">179341683-OzUZOQ9JtXfEcRlookJ10pMzFMIid7S2atQabo3Q</parameter>
+    <parameter key="inori_twitter_app.oauth_token_secret">ufLfz9xxFrSTrm6wLjmDwmr4UnhN3iCDVs9Tx9xRItY</parameter>
+    <parameter key="inori_twitter_app.api.class">TwitterOAuth</parameter>
+    <parameter key="inori_twitter_app.service.class">Inori\TwitterAppBundle\Services\TwitterApp</parameter>
     <parameter key="web_profiler.controller.profiler.class">Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController</parameter>
     <parameter key="web_profiler.controller.router.class">Symfony\Bundle\WebProfilerBundle\Controller\RouterController</parameter>
     <parameter key="web_profiler.controller.exception.class">Symfony\Bundle\WebProfilerBundle\Controller\ExceptionController</parameter>
@@ -708,7 +773,7 @@
       </parameter>
       <parameter key="data_collector.doctrine" type="collection">
         <parameter>db</parameter>
-        <parameter>DoctrineBundle:Collector:db</parameter>
+        <parameter>@Doctrine/Collector/db.html.twig</parameter>
       </parameter>
     </parameter>
   </parameters>
@@ -1024,7 +1089,9 @@
     </service>
     <service id="translator.default" class="Symfony\Bundle\FrameworkBundle\Translation\Translator">
       <argument type="service" id="service_container"/>
-      <argument type="service" id="translator.selector"/>
+      <argument type="service">
+        <service class="Symfony\Component\Translation\MessageSelector" public="false"/>
+      </argument>
       <argument type="collection">
         <argument key="translation.loader.php" type="collection">
           <argument>php</argument>
@@ -1062,11 +1129,694 @@
         <argument key="cache_dir">/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/cache/dev/translations</argument>
         <argument key="debug">true</argument>
       </argument>
+      <call method="setFallbackLocale">
+        <argument>en</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.es.xlf</argument>
+        <argument>es</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.zh_CN.xlf</argument>
+        <argument>zh_CN</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.nb.xlf</argument>
+        <argument>nb</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.de.xlf</argument>
+        <argument>de</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.no.xlf</argument>
+        <argument>no</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ca.xlf</argument>
+        <argument>ca</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.pt_BR.xlf</argument>
+        <argument>pt_BR</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.cy.xlf</argument>
+        <argument>cy</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.gl.xlf</argument>
+        <argument>gl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sk.xlf</argument>
+        <argument>sk</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.eu.xlf</argument>
+        <argument>eu</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.cs.xlf</argument>
+        <argument>cs</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sq.xlf</argument>
+        <argument>sq</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.nl.xlf</argument>
+        <argument>nl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.he.xlf</argument>
+        <argument>he</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.fa.xlf</argument>
+        <argument>fa</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.da.xlf</argument>
+        <argument>da</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.uk.xlf</argument>
+        <argument>uk</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ar.xlf</argument>
+        <argument>ar</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.id.xlf</argument>
+        <argument>id</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ja.xlf</argument>
+        <argument>ja</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.lt.xlf</argument>
+        <argument>lt</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.fr.xlf</argument>
+        <argument>fr</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.hr.xlf</argument>
+        <argument>hr</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.et.xlf</argument>
+        <argument>et</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.en.xlf</argument>
+        <argument>en</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.hy.xlf</argument>
+        <argument>hy</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.hu.xlf</argument>
+        <argument>hu</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.it.xlf</argument>
+        <argument>it</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.pt.xlf</argument>
+        <argument>pt</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sl.xlf</argument>
+        <argument>sl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ru.xlf</argument>
+        <argument>ru</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.tr.xlf</argument>
+        <argument>tr</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ro.xlf</argument>
+        <argument>ro</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.lb.xlf</argument>
+        <argument>lb</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sr_Latn.xlf</argument>
+        <argument>sr_Latn</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.mn.xlf</argument>
+        <argument>mn</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.af.xlf</argument>
+        <argument>af</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.bg.xlf</argument>
+        <argument>bg</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sr_Cyrl.xlf</argument>
+        <argument>sr_Cyrl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sv.xlf</argument>
+        <argument>sv</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.fi.xlf</argument>
+        <argument>fi</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.pl.xlf</argument>
+        <argument>pl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.es.xlf</argument>
+        <argument>es</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.zh_CN.xlf</argument>
+        <argument>zh_CN</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.nb.xlf</argument>
+        <argument>nb</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.de.xlf</argument>
+        <argument>de</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ca.xlf</argument>
+        <argument>ca</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.pt_BR.xlf</argument>
+        <argument>pt_BR</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.el.xlf</argument>
+        <argument>el</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.gl.xlf</argument>
+        <argument>gl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sk.xlf</argument>
+        <argument>sk</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.eu.xlf</argument>
+        <argument>eu</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.cs.xlf</argument>
+        <argument>cs</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.nl.xlf</argument>
+        <argument>nl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.he.xlf</argument>
+        <argument>he</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.fa.xlf</argument>
+        <argument>fa</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.da.xlf</argument>
+        <argument>da</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ar.xlf</argument>
+        <argument>ar</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.id.xlf</argument>
+        <argument>id</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ua.xlf</argument>
+        <argument>ua</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ja.xlf</argument>
+        <argument>ja</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.lt.xlf</argument>
+        <argument>lt</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.fr.xlf</argument>
+        <argument>fr</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.hr.xlf</argument>
+        <argument>hr</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.et.xlf</argument>
+        <argument>et</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.en.xlf</argument>
+        <argument>en</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.hy.xlf</argument>
+        <argument>hy</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.hu.xlf</argument>
+        <argument>hu</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.it.xlf</argument>
+        <argument>it</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.pt.xlf</argument>
+        <argument>pt</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sl.xlf</argument>
+        <argument>sl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.lv.xlf</argument>
+        <argument>lv</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ru.xlf</argument>
+        <argument>ru</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ro.xlf</argument>
+        <argument>ro</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.lb.xlf</argument>
+        <argument>lb</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sr_Latn.xlf</argument>
+        <argument>sr_Latn</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.mn.xlf</argument>
+        <argument>mn</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.bg.xlf</argument>
+        <argument>bg</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sr_Cyrl.xlf</argument>
+        <argument>sr_Cyrl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sv.xlf</argument>
+        <argument>sv</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.fi.xlf</argument>
+        <argument>fi</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.pl.xlf</argument>
+        <argument>pl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.sr_Cyrl.xlf</argument>
+        <argument>sr_Cyrl</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.cs.xlf</argument>
+        <argument>cs</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.pt_BR.xlf</argument>
+        <argument>pt_BR</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.ua.xlf</argument>
+        <argument>ua</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.ru.xlf</argument>
+        <argument>ru</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.ro.xlf</argument>
+        <argument>ro</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.da.xlf</argument>
+        <argument>da</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.gl.xlf</argument>
+        <argument>gl</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.sv.xlf</argument>
+        <argument>sv</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.hu.xlf</argument>
+        <argument>hu</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.nl.xlf</argument>
+        <argument>nl</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.de.xlf</argument>
+        <argument>de</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.fa.xlf</argument>
+        <argument>fa</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.pt_PT.xlf</argument>
+        <argument>pt_PT</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.sr_Latn.xlf</argument>
+        <argument>sr_Latn</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.es.xlf</argument>
+        <argument>es</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.sk.xlf</argument>
+        <argument>sk</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.pl.xlf</argument>
+        <argument>pl</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.ca.xlf</argument>
+        <argument>ca</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.en.xlf</argument>
+        <argument>en</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.it.xlf</argument>
+        <argument>it</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.tr.xlf</argument>
+        <argument>tr</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.ar.xlf</argument>
+        <argument>ar</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.fr.xlf</argument>
+        <argument>fr</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.sl.xlf</argument>
+        <argument>sl</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.no.xlf</argument>
+        <argument>no</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../../Resources/translations/security.lb.xlf</argument>
+        <argument>lb</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>php</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/FrontendBundle/Resources/translations/messages.es.php</argument>
+        <argument>es</argument>
+        <argument>messages</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Resources/translations/validators.en.yml</argument>
+        <argument>en</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Resources/translations/validators.fr.yml</argument>
+        <argument>fr</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Resources/translations/validators.de.yml</argument>
+        <argument>de</argument>
+        <argument>validators</argument>
+      </call>
     </service>
-    <service id="translator" class="Symfony\Component\Translation\IdentityTranslator">
-      <argument type="service" id="translator.selector"/>
-    </service>
-    <service id="translator.selector" class="Symfony\Component\Translation\MessageSelector" public="false"/>
     <service id="translation.loader.php" class="Symfony\Component\Translation\Loader\PhpFileLoader">
       <tag name="translation.loader" alias="php"/>
     </service>
@@ -1536,7 +2286,7 @@
     </service>
     <service id="templating.helper.translator" class="Symfony\Bundle\FrameworkBundle\Templating\Helper\TranslatorHelper">
       <tag name="templating.helper" alias="translator"/>
-      <argument type="service" id="translator"/>
+      <argument type="service" id="translator.default"/>
     </service>
     <service id="templating.helper.form" class="Symfony\Bundle\FrameworkBundle\Templating\Helper\FormHelper">
       <tag name="templating.helper" alias="form"/>
@@ -1692,7 +2442,7 @@
       <call method="add">
         <argument type="service">
           <service class="Doctrine\Bundle\DoctrineBundle\DataCollector\DoctrineDataCollector" public="false">
-            <tag name="data_collector" template="DoctrineBundle:Collector:db" id="db"/>
+            <tag name="data_collector" template="@Doctrine/Collector/db.html.twig" id="db"/>
             <argument type="service" id="doctrine"/>
             <call method="addLogger">
               <argument>default</argument>
@@ -1950,9 +2700,9 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Core\User\User" public="false">
             <argument>admin</argument>
-            <argument>admin777</argument>
+            <argument>admin</argument>
             <argument type="collection">
-              <argument>ROLE_USER</argument>
+              <argument>ROLE_ADMIN</argument>
             </argument>
           </service>
         </argument>
@@ -1963,7 +2713,7 @@
             <argument>richpolis</argument>
             <argument>D3m3s1s1</argument>
             <argument type="collection">
-              <argument>ROLE_ADMIN</argument>
+              <argument>ROLE_SUPER_ADMIN</argument>
             </argument>
           </service>
         </argument>
@@ -1983,7 +2733,41 @@
           <service class="Symfony\Component\Security\Http\Firewall\ChannelListener" public="false">
             <tag name="monolog.logger" channel="security"/>
             <argument type="service">
-              <service class="Symfony\Component\Security\Http\AccessMap" public="false"/>
+              <service class="Symfony\Component\Security\Http\AccessMap" public="false">
+                <call method="add">
+                  <argument type="service">
+                    <service class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
+                      <argument>^/backend/botellas</argument>
+                    </service>
+                  </argument>
+                  <argument type="collection">
+                    <argument>ROLE_SUPER_ADMIN</argument>
+                  </argument>
+                  <argument>null</argument>
+                </call>
+                <call method="add">
+                  <argument type="service">
+                    <service class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
+                      <argument>^/backend/mensajes</argument>
+                    </service>
+                  </argument>
+                  <argument type="collection">
+                    <argument>ROLE_SUPER_ADMIN</argument>
+                  </argument>
+                  <argument>null</argument>
+                </call>
+                <call method="add">
+                  <argument type="service">
+                    <service class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
+                      <argument>^/backend</argument>
+                    </service>
+                  </argument>
+                  <argument type="collection">
+                    <argument>ROLE_ADMIN</argument>
+                  </argument>
+                  <argument>null</argument>
+                </call>
+              </service>
             </argument>
             <argument type="service">
               <service class="Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint" public="false">
@@ -2111,7 +2895,41 @@
             <argument type="service" id="security.context"/>
             <argument type="service" id="security.access.decision_manager"/>
             <argument type="service">
-              <service class="Symfony\Component\Security\Http\AccessMap" public="false"/>
+              <service class="Symfony\Component\Security\Http\AccessMap" public="false">
+                <call method="add">
+                  <argument type="service">
+                    <service class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
+                      <argument>^/backend/botellas</argument>
+                    </service>
+                  </argument>
+                  <argument type="collection">
+                    <argument>ROLE_SUPER_ADMIN</argument>
+                  </argument>
+                  <argument>null</argument>
+                </call>
+                <call method="add">
+                  <argument type="service">
+                    <service class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
+                      <argument>^/backend/mensajes</argument>
+                    </service>
+                  </argument>
+                  <argument type="collection">
+                    <argument>ROLE_SUPER_ADMIN</argument>
+                  </argument>
+                  <argument>null</argument>
+                </call>
+                <call method="add">
+                  <argument type="service">
+                    <service class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
+                      <argument>^/backend</argument>
+                    </service>
+                  </argument>
+                  <argument type="collection">
+                    <argument>ROLE_ADMIN</argument>
+                  </argument>
+                  <argument>null</argument>
+                </call>
+              </service>
             </argument>
             <argument type="service" id="security.authentication.manager"/>
             <argument type="service" id="monolog.logger.security"/>
@@ -2178,7 +2996,7 @@
         <argument type="service">
           <service class="Symfony\Bridge\Twig\Extension\TranslationExtension" public="false">
             <tag name="twig.extension"/>
-            <argument type="service" id="translator"/>
+            <argument type="service" id="translator.default"/>
           </service>
         </argument>
       </call>
@@ -2292,6 +3110,21 @@
           <service class="Avalanche\Bundle\ImagineBundle\Templating\ImagineExtension" public="false">
             <tag name="twig.extension"/>
             <argument type="service" id="imagine.cache.path.resolver"/>
+          </service>
+        </argument>
+      </call>
+      <call method="addExtension">
+        <argument type="service" id="twig.extension.stfalcon_tinymce"/>
+      </call>
+      <call method="addExtension">
+        <argument type="service">
+          <service class="Knp\Bundle\LastTweetsBundle\Twig\Extension\TweetUrlizeTwigExtension" public="false">
+            <tag name="twig.extension"/>
+            <argument type="service">
+              <service class="Knp\Bundle\LastTweetsBundle\Helper\TweetUrlizeHelper" public="false">
+                <tag name="templating.helper"/>
+              </service>
+            </argument>
           </service>
         </argument>
       </call>
@@ -2511,8 +3344,8 @@
       <argument type="collection"/>
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.default_entity_manager" class="EntityManager522d3f6e59d6c_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
-      <file>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/cache/dev/jms_diextra/doctrine/EntityManager_522d3f6e59d6c.php</file>
+    <service id="doctrine.orm.default_entity_manager" class="EntityManager523d0a8f891a8_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
+      <file>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/cache/dev/jms_diextra/doctrine/EntityManager_523d0a8f891a8.php</file>
       <argument type="service">
         <service class="Doctrine\ORM\EntityManager" factory-method="create" public="false">
           <argument type="service" id="doctrine.dbal.default_connection"/>
@@ -2523,6 +3356,7 @@
                   <argument key="BackendBundle">Richpolis\BackendBundle\Entity</argument>
                   <argument key="PublicacionesBundle">Richpolis\PublicacionesBundle\Entity</argument>
                   <argument key="CategoriasGaleriaBundle">Richpolis\CategoriasGaleriaBundle\Entity</argument>
+                  <argument key="FrontendBundle">Richpolis\FrontendBundle\Entity</argument>
                 </argument>
               </call>
               <call method="setMetadataCacheImpl">
@@ -2563,6 +3397,7 @@
                             <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/BackendBundle/Entity</argument>
                             <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/PublicacionesBundle/Entity</argument>
                             <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/CategoriasGaleriaBundle/Entity</argument>
+                            <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/FrontendBundle/Entity</argument>
                           </argument>
                         </service>
                       </argument>
@@ -2576,6 +3411,7 @@
                             <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/BackendBundle/Entity</argument>
                             <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/PublicacionesBundle/Entity</argument>
                             <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/CategoriasGaleriaBundle/Entity</argument>
+                            <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/FrontendBundle/Entity</argument>
                           </argument>
                         </service>
                       </argument>
@@ -2589,10 +3425,25 @@
                             <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/BackendBundle/Entity</argument>
                             <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/PublicacionesBundle/Entity</argument>
                             <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/CategoriasGaleriaBundle/Entity</argument>
+                            <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/FrontendBundle/Entity</argument>
                           </argument>
                         </service>
                       </argument>
                       <argument>Richpolis\CategoriasGaleriaBundle\Entity</argument>
+                    </call>
+                    <call method="addDriver">
+                      <argument type="service">
+                        <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                          <argument type="service" id="annotation_reader"/>
+                          <argument type="collection">
+                            <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/BackendBundle/Entity</argument>
+                            <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/PublicacionesBundle/Entity</argument>
+                            <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/CategoriasGaleriaBundle/Entity</argument>
+                            <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Richpolis/FrontendBundle/Entity</argument>
+                          </argument>
+                        </service>
+                      </argument>
+                      <argument>Richpolis\FrontendBundle\Entity</argument>
                     </call>
                   </service>
                 </argument>
@@ -2833,6 +3684,13 @@
           <argument>3526E6</argument>
           <argument>88531E</argument>
         </argument>
+        <argument key="fonts" type="collection">
+          <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../web/bundles/genemuform/fonts/akbar.ttf</argument>
+          <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../web/bundles/genemuform/fonts/brushcut.ttf</argument>
+          <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../web/bundles/genemuform/fonts/molten.ttf</argument>
+          <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../web/bundles/genemuform/fonts/planetbe.ttf</argument>
+          <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../web/bundles/genemuform/fonts/whoobub.ttf</argument>
+        </argument>
         <argument key="background_color">DDDDDD</argument>
         <argument key="border_color">000000</argument>
         <argument key="code">null</argument>
@@ -3018,7 +3876,7 @@
     </service>
     <service id="knp_paginator.helper.processor" class="Knp\Bundle\PaginatorBundle\Helper\Processor">
       <argument type="service" id="templating.helper.router"/>
-      <argument type="service" id="translator"/>
+      <argument type="service" id="translator.default"/>
     </service>
     <service id="knp_paginator.templating.helper.pagination" class="Knp\Bundle\PaginatorBundle\Templating\PaginationHelper">
       <tag name="templating.helper" alias="knp_pagination"/>
@@ -3138,6 +3996,31 @@
     <service id="imagine.filter.loader.thumbnail" class="Avalanche\Bundle\ImagineBundle\Imagine\Filter\Loader\ThumbnailFilterLoader">
       <tag name="imagine.filter.loader" filter="thumbnail"/>
     </service>
+    <service id="twig.extension.stfalcon_tinymce" class="Stfalcon\Bundle\TinymceBundle\Twig\Extension\StfalconTinymceExtension">
+      <tag name="twig.extension" alias="stfalcon_tinymce"/>
+      <argument type="service" id="service_container"/>
+    </service>
+    <service id="buzz" class="Buzz\Browser">
+      <argument type="service">
+        <service class="Buzz\Client\Curl" public="false"/>
+      </argument>
+      <argument type="service">
+        <service class="Buzz\Message\Factory\Factory" public="false"/>
+      </argument>
+    </service>
+    <service id="knp_last_tweets.last_tweets_fetcher.oauth" class="Knp\Bundle\LastTweetsBundle\Twitter\LastTweetsFetcher\OAuthFetcher">
+      <argument type="service" id="twitter_app"/>
+    </service>
+    <service id="twitter_app" class="Inori\TwitterAppBundle\Services\TwitterApp">
+      <argument type="service" id="inori_twitter_app.api"/>
+    </service>
+    <service id="inori_twitter_app.api" class="TwitterOAuth">
+      <file>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/app/../vendor/abraham/twitteroauth/twitteroauth/twitteroauth.php</file>
+      <argument key="consumer_key">CvGvq3g8R9dBqIP3QIxaUw</argument>
+      <argument key="consumer_secret">l9IlAqYPC3PKZAk3OeW8pseO73nNxYBjpYMH8d9eTw</argument>
+      <argument key="oauth_token">179341683-OzUZOQ9JtXfEcRlookJ10pMzFMIid7S2atQabo3Q</argument>
+      <argument key="oauth_token_secret">ufLfz9xxFrSTrm6wLjmDwmr4UnhN3iCDVs9Tx9xRItY</argument>
+    </service>
     <service id="twig.extension.acme.demo" class="Acme\DemoBundle\Twig\Extension\DemoExtension" public="false">
       <tag name="twig.extension"/>
       <argument type="service" id="twig.loader"/>
@@ -3193,7 +4076,7 @@
         </argument>
         <argument key="data_collector.doctrine" type="collection">
           <argument>db</argument>
-          <argument>DoctrineBundle:Collector:db</argument>
+          <argument>@Doctrine/Collector/db.html.twig</argument>
         </argument>
       </argument>
       <argument>bottom</argument>
@@ -3453,6 +4336,14 @@
         <argument>KnpPaginator</argument>
       </call>
       <call method="addPath">
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/stfalcon/tinymce-bundle/Stfalcon/Bundle/TinymceBundle/Resources/views</argument>
+        <argument>StfalconTinymce</argument>
+      </call>
+      <call method="addPath">
+        <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/vendor/knplabs/knp-last-tweets-bundle/Knp/Bundle/LastTweetsBundle/Resources/views</argument>
+        <argument>KnpLastTweets</argument>
+      </call>
+      <call method="addPath">
         <argument>/home/richpolis/sfproyectos/sf2LaNinaDelMezcal/src/Acme/DemoBundle/Resources/views</argument>
         <argument>AcmeDemo</argument>
       </call>
@@ -3555,6 +4446,7 @@
       </argument>
     </service>
     <service id="session.storage" alias="session.storage.native"/>
+    <service id="translator" alias="translator.default"/>
     <service id="debug.templating.engine.twig" alias="templating"/>
     <service id="swiftmailer.spool" alias="swiftmailer.mailer.default.spool"/>
     <service id="swiftmailer.transport.real" alias="swiftmailer.mailer.default.transport.real"/>
@@ -3565,5 +4457,7 @@
     <service id="database_connection" alias="doctrine.dbal.default_connection"/>
     <service id="doctrine.orm.entity_manager" alias="doctrine.orm.default_entity_manager"/>
     <service id="imagine" alias="imagine.gd"/>
+    <service id="oauth_browser" alias="twitter_app"/>
+    <service id="knp_last_tweets.last_tweets_fetcher" alias="knp_last_tweets.last_tweets_fetcher.oauth"/>
   </services>
 </container>

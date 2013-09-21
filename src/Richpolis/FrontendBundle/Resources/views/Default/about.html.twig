@@ -2,6 +2,7 @@
 
 {% block stylesheets %}
 {{parent()}}
+<link rel="stylesheet" href="{{ asset('css/prettyPhoto.css') }}">
 <link rel="stylesheet" href="{{ asset('css/jquery.bxslider.css') }}">
 <style type="text/css">
 .bx-wrapper .bx-viewport{
@@ -16,34 +17,35 @@
 
 {% block body %}
 <section id="contenido">
-   <article>
+   <article class="publicaciones-about">
          <figure id="foto-la-nina">
                <img src="{{asset('images/keyarts/fotos/la-nina-vintage-960x460.jpg')}}" alt="foto la niña">
          </figure>
-         <h2 class="titulo-article">about la niña</h2>
-         <p>
-               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, sit, molestiae pariatur consectetur quisquam non fuga quidem et modi asperiores aliquam aliquid odio assumenda eius dolor quaerat in libero eum!
-               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, ea, eos dolore fuga facere similique ipsam consequuntur eaque officiis dolor esse sequi et omnis odio ratione corporis nostrum. Dolorum, eveniet.
-               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, quod, mollitia, quidem possimus quaerat vitae expedita itaque laborum debitis laudantium eum optio earum quis deleniti asperiores cupiditate facere! Officiis, soluta!
-         </p>
+         {% for publicacion in publicaciones %}
+           {% if publicacion.slug == "about-la-nia" %}
+            <h2 class="titulo-article">{% trans %}about la niña{% endtrans %}</h2>
+            {{publicacion.descripcion(app.request.locale)|raw}}
+            {% endif %}
+         {% endfor %}
    </article>
-   <article>
-         <h2 class="titulo-article">
-               the story
-         </h2>
-         <p>
-               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, non, aliquam velit eum dolor assumenda temporibus mollitia earum veritatis voluptas modi doloremque pariatur sapiente minima necessitatibus molestiae nulla illum fuga!
-               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, beatae, perspiciatis eius explicabo sit hic consequatur magni laudantium animi vitae labore quisquam voluptates aliquid rem qui necessitatibus minima nesciunt vero.
-         </p>
+   <article class="publicaciones-about">
+         {% for publicacion in publicaciones %}
+           {% if publicacion.slug == "the-story-1" %}
+            <h2 class="titulo-article">{% trans %}the story{% endtrans %}</h2>
+            {{publicacion.descripcion(app.request.locale)|raw}}
+            {% endif %}
+         {% endfor %}
+         
          <div id="galeria-about" class="galeria">
                <div class="contenedor-galeria about">
                   <ul class="slider1">
-                     <li class="item-regular"><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 1"></a></li>
-                     <li class="item-regular"><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 2"></a></li>
-                     <li class="item-regular"><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 3"></a></li>
-                     <li class="item-regular"><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 1"></a></li>
-                     <li class="item-regular"><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 2"></a></li>
-                     <li class="item-regular"><a href=""><img src="{{asset('images/keyarts/fotos/la-nacional-300x227.jpg')}}" alt="imagen 3"></a></li>
+                     {% for galeria in galerias %} 
+                     <li class="item-regular">
+                         <a href="{{galeria.webPath}}" rel="prettyPhoto" title="{{galeria.descripcion}}">
+                             <img src="{{galeria.thumbnailWebPath}}" alt="{{galeria.titulo}}">
+                         </a>
+                     </li>
+                     {% endfor %}
                   </ul>
                </div>
                <figure class="control-galeria-izquierda">
@@ -53,17 +55,30 @@
 
                </figure>
          </div>
-         <p>
-               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, quae, atque mollitia aspernatur illo ipsum vero sed error soluta quisquam itaque tempore voluptates est in blanditiis nostrum vitae minima molestiae?
-               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, earum, inventore, quas, hic minima a adipisci ullam libero illum tempore doloribus nihil atque similique deserunt perferendis. Atque minus necessitatibus magnam.
-         </p>
+         {% for publicacion in publicaciones %}
+           {% if publicacion.slug == "the-story-2" %}
+            {{publicacion.descripcion(app.request.locale)|raw}}
+            {% endif %}
+         {% endfor %}
+   </article>
+   <article class="publicaciones-about">
+         {% for publicacion in publicaciones %}
+           {% if publicacion.slug == "mision-vision-and-values" %}
+            <h2 class="titulo-article">{% trans %}mision, vision and values{% endtrans %}</h2>
+            {{publicacion.descripcion(app.request.locale)|raw}}
+            {% endif %}
+         {% endfor %}
    </article>
    <div id="redes-sociales-pagina">
-         <figure id="red-social-pagina-facebook">
-               <img src="{{asset('images/keyarts/facebook_share.png')}}" alt="compartir en facebook">
+          <figure id="red-social-pagina-facebook">
+            <a target="_blank" href="http://www.facebook.com/sharer.php?u={{url('about_la_nina',{'_locale':locale})}}&t={{ "sitio interesante para brindar por ello"|url_encode(true) }}">
+                <img src="{{asset('images/keyarts/facebook_share.png')}}" alt="compartir en facebook">     
+            </a>
          </figure>
          <figure id="red-social-pagina-twitter">
-               <img src="{{asset('images/keyarts/twitter_share.png')}}" alt="compartir en twitter">
+              <a href="http://twitter.com/home?status={{ "Estoy leyendo "|url_encode(true) }}{{url('about_la_nina',{'_locale':locale})}}{{ "en el sitio www.laninadelmezcal.com"|url_encode(true) }}." target="_blank">
+                  <img src="{{asset('images/keyarts/twitter_share.png')}}" alt="compartir en twitter">
+              </a>
          </figure>
    </div>
 </section>
@@ -73,8 +88,12 @@
 {% block javascripts %}
 {{parent()}}
 <script type="text/javascript" src="{{asset('js/jquery.bxslider.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/jquery.prettyPhoto.js')}}"></script>  
+<script type="text/javascript" src="{{asset('js/sfrichpolis.js')}}"></script> 
 <script>
    $(document).ready(function(){
+     $.configPrettyPhoto();
+     
      $('.slider1').bxSlider({
        slideWidth: 290,
        minSlides: 1,

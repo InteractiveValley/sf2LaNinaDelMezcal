@@ -2,6 +2,7 @@
 
 {% block stylesheets %}
 {{parent()}}
+<link rel="stylesheet" href="{{ asset('css/prettyPhoto.css') }}">
 <link rel="stylesheet" href="{{ asset('css/jquery.bxslider.css') }}">
 <style type="text/css">
 .bx-wrapper .bx-viewport{
@@ -14,6 +15,8 @@
 </style>
 {% endblock %}
 
+{% set locale = app.request.locale %}
+
 {% block body %}
 <section id="contenido">
    <article>
@@ -25,11 +28,17 @@
          <div id="galeria-mexico" class="galeria">
                <div class="contenedor-galeria">
                   <ul class="slider1">
-                     <li class="item-small"><a href=""><img src="{{asset('images/keyarts/fotos/BACUS-300x155.jpg')}}" alt="imagen 1"></a></li>
-                     <li class="item-small"><a href=""><img src="{{asset('images/keyarts/fotos/el-bebian-logo.jpg')}}" alt="imagen 2"></a></li>
-                     <li class="item-small"><a href=""><img src="{{asset('images/keyarts/fotos/k-and-l.gif')}}" alt="imagen 3"></a></li>
-                     <li class="item-small"><a href=""><img src="{{asset('images/keyarts/fotos/la-reforma1-300x111.jpg')}}" alt="imagen 4"></a></li>
-                     <li class="item-small"><a href=""><img src="{{asset('images/keyarts/fotos/LOGO_CITY_MARKET.315165626_std.jpg')}}" alt="imagen 4"></a></li>
+                     {% for categoria in galerias %}
+                      {% if categoria.slug == "galeria-tiendas-mxico" %}
+                       {% for galeria in categoria.galerias %}
+                        <li class="item-small">
+                         <a href="{{galeria.webPath}}" rel="prettyPhoto">
+                             <img src="{{galeria.thumbnailWebPath}}" alt="{{galeria.titulo}}">
+                         </a>
+                        </li>
+                      {% endfor %}
+                     {% endif %}
+                    {% endfor %}
                   </ul>
                </div>
                <figure id="control-1" class="control-galeria-izquierda">
@@ -43,21 +52,18 @@
          <div id="galeria-mexico-distribuidores" class="galeria distribuidores">
                <div class="contenedor-galeria">
                   <ul class="slider-distribuidores-1">
-                     <li class="item-distribuidores">
-                        <div class="contenido-galeria-distribuidores">
-                           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, beatae maiores odit temporibus dolor quas illum. Perspiciatis, doloremque, incidunt ipsam obcaecati illo reprehenderit quo repellat rem minima tempore neque voluptas.</p>
-                        </div>
-                     </li>
-                     <li class="item-distribuidores">
-                        <div class="contenido-galeria-distribuidores">
-                           <p>Eaque, voluptas, ducimus? Ut, incidunt, officiis tenetur dignissimos sit minima voluptas maxime eaque ea eligendi voluptatibus autem. Voluptas, ut, eius, ipsa, fuga commodi repudiandae cum quo unde totam similique officiis.</p>
-                        </div>
-                     </li>
-                     <li class="item-distribuidores">
-                        <div class="contenido-galeria-distribuidores">
-                           <p>Natus, consequatur, repellat, vitae tempore deserunt quos odit optio blanditiis laborum placeat facilis quam beatae. Ratione, minus, laborum, temporibus vero animi a quos perspiciatis eum nihil ipsa aspernatur aliquid tempora!</p>
-                        </div>
-                     </li>
+                     {% for categoria in categoriasPublicacion %}  
+                     {% if categoria.slug == "where-to-find-mexico" %}
+                        {% for publicacion in categoria.publicaciones %}
+                        <li class="item-distribuidores">
+                            <div class="contenido-galeria-distribuidores">
+                                <h3>{{publicacion.titulo}}</h3>
+                                {{publicacion.descripcion(locale)|raw}}
+                            </div>
+                        </li>
+                        {% endfor %}
+                     {% endif %}
+                     {% endfor %}
                   </ul>
                </div>
                <figure id="control-3" class="control-galeria-izquierda">
@@ -74,11 +80,17 @@
          <div id="galeria-usa" class="galeria">
                <div class="contenedor-galeria">
                   <ul class="slider2">
-                     <li class="item-small"><a href=""><img src="{{asset('images/keyarts/fotos/BACUS-300x155.jpg')}}" alt="imagen 1"></a></li>
-                     <li class="item-small"><a href=""><img src="{{asset('images/keyarts/fotos/el-bebian-logo.jpg')}}" alt="imagen 2"></a></li>
-                     <li class="item-small"><a href=""><img src="{{asset('images/keyarts/fotos/k-and-l.gif')}}" alt="imagen 3"></a></li>
-                     <li class="item-small"><a href=""><img src="{{asset('images/keyarts/fotos/la-reforma1-300x111.jpg')}}" alt="imagen 4"></a></li>
-                     <li class="item-small"><a href=""><img src="{{asset('images/keyarts/fotos/LOGO_CITY_MARKET.315165626_std.jpg')}}" alt="imagen 4"></a></li>
+                     {% for categoria in galerias %}
+                      {% if categoria.slug == "galeria-tiendas-usa" %}
+                       {% for galeria in categoria.galerias %}
+                        <li class="item-small">
+                         <a href="{{galeria.webPath}}" rel="prettyPhoto">
+                             <img src="{{galeria.thumbnailWebPath}}" alt="{{galeria.titulo}}">
+                         </a>
+                        </li>
+                      {% endfor %}
+                     {% endif %}
+                    {% endfor %}
                   </ul>
                </div>
                <figure id="control-5" class="control-galeria-izquierda">
@@ -92,21 +104,18 @@
          <div id="galeria-usa-distribuidores" class="galeria distribuidores">
                <div class="contenedor-galeria">
                   <ul class="slider-distribuidores-2">
-                     <li class="item-distribuidores">
-                        <div class="contenido-galeria-distribuidores">
-                           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, beatae maiores odit temporibus dolor quas illum. Perspiciatis, doloremque, incidunt ipsam obcaecati illo reprehenderit quo repellat rem minima tempore neque voluptas.</p>
-                        </div>
-                     </li>
-                     <li class="item-distribuidores">
-                        <div class="contenido-galeria-distribuidores">
-                           <p>Eaque, voluptas, ducimus? Ut, incidunt, officiis tenetur dignissimos sit minima voluptas maxime eaque ea eligendi voluptatibus autem. Voluptas, ut, eius, ipsa, fuga commodi repudiandae cum quo unde totam similique officiis.</p>
-                        </div>
-                     </li>
-                     <li class="item-distribuidores">
-                        <div class="contenido-galeria-distribuidores">
-                           <p>Natus, consequatur, repellat, vitae tempore deserunt quos odit optio blanditiis laborum placeat facilis quam beatae. Ratione, minus, laborum, temporibus vero animi a quos perspiciatis eum nihil ipsa aspernatur aliquid tempora!</p>
-                        </div>
-                     </li>
+                     {% for categoria in categoriasPublicacion %}  
+                     {% if categoria.slug == "where-to-find-usa" %}
+                        {% for publicacion in categoria.publicaciones %}
+                        <li class="item-distribuidores">
+                            <div class="contenido-galeria-distribuidores">
+                                <h3>{{publicacion.titulo}}</h3>
+                                {{publicacion.descripcion(locale)|raw}}
+                            </div>
+                        </li>
+                        {% endfor %}
+                     {% endif %}
+                     {% endfor %}
                   </ul>
                </div>
                <figure id="control-7" class="control-galeria-izquierda">
@@ -122,21 +131,18 @@
          <div id="galeria-distribution-distribuidores" class="galeria distribuidores">
                <div class="contenedor-galeria">
                   <ul class="slider-distribuidores-3">
-                     <li class="item-distribuidores">
-                        <div class="contenido-galeria-distribuidores">
-                           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, beatae maiores odit temporibus dolor quas illum. Perspiciatis, doloremque, incidunt ipsam obcaecati illo reprehenderit quo repellat rem minima tempore neque voluptas.</p>
-                        </div>
-                     </li>
-                     <li class="item-distribuidores">
-                        <div class="contenido-galeria-distribuidores">
-                           <p>Eaque, voluptas, ducimus? Ut, incidunt, officiis tenetur dignissimos sit minima voluptas maxime eaque ea eligendi voluptatibus autem. Voluptas, ut, eius, ipsa, fuga commodi repudiandae cum quo unde totam similique officiis.</p>
-                        </div>
-                     </li>
-                     <li class="item-distribuidores">
-                        <div class="contenido-galeria-distribuidores">
-                           <p>Natus, consequatur, repellat, vitae tempore deserunt quos odit optio blanditiis laborum placeat facilis quam beatae. Ratione, minus, laborum, temporibus vero animi a quos perspiciatis eum nihil ipsa aspernatur aliquid tempora!</p>
-                        </div>
-                     </li>
+                     {% for categoria in categoriasPublicacion %}  
+                     {% if categoria.slug == "where-to-find-distribuidores" %}
+                        {% for publicacion in categoria.publicaciones %}
+                        <li class="item-distribuidores">
+                            <div class="contenido-galeria-distribuidores">
+                                <h3>{{publicacion.titulo}}</h3>
+                                {{publicacion.descripcion(locale)|raw}}
+                            </div>
+                        </li>
+                        {% endfor %}
+                     {% endif %}
+                     {% endfor %}
                   </ul>
                </div>
                <figure id="control-9" class="control-galeria-izquierda">
@@ -152,8 +158,11 @@
 {% block javascripts %}
 {{parent()}}
 <script type="text/javascript" src="{{asset('js/jquery.bxslider.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/jquery.prettyPhoto.js')}}"></script>  
+<script type="text/javascript" src="{{asset('js/sfrichpolis.js')}}"></script> 
 <script>
    $(document).ready(function(){
+    $.configPrettyPhoto();
      $('.slider1').bxSlider({
        slideWidth: 195,
        minSlides: 1,
@@ -167,7 +176,7 @@
 
      });
      $('.slider-distribuidores-1').bxSlider({
-       slideWidth: 290,
+       slideWidth: 300,
        minSlides: 1,
        maxSlides: 4,
        slideMargin: 5,
@@ -191,7 +200,7 @@
        pager:false
      });
      $('.slider-distribuidores-2').bxSlider({
-       slideWidth: 290,
+       slideWidth: 300,
        minSlides: 1,
        maxSlides: 4,
        slideMargin: 5,
@@ -204,7 +213,7 @@
        pager:false
      });
      $('.slider-distribuidores-3').bxSlider({
-       slideWidth: 290,
+       slideWidth: 300,
        minSlides: 1,
        maxSlides: 4,
        slideMargin: 5,

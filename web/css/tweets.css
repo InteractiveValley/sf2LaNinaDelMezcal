@@ -1,37 +1,44 @@
-ul.tweets-lista{
+.knp_last_tweets{
+    margin: 2em auto;
+    text-align: center;
+}
+
+.knp_last_tweets ul.tweets-lista{
     width: 100%;
     height: 290px;
     overflow: hidden;
+    padding: 0;
 }
 
-li.tweet-item{
-    border-bottom: 1px solid gray;
+.knp_last_tweets li.tweet-item{
+    border-bottom: 2px solid #920d10;
+    list-style: none;
     padding-bottom: 5px;
     margin-top: 5px;
     width: 100%;
 }
 
-.tweet-item-contenedor{
+.knp_last_tweets .tweet-item-contenedor{
     height: 60px;
     width: 100%;
 }
 
-.tweet-item-contenedor .tweet-item-imagen{
+.knp_last_tweets .tweet-item-contenedor .tweet-item-imagen{
     float: left;
     margin-right: 20px;
     width: 60px;
 }
-.tweet-item-contenedor .tweet-item-contenido{
+.knp_last_tweets .tweet-item-contenedor .tweet-item-contenido{
     float: left;
     width: 85%;
     text-align: left;
 }
-.tweet-item-contenedor .tweet-item-contenido span.tweet-item-tiempo{
+.knp_last_tweets .tweet-item-contenedor .tweet-item-contenido span.tweet-item-tiempo{
     width: 100%;
     text-align: right;
     display: inline-block;
 }
 
-.tweet-item-contenedor .tweet-item-controles{
+.knp_last_tweets .tweet-item-contenedor .tweet-item-controles{
     clear: both;
 }

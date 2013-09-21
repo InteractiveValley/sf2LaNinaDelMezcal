@@ -28,6 +28,8 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
+            new Knp\Bundle\LastTweetsBundle\KnpLastTweetsBundle(),
+            new Inori\TwitterAppBundle\InoriTwitterAppBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

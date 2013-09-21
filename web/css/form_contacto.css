@@ -10,7 +10,9 @@
 .form-contacto button, input.form-submit {
 	height:auto;
 	text-shadow: 1px 1px 0 #B84444; 
-	background:url(../images/keyarts/botonenviar.png) repeat center center; 
+	/*background:url(../images/keyarts/botonenviar.png) repeat center center; */
+	background-image: none;
+	background-color: #920d10;
 	color:#E7E7DE; 
 	padding:7px 10px 3px 10px; 
 	font-weight:normal; 

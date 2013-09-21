@@ -6,6 +6,7 @@ article p {
 }
 body {
   background: url("/images/keyarts/bg_canvas.png");
+  font-family: 'GeorgiaRegular', Arial, Helvetica, sans-serif;
   font-size: 16px;
 }
 footer {
@@ -15,6 +16,7 @@ footer {
   font-family: 'GeorgiaRegular', Arial, Helvetica, sans-serif;
   font-size:.7em; 
   height: 42px; 
+  margin-top:30px;
   position: relative;
   width: 100%;
 }
@@ -152,6 +154,7 @@ nav > ul > li > ul > li {
 #boton-comprar {
   text-align: left;
   position: relative;
+  width: 150px;
 }
 #boton-comprar > a {
   background: url("/images/keyarts/comprar.png") no-repeat center right;
@@ -195,6 +198,10 @@ nav > ul > li > ul > li {
   display: block;
   padding: 10px 15px;
 }
+
+#boton-comprar ul.menu-comprar li:hover a {
+  text-decoration: underline;
+} 
 #contenedor {
   margin: 0 auto;
   min-height: 400px;
@@ -263,7 +270,7 @@ nav > ul > li > ul > li {
   text-decoration: none;
   text-transform: uppercase;
   font-size: 0.7em;
-  font-weight: bold;
+
 }
 #lenguajes span:first-child {
   border-right: 1px solid #808080;
@@ -290,6 +297,7 @@ nav > ul > li > ul > li {
 }
 #menus-botellas {
   background: url("/images/keyarts/bottletour-submenu.png") no-repeat center top;
+  font-family: 'CenturyGothicRegular', Arial, Helvetica, sans-serif;
   height: 40px;
   margin-bottom: 1em;
   width: 100%;
@@ -352,11 +360,16 @@ nav > ul > li > ul > li {
 #botella .descripcion-botella header h2 {
   font-size: 3em;
 }
-#botella .descripcion-botella p {
+#botella .descripcion-botella #descripcion-botella-cuerpo {
   font-family: 'GeorgiaRegular', Arial, Helvetica, sans-serif;
   border-left: 6px solid #f00;
   padding-left: 5px;
 }
+
+#botella .descripcion-botella #descripcion-botella-cuerpo:first-letter {
+  text-transform: uppercase;
+}
+
 #botella .mensaje-toltip {
   font-size: 1em;
   text-transform: capitalize;
@@ -376,6 +389,13 @@ nav > ul > li > ul > li {
 .botellas #redes-sociales-pagina {
   text-align: right;
 }
+.contacto {
+  display: inline-block;
+  text-align: center;
+  vertical-align: top;
+  width: 45%;
+}
+
 .contenedor-galeria {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -384,11 +404,26 @@ nav > ul > li > ul > li {
   padding: 0;
   width: 95%;
 }
-.contacto {
-  display: inline-block;
-  text-align: center;
-  vertical-align: top;
-  width: 45%;
+.contenido-galeria-distribuidores{
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  position:absolute;
+  top: -1em;
+  text-align: left;
+  width: 100%;
+  padding: 0 1em 0 .5em;
+}
+
+.contenido-galeria-distribuidores h3{
+  font-size: 2em;
+  font-family: 'Oswald', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: -1.5px;
+  text-transform: uppercase;
+  text-align: left;
+
 }
 .espadin {
   color: #920d10;
@@ -443,9 +478,9 @@ nav > ul > li > ul > li {
   width: 195px;
 }
 .galeria ul li.item-distribuidores {
-  background: url("/images/keyarts/separadorvertical.png") no-repeat top right;
+  background: url("/images/keyarts/separadorvertical.png") no-repeat bottom right;
   height: 560px;
-  width: 300px;
+  width: auto;
 }
 .galeria ul li a {
   margin: 0 auto;
@@ -491,16 +526,27 @@ nav > ul > li > ul > li {
 }
 .galeria.distribuidores {
   padding: 0;
+  position: relative;
 }
+
+.galeria.distribuidores ul li{
+  display: block;
+}
+
 .galeria.distribuidores figure.control-galeria-izquierda {
   margin: 0 -25px 0 0;
-  top: 1em;
+  top: 3em;
 }
 .galeria.distribuidores figure.control-galeria-derecha {
   margin: 0 0 0 -25px;
-  top: 1em;
+  top: 3em;
 }
-.informaciones p,.mensaje-toltip,.qtip-content
+.publicaciones-about p{
+  line-height: 26px;
+  color: #535353;
+}
+
+.publicaciones-about p,.mensaje-toltip,.qtip-content
 {
   font-family: 'GeorgiaRegular', Arial, Helvetica, sans-serif;
 }

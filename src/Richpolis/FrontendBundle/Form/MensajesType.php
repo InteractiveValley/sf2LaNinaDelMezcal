@@ -12,12 +12,19 @@ class MensajesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titulo')
-            ->add('mensaje','textarea', array(
+            ->add('tituloEn','text',array('label'=>'Titulo Ingles'))
+            ->add('tituloEs','text',array('label'=>'Titulo Español'))    
+            ->add('mensajeEn','textarea', array(
                     'attr' => array(
                         'class' => 'tinymce',
                         'data-theme' => 'advanced' // Skip it if you want to use default theme
-                    )
+                    ),'label'=>'Mensaje Ingles'
+                ))
+            ->add('mensajeEs','textarea', array(
+                    'attr' => array(
+                        'class' => 'tinymce',
+                        'data-theme' => 'advanced' // Skip it if you want to use default theme
+                    ),'label'=>'Mensaje Español'
                 ))
             ->add('file','file',array(
                 'label'=>'Imagen',

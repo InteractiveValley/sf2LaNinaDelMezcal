@@ -25,49 +25,63 @@ class Publicacion
     /**
      * @var string
      *
-     * @ORM\Column(name="titulo", type="string", length=255)
+     * @ORM\Column(name="titulo", type="string", length=255 )
      */
     private $titulo;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="descripcion", type="text")
+     * @ORM\Column(name="descripcion_es", type="text" )
      */
-    private $descripcion;
+    private $descripcionEs;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="archivo", type="string", length=255)
+     * @ORM\Column(name="descripcion_en", type="text" )
+     */
+    private $descripcionEn;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="archivo", type="string", length=255, nullable=true )
      */
     private $archivo;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="thumbnail", type="string", length=255)
+     * @ORM\Column(name="thumbnail", type="string", length=255, nullable=true )
      */
     private $thumbnail;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="posicion", type="integer", nullable=false)
+     * @ORM\Column(name="posicion", type="integer", nullable=false )
      */
     private $posicion;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=255)
+     */
+    private $slug;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_active", type="boolean", nullable=true)
+     * @ORM\Column(name="is_active", type="boolean", nullable=true )
      */
     private $isActive;
     
     /**
      * @var \CategoriasPublicacion
      *
-     * @ORM\ManyToOne(targetEntity="CategoriasPublicacion", inversedBy="publicaciones")
+     * @ORM\ManyToOne(targetEntity="CategoriasPublicacion", inversedBy="publicaciones" )
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="categoria_id", referencedColumnName="id")
      * })
@@ -130,26 +144,34 @@ class Publicacion
     }
 
     /**
-     * Set descripcion
+     * Set descripcion, segun el locale de la aplicacion 
      *
      * @param string $descripcion
      * @return Publicacion
      */
-    public function setDescripcion($descripcion)
+    public function setDescripcion($locale,$descripcion)
     {
-        $this->descripcion = $descripcion;
+        if($locale=="es"){
+            $this->descripcionEs = $descripcion;
+        }else{
+            $this->descripcionEn = $descripcion;
+        }
     
         return $this;
     }
 
     /**
-     * Get descripcion
+     * Get descripcion, segun el locale de la aplicacion
      *
      * @return string 
      */
-    public function getDescripcion()
+    public function getDescripcion($locale)
     {
-        return $this->descripcion;
+        if($locale=="es"){
+            return $this->descripcionEs;
+        }else{
+            return $this->descripcionEn;
+        }
     }
 
     /**
@@ -534,5 +556,74 @@ class Publicacion
     public function getCategoria()
     {
         return $this->categoria;
+    }
+
+    /**
+     * Set descripcionEs
+     *
+     * @param string $descripcionEs
+     * @return Publicacion
+     */
+    public function setDescripcionEs($descripcionEs)
+    {
+        $this->descripcionEs = $descripcionEs;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcionEs
+     *
+     * @return string 
+     */
+    public function getDescripcionEs()
+    {
+        return $this->descripcionEs;
+    }
+
+    /**
+     * Set descripcionEn
+     *
+     * @param string $descripcionEn
+     * @return Publicacion
+     */
+    public function setDescripcionEn($descripcionEn)
+    {
+        $this->descripcionEn = $descripcionEn;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcionEn
+     *
+     * @return string 
+     */
+    public function getDescripcionEn()
+    {
+        return $this->descripcionEn;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Publicacion
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

@@ -136,6 +136,17 @@ stfalcon_tinymce:
              menubar: false
              toolbar1: "bold,italic,underline,undo,redo,link,unlink,removeformat,cleanup,code,preview"
 
+inori_twitter_app:
+    file: %kernel.root_dir%/../vendor/abraham/twitteroauth/twitteroauth/twitteroauth.php
+    consumer_key: CvGvq3g8R9dBqIP3QIxaUw
+    consumer_secret: l9IlAqYPC3PKZAk3OeW8pseO73nNxYBjpYMH8d9eTw
+    oauth_token: 179341683-OzUZOQ9JtXfEcRlookJ10pMzFMIid7S2atQabo3Q
+    oauth_token_secret: ufLfz9xxFrSTrm6wLjmDwmr4UnhN3iCDVs9Tx9xRItY
+
+knp_last_tweets:
+    fetcher:
+        driver: oauth
+
 parameters:
     # dirección de correo electrónico para contacto del Blogger
     richpolis.emails.to_email: richpolis@gmail.com

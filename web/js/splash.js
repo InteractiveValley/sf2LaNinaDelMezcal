@@ -11,11 +11,11 @@ function splashShow(){
 	var $leyenda = $("#leyenda");
 	var $frase = $("#frase");
 	var $botones = $("#botones");
-        var $footer = $("footer");
+        /*var $footer = $("footer");*/
 	$frase.fadeOut("slow",function(){
 		$leyenda.fadeIn("slow");
 		$botones.fadeIn("slow");
-                $footer.fadeIn("slow");
+        /*$footer.fadeIn("slow");*/
 	});
 
 }

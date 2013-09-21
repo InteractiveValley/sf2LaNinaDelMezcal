@@ -24,7 +24,9 @@
             <img src="{{asset('images/keyarts/logo_contacto.png')}}" alt="La niña del mezcal"/>
         </figure>
         <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, beatae eius distinctio modi doloremque illo laudantium porro asperiores facilis iste. Architecto, sit, neque quisquam tempore libero temporibus commodi laborum iste.
+            {% if contacto.texto %}
+            {{contacto.texto|raw}}
+            {% endif %}
         </div>
     </article>
     <article class="form contacto">
