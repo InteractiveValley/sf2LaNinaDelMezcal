@@ -20,4 +20,9 @@ return array(
                 "Telephone"=>"Teléfono",
                 "Message"=>"Mensaje",
                 "Send"=>"Enviar",
+                "It has sent the message"=>"Se ha enviado el mensaje",
+                "El mensaje no se ha podido enviar"=>"El mensaje no se ha podido enviar",
+                "Violacion de acceso"=>"Violacion de acceso",
+                "Gracias por enviar su correo!"=>"Gracias por enviar su correo!",
+    
 );

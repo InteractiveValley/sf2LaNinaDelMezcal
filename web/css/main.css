@@ -20,6 +20,7 @@ footer {
   position: relative;
   width: 100%;
 }
+
 footer #desarrollado {
   bottom: 100%;
   position: absolute;
@@ -225,6 +226,13 @@ nav > ul > li > ul > li {
 #contenido-footer {
   padding: 1.1em;
 }
+
+#contenido-footer a { color: #e44a4a; }
+#contenido-footer a:visited { color: #551a8b; }
+#contenido-footer a:hover { color: #50adcf; }
+#contenido-footer a:focus { outline: thin dotted; }
+#contenido-footer a:hover, a:active { outline: 0; }
+
 #desarrollado img {
   opacity: 0.1;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=10);
@@ -550,3 +558,6 @@ nav > ul > li > ul > li {
 {
   font-family: 'GeorgiaRegular', Arial, Helvetica, sans-serif;
 }
+
+::-moz-selection { background: #e44a4a; color: #fff; text-shadow: none; }
+::selection { background: #e44a4a; color: #fff; text-shadow: none; }

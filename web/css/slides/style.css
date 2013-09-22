@@ -37,6 +37,8 @@
 	position:absolute;
 	top:-325px;
 	list-style:none;
+        -moz-animation-play-state:paused;
+	-webkit-animation-play-state:paused;
 }
 #slider li img{
 	max-height: 100%;
@@ -67,7 +69,7 @@
 	width:300px;
 	height:60px;
 	position:relative;
-	bottom:150px;
+	bottom:100px;
 	/*left: -320px;*/
 	-moz-transition:all 0.3s ease-in-out;
 	-webkit-transition:all 0.3s ease-in-out;  
@@ -101,4 +103,6 @@
 	background:#000;
 	-moz-animation:fullexpand 25s ease-out infinite;
 	-webkit-animation:fullexpand 25s ease-out infinite;
+        -moz-animation-play-state:paused;
+	-webkit-animation-play-state:paused;
 }

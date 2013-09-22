@@ -1,7 +1,14 @@
 .knp_last_tweets{
+    font-family: "Open Sans", Helvetica, "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Arial, Helvetica, sans-serif;
     margin: 2em auto;
     text-align: center;
 }
+
+.knp_last_tweets a { color: #e44a4a; }
+.knp_last_tweets a:visited { color: #551a8b; }
+.knp_last_tweets a:hover { color: #50adcf; }
+.knp_last_tweets a:focus { outline: thin dotted; }
+.knp_last_tweets a:hover, a:active { outline: 0; }
 
 .knp_last_tweets ul.tweets-lista{
     width: 100%;
@@ -11,7 +18,7 @@
 }
 
 .knp_last_tweets li.tweet-item{
-    border-bottom: 2px solid #920d10;
+    border-bottom: 1px solid gray;
     list-style: none;
     padding-bottom: 5px;
     margin-top: 5px;

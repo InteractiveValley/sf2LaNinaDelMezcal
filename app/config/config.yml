@@ -92,49 +92,16 @@ knp_paginator:
 
 avalanche_imagine:
     filters:
-        platillos_imagen:
+        galerias_general:
             type:    thumbnail
-            options: { size: [400, 400], mode: inset, cache_type: public, cache_expires: '2 weeks' }
-        galeria_imagen:
+            options: { size: [500, 500], mode: inset, cache_type: public, cache_expires: '2 weeks' }
+        publicaciones_about:
             type:    thumbnail
-            options: { size: [700, 370], mode: inset, cache_type: public, cache_expires: '2 weeks' }
+            options: { size: [940, 360], mode: inset, cache_type: public, cache_expires: '2 weeks' }
         galeria_imagen_recortar:
             type:    thumbnail
-            options: { size: [700, 370], mode: outbound, cache_type: public, cache_expires: '2 weeks' }    
+            options: { size: [940, 360], mode: outbound, cache_type: public, cache_expires: '2 weeks' }    
 
-stfalcon_tinymce:
-    include_jquery: false
-    tinymce_jquery: true
-    selector: ".tinymce"
-    base_url: "http://localhost:8029/" # this parameter may be included if you need to override the assets_base_urls for your template engine (to override a CDN base url)
-    # Get current language from the parameters.ini
-    language: %locale%
-    # Custom buttons
-    tinymce_buttons:
-        stfalcon: # Id of the first button
-            title: "Stfalcon"
-            image: "http://stfalcon.com/favicon.ico"
-    theme:
-        # Simple theme: same as default theme
-        simple: ~
-        # Advanced theme with almost all enabled plugins
-        advanced:
-             plugins:
-                 - "advlist autolink lists link image charmap print preview hr anchor pagebreak"
-                 - "searchreplace wordcount visualblocks visualchars code fullscreen"
-                 - "insertdatetime media nonbreaking save table contextmenu directionality"
-                 - "emoticons template paste textcolor"
-             toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-             toolbar2: "print preview media | forecolor backcolor emoticons | stfalcon | example"
-             image_advtab: true
-             templates:
-                 - {title: 'Test template 1', content: 'Test 1'}
-                 - {title: 'Test template 2', content: 'Test 2'}
-        # BBCode tag compatible theme (see http://www.bbcode.org/reference.php)
-        bbcode:
-             plugins: ["bbcode, code, link, preview"]
-             menubar: false
-             toolbar1: "bold,italic,underline,undo,redo,link,unlink,removeformat,cleanup,code,preview"
 
 inori_twitter_app:
     file: %kernel.root_dir%/../vendor/abraham/twitteroauth/twitteroauth/twitteroauth.php

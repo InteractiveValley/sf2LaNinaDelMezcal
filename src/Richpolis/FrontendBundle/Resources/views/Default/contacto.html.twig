@@ -41,7 +41,7 @@
              </span>
          </div>
          <div>
-             {{ form_label(form.email) }}
+             <label for="richpolis_backendbundle_contactotype_email" class="required">Email</label>
              <span class="form-contacto-control-wrap E-mail {%if form.email.vars.errors  | length > 0%}form-not-valid{%endif%}">
                  {{ form_widget(form.email, {'attr': {'class': 'form-contacto-control form-text form-email form-validates-as-required form-validates-as-email','size':'40','aria-requiered':'true'}}) }}
              </span>
@@ -50,9 +50,9 @@
              </span>    
          </div>
           <div>
-             <label for="richpolis_backendbundle_contactotype_telefono" class="required">{% trans %}Telephone{% endtrans %}</label> 
+             <label for="richpolis_backendbundle_contactotype_telefono">{% trans %}Telephone{% endtrans %}</label> 
              <span class="form-contacto-control-wrap telefono {%if form.telefono.vars.errors  | length > 0%}form-not-valid{%endif%}">
-                 {{ form_widget(form.telefono, {'attr': {'class': 'form-contacto-control form-text form-validates-as-required','size':'40','aria-requiered':'true'}}) }}
+                 {{ form_widget(form.telefono, {'attr': {'class': 'form-contacto-control form-text','size':'40','aria-requiered':'false'}}) }}
              </span>
              <span class="form-not-valid-tip-no-ajax"> 
                  {{ form_errors(form.telefono) }}

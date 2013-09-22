@@ -247,12 +247,14 @@ class DefaultController extends Controller {
         $contacto = new Contacto();
         $form = $this->createForm(new ContactoType(), $contacto);
         $request = $this->getRequest();
+        $traductor=$this->get('translator');
         
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);
 
             if ($form->isValid()) {
                 $datos=$form->getData();
+                
                 
                 $message = \Swift_Message::newInstance()
                         ->setSubject('Contacto desde pagina')
@@ -261,24 +263,24 @@ class DefaultController extends Controller {
                         ->setBody($this->renderView('BackendBundle:Default:contactoEmail.html.twig', array('datos' => $datos)), 'text/html');
                 $this->get('mailer')->send($message);
 
-                $this->get('session')->setFlash('noticia', 'Gracias por enviar su correo!');
+                $this->get('session')->setFlash('noticia', $traductor->trans('Thank you for submitting your email!'));
 
                 // Redirige - Esto es importante para prevenir que el usuario
                 // reenvíe el formulario si actualiza la página
                 $ok=true;
                 $error=false;
-                $mensaje="Se ha enviado el mensaje";
+                $mensaje=$traductor->trans("It has sent the message");
                 $contacto = new Contacto();
                 $form = $this->createForm(new ContactoType(), $contacto);
             }else{
                 $ok=false;
                 $error=true;
-                $mensaje="El mensaje no se ha podido enviar";
+                $mensaje=$traductor->trans("The message could not be sent");
             }
         }else{
             $ok=false;
             $error=false;
-            $mensaje="Violacion de acceso";
+            $mensaje=$traductor->trans("Access Violation");
         }
         
          $em = $this->getDoctrine()->getEntityManager();

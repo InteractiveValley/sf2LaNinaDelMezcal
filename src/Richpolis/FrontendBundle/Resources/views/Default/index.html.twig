@@ -4,6 +4,7 @@
  {{parent()}}
 <link rel="stylesheet" href="{{ asset('css/slides/animation.css') }}">
 <link rel="stylesheet" href="{{ asset('css/slides/style.css') }}">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,800,800italic' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="{{ asset('css/tweets.css') }}">
 {% endblock %}
 
@@ -15,7 +16,7 @@
                 <ul>
                     <li id="first" class="firstanimation">
                         <a href="#">
-                            <img src="{{galerias[0].webPath}}" alt="{{galerias[0].titulo}}"/>
+                            <img src="{{galerias[0].webPath | apply_filter('galeria_imagen_recortar')}}" alt="{{galerias[0].titulo}}"/>
                         </a>
                         <div class="tooltip">
                             <h1>{{galerias[0].titulo}}</h1>
@@ -24,7 +25,7 @@
 
                     <li id="second" class="secondanimation">
                         <a href="#">
-                            <img src="{{galerias[1].webPath}}" alt="{{galerias[1].titulo}}"/>
+                            <img src="{{galerias[1].webPath | apply_filter('galeria_imagen_recortar')}}" alt="{{galerias[1].titulo}}"/>
                         </a>
                         <div class="tooltip">
                             <h1>{{galerias[1].titulo}}</h1>
@@ -33,7 +34,7 @@
 
                     <li id="third" class="thirdanimation">
                         <a href="#">
-                            <img src="{{galerias[2].webPath}}" alt="{{galerias[2].titulo}}"/>
+                            <img src="{{galerias[2].webPath | apply_filter('galeria_imagen_recortar')}}" alt="{{galerias[2].titulo}}"/>
                         </a>
                         <div class="tooltip">
                             <h1>{{galerias[2].titulo}}</h1>
@@ -42,7 +43,7 @@
 
                     <li id="fourth" class="fourthanimation">
                         <a href="#">
-                            <img src="{{galerias[3].webPath}}" alt="{{galerias[3].titulo}}"/>
+                            <img src="{{galerias[3].webPath | apply_filter('galeria_imagen_recortar')}}" alt="{{galerias[3].titulo}}"/>
                         </a>
                         <div class="tooltip">
                             <h1>{{galerias[3].titulo}}</h1>
@@ -51,7 +52,7 @@
 
                     <li id="fifth" class="fifthanimation">
                         <a href="#">
-                            <img src="{{galerias[4].webPath}}" alt="{{galerias[4].titulo}}"/>
+                            <img src="{{galerias[4].webPath | apply_filter('galeria_imagen_recortar')}}" alt="{{galerias[4].titulo}}"/>
                         </a>
                         <div class="tooltip">
                             <h1>{{galerias[4].titulo}}</h1>

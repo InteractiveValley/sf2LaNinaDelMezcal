@@ -1,6 +1,7 @@
-/vendor/
-/app/logs/
-/app/cache/
-/web/uploads/botellas/
-/web/uploads/galerias/
-/web/uploads/publicaciones/
+/vendor/*
+/app/logs/*
+/app/cache/*
+/web/uploads/botellas/*
+/web/uploads/galerias/*
+/web/uploads/publicaciones/*
+/data/

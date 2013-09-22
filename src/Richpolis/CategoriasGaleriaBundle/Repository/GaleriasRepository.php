@@ -68,7 +68,7 @@ class GaleriasRepository extends EntityRepository
                     ->leftJoin('g.categoria', 'c') 
                     ->where('c.tipoCategoria=:tipo')
                     ->setParameter('tipo', $tipo)
-                    ->orderBy('g.posicion', 'DESC'); 
+                    ->orderBy('g.posicion', 'ASC'); 
         if(!$todas){
             $query->andWhere('g.isActive=:active')
                   ->setParameter('active', true);
@@ -88,7 +88,7 @@ class GaleriasRepository extends EntityRepository
                     ->leftJoin('g.categoria', 'c') 
                     ->where('c.slug=:slug')
                     ->setParameter('slug', $slug)
-                    ->orderBy('g.posicion', 'DESC'); 
+                    ->orderBy('g.posicion', 'ASC'); 
         return $query->getQuery()->getResult();
     }
 }
