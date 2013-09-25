@@ -224,7 +224,7 @@ nav > ul > li > ul > li {
   text-transform: uppercase;
 }
 #contenido-footer {
-  padding: 1.1em;
+  padding: .5em 1.1em;
 }
 
 #contenido-footer a { color: #e44a4a; }

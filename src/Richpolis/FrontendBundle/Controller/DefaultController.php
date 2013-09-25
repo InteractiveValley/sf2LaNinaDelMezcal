@@ -144,11 +144,11 @@ class DefaultController extends Controller {
             $galerias = $em->getRepository('CategoriasGaleriaBundle:Galerias')
                            ->getGaleriaPorCategoriaSlug('espadin');
             
-            $cadena="[";
+            /*$cadena="[";
             foreach($galerias as $galeria){
                 $cadena .= "{imagen:'".$galeria->getWebPath()."'},";
             }
-            $cadena.="]";
+            $cadena.="]";*/
 
            return $this->render("FrontendBundle:Default:botella.html.twig",array(
             "pagina_actual"=>"botella_espadin",
@@ -156,7 +156,7 @@ class DefaultController extends Controller {
             "botella_anterior"=>"botella_primario",
             "botella_siguiente"=>"botella_primario",
             'botella'=>$botella,
-            'galerias'=>$cadena
+            'galerias'=>$galerias
             ));
         }
         
@@ -181,16 +181,16 @@ class DefaultController extends Controller {
             $em = $this->getDoctrine()->getManager();
             
             $botella = $em->getRepository('FrontendBundle:Botellas')
-                            ->getBotellaYMensajesPorSlug('primario-mezcal-joven');
+                            ->getBotellaYMensajesPorSlug('primario-mezcal');
             
             $galerias = $em->getRepository('CategoriasGaleriaBundle:Galerias')
                        ->getGaleriaPorCategoriaSlug('primario-mezcal-joven');
         
-            $cadena="[";
+            /*$cadena="[";
             foreach($galerias as $galeria){
                 $cadena .= "{imagen:'".$galeria->getWebPath()."'},";
             }
-            $cadena.="]";
+            $cadena.="]";*/
 
            return $this->render("FrontendBundle:Default:botella.html.twig",array(
             "pagina_actual"=>"botella_primario",
@@ -198,7 +198,7 @@ class DefaultController extends Controller {
             "botella_anterior"=>"botella_espadin",
             "botella_siguiente"=>"botella_espadin",
             'botella'=>$botella,
-            'galerias'=>$cadena
+            'galerias'=>$galerias
             ));
         }
 
@@ -328,6 +328,19 @@ class DefaultController extends Controller {
         return $response;
     }
     
+    /**
+     * Pie de pagina.
+     *
+     * @Route("/pie/pagina/", name="pie_pagina")
+     */
+    public function piePaginaAction(){
+        $em = $this->getDoctrine()->getEntityManager();
+        $piePagina = $em->getRepository('BackendBundle:Configuraciones')->findOneBySlug('pie-pagina');
+        
+        return $this->render('FrontendBundle:Default:piePagina.html.twig',array(
+            'piePagina'=>$piePagina,
+        ));
+    }
 }
 
 ?>

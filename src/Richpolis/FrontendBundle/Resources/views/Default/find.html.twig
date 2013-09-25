@@ -32,8 +32,8 @@
                       {% if categoria.slug == "galeria-tiendas-mxico" %}
                        {% for galeria in categoria.galerias %}
                         <li class="item-small">
-                         <a href="{{galeria.webPath}}" rel="prettyPhoto">
-                             <img src="{{galeria.thumbnailWebPath}}" alt="{{galeria.titulo}}">
+                         <a href="{{galeria.webPath}}" rel="prettyPhoto[pp_gal]" title='{{galeria.descripcion | raw}}'>
+                             <img src="{{galeria.thumbnailWebPath}}" alt="{{galeria.titulo}}"/>
                          </a>
                         </li>
                       {% endfor %}
@@ -84,8 +84,8 @@
                       {% if categoria.slug == "galeria-tiendas-usa" %}
                        {% for galeria in categoria.galerias %}
                         <li class="item-small">
-                         <a href="{{galeria.webPath}}" rel="prettyPhoto">
-                             <img src="{{galeria.thumbnailWebPath}}" alt="{{galeria.titulo}}">
+                         <a href="{{galeria.webPath}}" rel="prettyPhoto[pp_gal]" title='{{galeria.descripcion | raw}}'>
+                             <img src="{{galeria.thumbnailWebPath}}" alt="{{galeria.titulo}}"/>
                          </a>
                         </li>
                       {% endfor %}

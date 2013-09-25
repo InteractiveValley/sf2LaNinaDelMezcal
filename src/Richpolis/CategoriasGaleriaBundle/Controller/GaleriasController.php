@@ -329,13 +329,16 @@ class GaleriasController extends Controller
         if ($request->getMethod() == 'POST') {
             $id=$request->request->get('id');
             $titulo=$request->request->get('titulo');
+            $descripcion =$request->request->get('contenido');
         }elseif($request->getMethod() == 'GET'){
             $id=$request->query->get('id');
             $titulo=$request->query->get('titulo');
+            $descripcion =$request->query->get('contenido');
         }
         $em = $this->getDoctrine()->getEntityManager();
         $registro = $em->getRepository('CategoriasGaleriaBundle:Galerias')->find($id);
         $registro->setTitulo($titulo);
+        $registro->setDescripcion($descripcion);
         $em->flush();
         
         $template=$this->renderView('CategoriasGaleriaBundle:Categorias:item.html.twig', array(

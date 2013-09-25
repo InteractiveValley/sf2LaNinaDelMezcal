@@ -83,7 +83,7 @@
         },6000);
     }
 
-    jQuery.mostrarTooltip=function() {
+    /*jQuery.mostrarTooltip=function() {
         $("#slider li .tooltip").animate({'left':'0px','opacity':1},'fast',function(){
             $("#slider li, #slider .progress-bar").css({"-moz-animation-play-state":"paused","-webkit-animation-play-state":"paused"});
         });
@@ -101,11 +101,11 @@
         setTimeout(function(){
             $.mostrarTooltip();
         },5000);
-    }
+    }*/
 
     jQuery.iniciar=function(){
         $.iniciarCircle();
-        $.mostrarTooltip();
+        /*$.mostrarTooltip();*/
     }
     
     $(document).on("ready",$.iniciar);

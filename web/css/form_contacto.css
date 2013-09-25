@@ -31,7 +31,7 @@ input.form-submit:focus {
 	background:#2f2e2a; 
 	text-shadow: 1px 1px 0 #000;
 }
-input.form-submit {width:280px !important; font-family: sans-serif;}
+input.form-submit {width:100px !important; font-family: sans-serif;}
 .form-validation-errors {color:#d84645; }
 .form-mail-sent-ok {color:#398F14;}
 .form-mail-sent-ok,.form-validation-errors, .form-mail-sent-ng {background:none;border:0 !important; margin:0 !important; font-size:1.3em; font-family: "Primavera", sans-serif;  text-align:center; } 

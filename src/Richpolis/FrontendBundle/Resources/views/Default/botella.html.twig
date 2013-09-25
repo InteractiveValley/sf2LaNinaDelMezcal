@@ -12,7 +12,7 @@
         <meta property="og:title" content="La niña del mezcal" />
         <meta property="og:type" content="album" />
         <meta property="og:url" content="{{url(pagina_actual,{'_locale':locale})}}" />
-        <meta property="og:image" content="{{asset('images/keyarts/logo_header.png')}}" />
+        <meta property="og:image" content="https://si0.twimg.com/profile_images/378800000027379417/b61ab62c160dda0a8f748fd2500d8656.jpeg" />
         <meta property="og:site_name" content="laninadelmezcal.com" />
         <!--meta property="fb:admins" content="USER_ID1,USER_ID2"/-->
         <meta property="og:description" content="La niña del mezcal." />
@@ -21,7 +21,7 @@
         <meta name="twitter:url" value="{{url(pagina_actual,{'_locale':locale})}}"/>
         <meta name="twitter:title" value="La niña del mezcal">
         <meta name="twitter:description" value="La niña del mezcal."/>
-        <meta name="twitter:image" value="{{asset('images/keyarts/logo_header.png')}}"/>
+        <meta name="twitter:image" value="https://si0.twimg.com/profile_images/378800000027379417/b61ab62c160dda0a8f748fd2500d8656.jpeg"/>
         <meta name="twitter:site" value="@laninadelmezcal"/>
         <meta name="twitter:creator" value="@richpolis"/>
 {% endblock %}
@@ -29,10 +29,10 @@
 
   
 {% block body %}
-<section id="contenido" class="botellas" ng-controller="BotellasController">
+<section id="contenido" class="botellas" ng-controller="BotellasController" style="max-height: 900px; opacity: 0;">
    <div class="galeria">
       <figure class="control-galeria-izquierda">
-          <a class="bx-prev" href="{{path(botella_anterior,{'_locale':locale})}}">&nbsp;</a>
+          <a class="bx-prev" href="{{path(botella_anterior,{'_locale':locale})}}#botella">&nbsp;</a>
       </figure>
       <article id="botella">
       
@@ -55,14 +55,14 @@
                 </div>
                 {% else %}
                 <div id="howToMix" class="mensaje-toltip espadin {{mensaje.clase}}" style="{{mensaje.style}}">
-                    <span onclick="javascript:generarHowToMix({{galerias|raw}})" style="cursor:pointer;">{{mensaje.titulo(locale)}}</span>
+                    <span onclick="javascript:generarHowToMix()" style="cursor:pointer;">{{mensaje.titulo(locale)}}</span>
                 </div>
                 {% endif %}
               {% endfor %}
               
       </article>
       <figure class="control-galeria-derecha">
-            <a class="bx-next" href="{{path(botella_siguiente,{'_locale':locale})}}">&nbsp;</a>
+            <a class="bx-next" href="{{path(botella_siguiente,{'_locale':locale})}}#botella">&nbsp;</a>
       </figure>   
    </div>
    <figure id="boton-comprar">
@@ -77,12 +77,12 @@
 
    <div id="redes-sociales-pagina" class="derecha">
          <figure id="red-social-pagina-facebook">
-            <a target="_blank" href="http://www.facebook.com/sharer.php?u={{url(pagina_actual,{'_locale':locale})}}&t={{ "sitio interesante para brindar por ello"|url_encode(true) }}">
+            <a target="_blank" href="http://www.facebook.com/sharer.php?u={{url(pagina_actual,{'_locale':locale})}}">
                 <img src="{{asset('images/keyarts/facebook_share.png')}}" alt="compartir en facebook">     
             </a>
          </figure>
          <figure id="red-social-pagina-twitter">
-              <a href="http://twitter.com/home?status={{ "Estoy leyendo "|url_encode(true) }}{{url(pagina_actual,{'_locale':locale})}}{{ "en el sitio www.laninadelmezcal.com"|url_encode(true) }}." target="_blank">
+              <a href="http://twitter.com/home?status={{url(pagina_actual,{'_locale':locale})}}{{ " Via: @laninadelmezcal"|url_encode(true) }}." target="_blank">
                   <img src="{{asset('images/keyarts/twitter_share.png')}}" alt="compartir en twitter">
               </a>
          </figure>
@@ -111,12 +111,22 @@
 <script src="{{asset('js/jquery.prettyPhoto.js')}}"></script>  
 <script src="{{asset('js/sfrichpolis.js')}}"></script>  
 <script>
-function generarHowToMix(objImagenes){
+var objImagenes= [
+  {% for galeria in galerias %}  
+  {
+    titulo: '{{galeria.titulo}}',
+    descripcion: '{{galeria.descripcion|raw}}',
+    imagen: '{{galeria.webPath}}',
+  },
+  {% endfor %}
+];    
+    
+function generarHowToMix(){
   var titulos=[],imagenes=[],descripciones=[],contador;
   for(contador=0;contador<objImagenes.length;contador++){
-    titulos[contador]="Imagen "+(contador+1);
+    titulos[contador]=objImagenes[contador].titulo;
     imagenes[contador]=objImagenes[contador].imagen;
-    descripciones[contador] ="";
+    descripciones[contador] =objImagenes[contador].descripcion;
   }
   $.prettyPhoto.open(imagenes,titulos,descripciones);
 } 
@@ -142,6 +152,8 @@ $(document).ready(function() {
         classes: 'qtip-light qtip-bootstrap'
       }
     });
+    $("section").animate({'opacity':1},"slow");
+
 });
 
 </script>

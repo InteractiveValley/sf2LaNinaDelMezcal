@@ -41,7 +41,7 @@
                   <ul class="slider1">
                      {% for galeria in galerias %} 
                      <li class="item-regular">
-                         <a href="{{galeria.webPath}}" rel="prettyPhoto" title="{{galeria.descripcion}}">
+                         <a href="{{galeria.webPath}}" rel="prettyPhoto[pp_gal]" title="{{galeria.descripcion}}">
                              <img src="{{galeria.thumbnailWebPath}}" alt="{{galeria.titulo}}">
                          </a>
                      </li>
@@ -64,19 +64,19 @@
    <article class="publicaciones-about">
          {% for publicacion in publicaciones %}
            {% if publicacion.slug == "mision-vision-and-values" %}
-            <h2 class="titulo-article">{% trans %}mision, vision and values{% endtrans %}</h2>
+            <h2 class="titulo-article">{% trans %}mission, vision and values{% endtrans %}</h2>
             {{publicacion.descripcion(app.request.locale)|raw}}
             {% endif %}
          {% endfor %}
    </article>
    <div id="redes-sociales-pagina">
           <figure id="red-social-pagina-facebook">
-            <a target="_blank" href="http://www.facebook.com/sharer.php?u={{url('about_la_nina',{'_locale':locale})}}&t={{ "sitio interesante para brindar por ello"|url_encode(true) }}">
+            <a target="_blank" href="http://www.facebook.com/sharer.php?u={{url('about_la_nina',{'_locale':locale})}}">
                 <img src="{{asset('images/keyarts/facebook_share.png')}}" alt="compartir en facebook">     
             </a>
          </figure>
          <figure id="red-social-pagina-twitter">
-              <a href="http://twitter.com/home?status={{ "Estoy leyendo "|url_encode(true) }}{{url('about_la_nina',{'_locale':locale})}}{{ "en el sitio www.laninadelmezcal.com"|url_encode(true) }}." target="_blank">
+              <a href="http://twitter.com/home?status={{url('about_la_nina',{'_locale':locale})}}{{ " Via: @laninadelmezcal"|url_encode(true) }}." target="_blank">
                   <img src="{{asset('images/keyarts/twitter_share.png')}}" alt="compartir en twitter">
               </a>
          </figure>
