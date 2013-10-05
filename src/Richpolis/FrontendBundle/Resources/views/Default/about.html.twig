@@ -16,6 +16,9 @@
 {% endblock %}
 
 {% block body %}
+
+{% set locale = app.request.locale %}
+
 <section id="contenido">
    <article class="publicaciones-about">
          <figure id="foto-la-nina">
@@ -23,16 +26,16 @@
          </figure>
          {% for publicacion in publicaciones %}
            {% if publicacion.slug == "about-la-nia" %}
-            <h2 class="titulo-article">{% trans %}about la niña{% endtrans %}</h2>
-            {{publicacion.descripcion(app.request.locale)|raw}}
+            <h2 class="titulo-article">{{publicacion.titulo(locale)}}</h2>
+            {{publicacion.descripcion(locale)|raw}}
             {% endif %}
          {% endfor %}
    </article>
    <article class="publicaciones-about">
          {% for publicacion in publicaciones %}
            {% if publicacion.slug == "the-story-1" %}
-            <h2 class="titulo-article">{% trans %}the story{% endtrans %}</h2>
-            {{publicacion.descripcion(app.request.locale)|raw}}
+            <h2 class="titulo-article">{{publicacion.titulo(locale)}}</h2>
+            {{publicacion.descripcion(locale)|raw}}
             {% endif %}
          {% endfor %}
          
@@ -57,15 +60,15 @@
          </div>
          {% for publicacion in publicaciones %}
            {% if publicacion.slug == "the-story-2" %}
-            {{publicacion.descripcion(app.request.locale)|raw}}
+            {{publicacion.descripcion(locale)|raw}}
             {% endif %}
          {% endfor %}
    </article>
    <article class="publicaciones-about">
          {% for publicacion in publicaciones %}
            {% if publicacion.slug == "mision-vision-and-values" %}
-            <h2 class="titulo-article">{% trans %}mission, vision and values{% endtrans %}</h2>
-            {{publicacion.descripcion(app.request.locale)|raw}}
+            <h2 class="titulo-article">{{publicacion.titulo(locale)}}</h2>
+            {{publicacion.descripcion(locale)|raw}}
             {% endif %}
          {% endfor %}
    </article>

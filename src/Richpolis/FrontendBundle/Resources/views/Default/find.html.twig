@@ -32,7 +32,7 @@
                       {% if categoria.slug == "galeria-tiendas-mxico" %}
                        {% for galeria in categoria.galerias %}
                         <li class="item-small">
-                         <a href="{{galeria.webPath}}" rel="prettyPhoto[pp_gal]" title='{{galeria.descripcion | raw}}'>
+                         <a class="mexico" href="{{galeria.webPath}}" rel="prettyPhoto[pp_gal]" title='{{galeria.descripcion | raw}}'>
                              <img src="{{galeria.thumbnailWebPath}}" alt="{{galeria.titulo}}"/>
                          </a>
                         </li>
@@ -57,7 +57,7 @@
                         {% for publicacion in categoria.publicaciones %}
                         <li class="item-distribuidores">
                             <div class="contenido-galeria-distribuidores">
-                                <h3>{{publicacion.titulo}}</h3>
+                                <h3>{{publicacion.titulo(locale)}}</h3>
                                 {{publicacion.descripcion(locale)|raw}}
                             </div>
                         </li>
@@ -84,7 +84,7 @@
                       {% if categoria.slug == "galeria-tiendas-usa" %}
                        {% for galeria in categoria.galerias %}
                         <li class="item-small">
-                         <a href="{{galeria.webPath}}" rel="prettyPhoto[pp_gal]" title='{{galeria.descripcion | raw}}'>
+                         <a class="usa" href="{{galeria.webPath}}" rel="prettyPhoto[pp_gal]" title='{{galeria.descripcion | raw}}'>
                              <img src="{{galeria.thumbnailWebPath}}" alt="{{galeria.titulo}}"/>
                          </a>
                         </li>
@@ -109,7 +109,7 @@
                         {% for publicacion in categoria.publicaciones %}
                         <li class="item-distribuidores">
                             <div class="contenido-galeria-distribuidores">
-                                <h3>{{publicacion.titulo}}</h3>
+                                <h3>{{publicacion.titulo(locale)}}</h3>
                                 {{publicacion.descripcion(locale)|raw}}
                             </div>
                         </li>
@@ -136,7 +136,7 @@
                         {% for publicacion in categoria.publicaciones %}
                         <li class="item-distribuidores">
                             <div class="contenido-galeria-distribuidores">
-                                <h3>{{publicacion.titulo}}</h3>
+                                <h3>{{publicacion.titulo(locale)}}</h3>
                                 {{publicacion.descripcion(locale)|raw}}
                             </div>
                         </li>
@@ -162,7 +162,8 @@
 <script type="text/javascript" src="{{asset('js/sfrichpolis.js')}}"></script> 
 <script>
    $(document).ready(function(){
-    $.configPrettyPhoto();
+    $.configPrettyPhotoConClase(".mexico");
+    $.configPrettyPhotoConClase(".usa");
      $('.slider1').bxSlider({
        slideWidth: 195,
        minSlides: 1,
@@ -184,7 +185,7 @@
        prevSelector: '#control-4',
        nextText: 'Next',
        prevText: 'Prev',
-       infiniteLoop: false,
+       infiniteLoop: true,
        hideControlOnEnd: true,
        pager:false
      });
@@ -208,7 +209,7 @@
        prevSelector: '#control-8',
        nextText: 'Next',
        prevText: 'Prev',
-       infiniteLoop: false,
+       infiniteLoop: true,
        hideControlOnEnd: true,
        pager:false
      });
@@ -221,7 +222,7 @@
        prevSelector: '#control-10',
        nextText: 'Next',
        prevText: 'Prev',
-       infiniteLoop: false,
+       infiniteLoop: true,
        hideControlOnEnd: true,
        pager:false
      });

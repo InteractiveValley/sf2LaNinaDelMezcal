@@ -4,6 +4,19 @@
 {{parent()}}
 <link rel="stylesheet" href="{{ asset('css/jquery.qtip.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/prettyPhoto.css') }}">
+<style type="text/css">
+  #pp_full_res .pp_inline{
+    text-align: center;
+  }
+  #pp_full_res .pp_inline figure img{
+    max-width: 100%;
+  }
+  #pp_full_res .pp_inline div.contenido-receta{
+    text-align: left;
+    max-width: 100%;
+    padding: .5em;
+  }
+</style>
 {% endblock %}
 
 {% set locale = app.request.locale %}
@@ -50,7 +63,7 @@
             </figure>
               {% for mensaje in botella.mensajes %}
                 {% if not mensaje.isHowToMix %}
-                <div class="mensaje-toltip espadin {{mensaje.clase}}" rel="tip" title="{{mensaje.mensaje(locale)|raw}}" style="{{mensaje.style}}">
+                <div class="mensaje-toltip espadin {{mensaje.clase}}" rel="tip" title='{{mensaje.mensaje(locale)|raw}}' style="{{mensaje.style}}">
                       {{mensaje.titulo(locale)}}
                 </div>
                 {% else %}
@@ -98,8 +111,21 @@
          <li><a href="" class="{%if(pagina_actual=='primario-licor')%}active{%endif%} primario-licor">primario licor</a></li>
       </ul>
    </figure>
+  
+  
+
 </section>
 
+{% for galeria in galerias %}
+    <div id="receta-{{galeria.id}}" class="receta" style="display:none;">
+      <figure>
+        <img src="{{galeria.webPath}}"/>
+      </figure>
+      <div class="contenido-receta">
+        {{galeria.descripcion | raw }}  
+      </div>
+    </div>
+  {% endfor %}
 {% endblock %}
 
 {% block javascripts %}
@@ -113,22 +139,23 @@
 <script>
 var objImagenes= [
   {% for galeria in galerias %}  
-  {
+  {{'{'}}
     titulo: '{{galeria.titulo}}',
-    descripcion: '{{galeria.descripcion|raw}}',
-    imagen: '{{galeria.webPath}}',
-  },
+    descripcion: "",
+    imagen: '#receta-{{galeria.id}}',
+  {{'},'}}
   {% endfor %}
 ];    
     
 function generarHowToMix(){
   var titulos=[],imagenes=[],descripciones=[],contador;
   for(contador=0;contador<objImagenes.length;contador++){
-    titulos[contador]=objImagenes[contador].titulo;
-    imagenes[contador]=objImagenes[contador].imagen;
-    descripciones[contador] =objImagenes[contador].descripcion;
+    titulos[contador]= objImagenes[contador].titulo;
+    imagenes[contador]= objImagenes[contador].imagen;
+    descripciones[contador] = objImagenes[contador].descripcion;
   }
   $.prettyPhoto.open(imagenes,titulos,descripciones);
+
 } 
 $(document).ready(function() {
   $.configPrettyPhoto();
@@ -143,10 +170,17 @@ $(document).ready(function() {
       },
       show: {
         event: 'click mouseenter',
-        solo: true
+        solo: true,
+        effect: function(offset) {
+            $(this).fadeIn("fast"); // "this" refers to the tooltip
+        }
       },
       hide: {
-        event: 'unfocus'
+        event: 'mouseout',
+        delay: 500,
+        effect: function(offset) {
+            $(this).fadeOut("slow"); // "this" refers to the tooltip
+        }
       },
       style: {
         classes: 'qtip-light qtip-bootstrap'

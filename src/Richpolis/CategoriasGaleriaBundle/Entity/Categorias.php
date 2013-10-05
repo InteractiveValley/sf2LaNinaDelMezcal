@@ -386,7 +386,6 @@ class Categorias
     
     /**
     * @ORM\PrePersist
-    * @ORM\PreUpdate
     */
     public function setSlugAtValue()
     {

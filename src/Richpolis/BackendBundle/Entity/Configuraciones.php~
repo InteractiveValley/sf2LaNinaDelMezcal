@@ -188,7 +188,6 @@ class Configuraciones
     
     /**
     * @ORM\PrePersist
-    * @ORM\PreUpdate
     */
     public function setSlugAtValue()
     {

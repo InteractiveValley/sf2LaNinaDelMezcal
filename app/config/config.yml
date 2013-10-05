@@ -116,7 +116,7 @@ knp_last_tweets:
 
 parameters:
     # dirección de correo electrónico para contacto del Blogger
-    richpolis.emails.to_email: richpolis@gmail.com
+    richpolis.emails.to_email: info@laninadelmezcal.com
     # Blogger máximo de comentarios recientes
     richpolis_registros_limit: 10
     richpolis_imagenes_limit: 50

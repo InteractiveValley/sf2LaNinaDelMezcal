@@ -49,7 +49,7 @@
     {% for entity in pagination %}
         <tr class="list-registro">
             <td class="list-registro-posicion"><a href="{{ path('publicacion_show', { 'id': entity.id }) }}">{{ entity.posicion }}</a></td>
-            <td class="list-registro-titulo">{{ entity.titulo }}</td>
+            <td class="list-registro-titulo">{{ entity.tituloEn }}</td>
             <td class="list-registro-slug">{{ entity.slug }}</td>
             <td class="list-registro-imagen">
                 {% if entity.archivo | length > 0 %}

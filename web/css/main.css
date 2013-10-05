@@ -82,6 +82,8 @@ h2.titulo-galeria span {
   text-transform: uppercase;
   position: absolute;
 }
+
+
 h2.titulo-galeria.titulo-galeria-find {
   background: url("/images/keyarts/separador.png");
   background-repeat: repeat-x;
@@ -227,11 +229,27 @@ nav > ul > li > ul > li {
   padding: .5em 1.1em;
 }
 
-#contenido-footer a { color: #e44a4a; }
-#contenido-footer a:visited { color: #551a8b; }
-#contenido-footer a:hover { color: #50adcf; }
-#contenido-footer a:focus { outline: thin dotted; }
-#contenido-footer a:hover, a:active { outline: 0; }
+#contenido-pagina-inicial{
+  margin: 1em auto;
+}
+
+#contenido-pagina-inicial h2{
+  font-family: 'Oswald', Arial, Helvetica, sans-serif;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: -1.5px;
+  text-align: left;
+  text-transform: uppercase;
+  line-height: 150%;
+}
+
+
+#contenido-pagina-inicial a,#contenido-footer a { color: #e44a4a; }
+/*#contenido-pagina-inicial a:visited,#contenido-footer a:visited { color: #551a8b; }*/
+#contenido-pagina-inicial a:hover,#contenido-footer a:hover { color: #50adcf; }
+#contenido-pagina-inicial a:focus,#contenido-footer a:focus { outline: thin dotted; }
+#contenido-pagina-inicial a:hover,#contenido-pagina-inicial a:active, #contenido-footer a:hover, #contenido-footer a:active { outline: 0; }
 
 #desarrollado img {
   opacity: 0.1;
@@ -558,6 +576,7 @@ nav > ul > li > ul > li {
 {
   font-family: 'GeorgiaRegular', Arial, Helvetica, sans-serif;
 }
+
 
 ::-moz-selection { background: #e44a4a; color: #fff; text-shadow: none; }
 ::selection { background: #e44a4a; color: #fff; text-shadow: none; }

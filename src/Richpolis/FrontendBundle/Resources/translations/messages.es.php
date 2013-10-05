@@ -25,5 +25,6 @@ return array(
                 "El mensaje no se ha podido enviar"=>"El mensaje no se ha podido enviar",
                 "Violacion de acceso"=>"Violacion de acceso",
                 "Gracias por enviar su correo!"=>"Gracias por enviar su correo!",
+                "from the blog"=>"desde el blog",
     
 );

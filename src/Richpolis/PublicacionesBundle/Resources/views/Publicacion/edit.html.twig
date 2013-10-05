@@ -20,7 +20,7 @@
 {% endblock %}    
 
 {% block body %}
-<h1>Editar Publicacion "{{ entity.titulo }}"</h1>
+<h1>Editar Publicacion "{{ entity.tituloEn }} / {{ entity.tituloEs }}"</h1>
 
 <form id="formPrincipal" action="{{ path('publicacion_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}

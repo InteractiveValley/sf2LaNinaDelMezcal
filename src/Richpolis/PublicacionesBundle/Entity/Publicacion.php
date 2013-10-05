@@ -25,9 +25,16 @@ class Publicacion
     /**
      * @var string
      *
-     * @ORM\Column(name="titulo", type="string", length=255 )
+     * @ORM\Column(name="titulo_es", type="string", length=255 )
      */
-    private $titulo;
+    private $tituloEs;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="titulo_en", type="string", length=255 )
+     */
+    private $tituloEn;
 
     /**
      * @var string
@@ -121,14 +128,20 @@ class Publicacion
     }
 
     /**
-     * Set titulo
+     * Set titulo, segun el locale
      *
      * @param string $titulo
+     * @param string $locale 
      * @return Publicacion
      */
-    public function setTitulo($titulo)
+    public function setTitulo($locale,$titulo)
     {
-        $this->titulo = $titulo;
+        if($locale=="es"){
+            $this->tituloEs = $titulo;
+        }else{
+            $this->tituloEn = $titulo;
+        }
+        
         
         return $this;
     }
@@ -136,11 +149,16 @@ class Publicacion
     /**
      * Get titulo
      *
+     * @param string $locale
      * @return string 
      */
-    public function getTitulo()
+    public function getTitulo($locale)
     {
-        return $this->titulo;
+        if($locale=="es"){
+            return $this->tituloEs;
+        }else{
+            return $this->tituloEn;
+        }
     }
 
     /**
@@ -296,11 +314,10 @@ class Publicacion
     
     /**
     * @ORM\PrePersist
-    * @ORM\PreUpdate
     */
     public function setSlugAtValue()
     {
-        $this->slug = \Richpolis\BackendBundle\Utils\Richsys::slugify($this->getTitulo());
+        $this->slug = \Richpolis\BackendBundle\Utils\Richsys::slugify($this->getTituloEn());
     }
     
     /*
@@ -625,5 +642,51 @@ class Publicacion
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set tituloEs
+     *
+     * @param string $tituloEs
+     * @return Publicacion
+     */
+    public function setTituloEs($tituloEs)
+    {
+        $this->tituloEs = $tituloEs;
+
+        return $this;
+    }
+
+    /**
+     * Get tituloEs
+     *
+     * @return string 
+     */
+    public function getTituloEs()
+    {
+        return $this->tituloEs;
+    }
+
+    /**
+     * Set tituloEn
+     *
+     * @param string $tituloEn
+     * @return Publicacion
+     */
+    public function setTituloEn($tituloEn)
+    {
+        $this->tituloEn = $tituloEn;
+
+        return $this;
+    }
+
+    /**
+     * Get tituloEn
+     *
+     * @return string 
+     */
+    public function getTituloEn()
+    {
+        return $this->tituloEn;
     }
 }

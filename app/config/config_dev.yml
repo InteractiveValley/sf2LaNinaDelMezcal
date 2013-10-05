@@ -62,3 +62,8 @@ stfalcon_tinymce:
              plugins: ["bbcode, code, link, preview"]
              menubar: false
              toolbar1: "bold,italic,underline,undo,redo,link,unlink,removeformat,cleanup,code,preview"
+
+swiftmailer:
+    transport: gmail
+    username:  richpolis@gmail.com
+    password:  D3m3s1s1

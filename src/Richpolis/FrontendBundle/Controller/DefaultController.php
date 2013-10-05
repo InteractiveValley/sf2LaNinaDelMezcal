@@ -20,25 +20,6 @@ use Richpolis\CategoriasGaleriaBundle\Entity\Categorias;
  */
 class DefaultController extends Controller {
     
-    protected $CambioLang=false;
-
-    protected function lenguajePagina($request){
-        $lang=$request->query->get('lang',0);
-        $locale = $request->getLocale();
-        if($lang!=$locale){
-            if($lang=="es"){
-                $request->setLocale('es');
-                $this->CambioLang=true;
-            }elseif($lang=="en"){
-                $request->setLocale('en');
-                $this->CambioLang=true;
-            }else{
-                $request->setLocale('es');
-                $CambioLang=true;
-            }    
-        }
-    }
-    
     /**
      * Lists all Frontend entities.
      *
@@ -46,23 +27,18 @@ class DefaultController extends Controller {
      */
     public function indexAction()
     {
-        $this->lenguajePagina($this->getRequest());
+
+        $em = $this->getDoctrine()->getManager();
+       
+        $galerias = $em->getRepository('CategoriasGaleriaBundle:Galerias')
+                       ->getGaleriaPorTipoCategoria(Categorias::$GALERIA_PRINCIPAL);
         
-        if($this->CambioLang){
-            $this->CambioLang=false;
-            return $this->redirect($this->generateUrl("homepage",array('_locale'=>$this->getRequest()->getLocale())));
-        }else{
-            
-            $em = $this->getDoctrine()->getManager();
-            
-            $galerias = $em->getRepository('CategoriasGaleriaBundle:Galerias')
-                            ->getGaleriaPorTipoCategoria(Categorias::$GALERIA_PRINCIPAL);
+        $paginaInicial = $em->getRepository('PublicacionesBundle:Publicacion')->findOneBySlug('from-the-blog');
 
-
-           return $this->render("FrontendBundle:Default:index.html.twig",array(
-            "galerias"=>$galerias,
-            ));
-        }
+        return $this->render("FrontendBundle:Default:index.html.twig",array(
+          "galerias"=>$galerias,
+          "paginaInicial"=>$paginaInicial,
+        ));
 
     }
     
@@ -74,10 +50,7 @@ class DefaultController extends Controller {
      */
     public function splashAction()
     {
-        $this->lenguajePagina($this->getRequest());
-        
         return array();
-        
     }
     
     /**
@@ -87,27 +60,20 @@ class DefaultController extends Controller {
      */
     public function aboutAction()
     {
-        $this->lenguajePagina($this->getRequest());
+        $em = $this->getDoctrine()->getManager();
         
-        if($this->CambioLang){
-            $this->CambioLang=false;
-            return $this->redirect($this->generateUrl("about_la_nina",array('_locale'=>$this->getRequest()->getLocale())));
-        }else{
-
-            $em = $this->getDoctrine()->getManager();
-            $publicaciones = $em->getRepository('PublicacionesBundle:Publicacion')
+        $publicaciones = $em->getRepository('PublicacionesBundle:Publicacion')
                             ->getPublicacionPorTipoCategoriaActivas(CategoriasPublicacion::$ABOUT);
         
-            $galerias = $em->getRepository('CategoriasGaleriaBundle:Galerias')
+        $galerias = $em->getRepository('CategoriasGaleriaBundle:Galerias')
                             ->getGaleriaPorTipoCategoria(Categorias::$GALERIA_ABOUT);
 
 
-           return $this->render("FrontendBundle:Default:about.html.twig",array(
+        return $this->render("FrontendBundle:Default:about.html.twig",array(
             'publicaciones'=>$publicaciones,
             'galerias'=>$galerias,
-            ));
-        }
-        
+        ));
+                
     }
 
     /**
@@ -117,9 +83,11 @@ class DefaultController extends Controller {
      */
     public function mezcalAction()
     {
-        $this->lenguajePagina($this->getRequest());
-        return $this->redirect("/mezcal/espadin");
-        
+        return $this->redirect(
+            $this->generateUrl("botella_espadin",array(
+                '_locale'=>$this->getRequest()->getLocale()
+            ))
+        );
     }
 
     /**
@@ -130,35 +98,22 @@ class DefaultController extends Controller {
      */
     public function espadinAction()
     {
-        $this->lenguajePagina($this->getRequest());
-        
-        if($this->CambioLang){
-            $this->CambioLang=false;
-            return $this->redirect($this->generateUrl("botella_espadin",array('_locale'=>$this->getRequest()->getLocale())));
-        }else{
-            $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
 
-            $botella = $em->getRepository('FrontendBundle:Botellas')
-                          ->getBotellaYMensajesPorSlug('espadin');
+        $botella = $em->getRepository('FrontendBundle:Botellas')
+                      ->getBotellaYMensajesPorSlug('espadin');
             
-            $galerias = $em->getRepository('CategoriasGaleriaBundle:Galerias')
-                           ->getGaleriaPorCategoriaSlug('espadin');
-            
-            /*$cadena="[";
-            foreach($galerias as $galeria){
-                $cadena .= "{imagen:'".$galeria->getWebPath()."'},";
-            }
-            $cadena.="]";*/
+        $galerias = $em->getRepository('CategoriasGaleriaBundle:Galerias')
+                       ->getGaleriaPorCategoriaSlug('espadin');
 
-           return $this->render("FrontendBundle:Default:botella.html.twig",array(
+        return $this->render("FrontendBundle:Default:botella.html.twig",array(
             "pagina_actual"=>"botella_espadin",
             "app_angular"=>"js/app/espadin.js",
             "botella_anterior"=>"botella_primario",
             "botella_siguiente"=>"botella_primario",
             'botella'=>$botella,
             'galerias'=>$galerias
-            ));
-        }
+        ));
         
     }
 
@@ -171,37 +126,22 @@ class DefaultController extends Controller {
      */
     public function primarioAction()
     {
-        $this->lenguajePagina($this->getRequest());
-        
-        if($this->CambioLang){
-            $this->CambioLang=false;
-            return $this->redirect($this->generateUrl("botella_primario",array('_locale'=>$this->getRequest()->getLocale())));
-        }else{
+        $em = $this->getDoctrine()->getManager();
+       
+        $botella = $em->getRepository('FrontendBundle:Botellas')
+                      ->getBotellaYMensajesPorSlug('primario-mezcal');
             
-            $em = $this->getDoctrine()->getManager();
-            
-            $botella = $em->getRepository('FrontendBundle:Botellas')
-                            ->getBotellaYMensajesPorSlug('primario-mezcal');
-            
-            $galerias = $em->getRepository('CategoriasGaleriaBundle:Galerias')
+        $galerias = $em->getRepository('CategoriasGaleriaBundle:Galerias')
                        ->getGaleriaPorCategoriaSlug('primario-mezcal-joven');
         
-            /*$cadena="[";
-            foreach($galerias as $galeria){
-                $cadena .= "{imagen:'".$galeria->getWebPath()."'},";
-            }
-            $cadena.="]";*/
-
-           return $this->render("FrontendBundle:Default:botella.html.twig",array(
+        return $this->render("FrontendBundle:Default:botella.html.twig",array(
             "pagina_actual"=>"botella_primario",
             "app_angular"=>"js/app/primario.js",
             "botella_anterior"=>"botella_espadin",
             "botella_siguiente"=>"botella_espadin",
             'botella'=>$botella,
             'galerias'=>$galerias
-            ));
-        }
-
+        ));
     }
 
 
@@ -214,27 +154,18 @@ class DefaultController extends Controller {
      */
     public function findAction()
     {
-        $this->lenguajePagina($this->getRequest());
-        
-        if($this->CambioLang){
-            $this->CambioLang=false;
-            return $this->redirect($this->generateUrl("find_la_nina",array('_locale'=>$this->getRequest()->getLocale())));
-        }else{
-            
-            $em = $this->getDoctrine()->getManager();
-            
-            $categoriasPublicacion=$em->getRepository('PublicacionesBundle:CategoriasPublicacion')
+        $em = $this->getDoctrine()->getManager();
+      
+        $categoriasPublicacion=$em->getRepository('PublicacionesBundle:CategoriasPublicacion')
                                   ->getCategoriasPorTipoYActivas(CategoriasPublicacion::$DISTRIBUIDORES);
         
-            $galerias = $em->getRepository('CategoriasGaleriaBundle:Categorias')
+        $galerias = $em->getRepository('CategoriasGaleriaBundle:Categorias')
                        ->getCategoriasPorTipoYActivas(Categorias::$GALERIA_DISTRIBUIDORES);
 
-           return $this->render("FrontendBundle:Default:find.html.twig",array(
+        return $this->render("FrontendBundle:Default:find.html.twig",array(
             'categoriasPublicacion'=>$categoriasPublicacion,
             'galerias'=>$galerias
-            ));
-        }
-        
+        ));
     }
 
     /**
@@ -243,14 +174,13 @@ class DefaultController extends Controller {
      * @Method({"GET", "POST"})
      */
     public function contactoAction() {
-        $this->lenguajePagina($this->getRequest());
         $contacto = new Contacto();
         $form = $this->createForm(new ContactoType(), $contacto);
         $request = $this->getRequest();
         $traductor=$this->get('translator');
         
         if ($request->getMethod() == 'POST') {
-            $form->bindRequest($request);
+            $form->bind($request);
 
             if ($form->isValid()) {
                 $datos=$form->getData();
@@ -283,21 +213,15 @@ class DefaultController extends Controller {
             $mensaje=$traductor->trans("Access Violation");
         }
         
-         $em = $this->getDoctrine()->getEntityManager();
-         $contacto = $em->getRepository('BackendBundle:Configuraciones')->findOneBySlug('contacto'); 
-
-        if($this->CambioLang){
-            $this->CambioLang=false;
-            return $this->redirect($this->generateUrl("frontend_contacto",array('_locale'=>$this->getRequest()->getLocale())));
-        }else{
-           return $this->render("FrontendBundle:Default:contacto.html.twig",array(
+        $em = $this->getDoctrine()->getManager();
+        $contacto = $em->getRepository('BackendBundle:Configuraciones')->findOneBySlug('contacto'); 
+        return $this->render("FrontendBundle:Default:contacto.html.twig",array(
               'contacto'=>$contacto,
               'form' => $form->createView(),
               'ok'=>$ok,
               'error'=>$error,
               'mensaje'=>$mensaje,
-            ));
-        }
+        ));
     }
     
     /**
@@ -334,7 +258,7 @@ class DefaultController extends Controller {
      * @Route("/pie/pagina/", name="pie_pagina")
      */
     public function piePaginaAction(){
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $piePagina = $em->getRepository('BackendBundle:Configuraciones')->findOneBySlug('pie-pagina');
         
         return $this->render('FrontendBundle:Default:piePagina.html.twig',array(

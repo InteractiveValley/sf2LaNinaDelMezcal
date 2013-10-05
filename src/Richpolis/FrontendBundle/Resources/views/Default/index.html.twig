@@ -15,7 +15,7 @@
             <div id="mask">
                 <ul>
                     <li id="first" class="firstanimation">
-                        <a href="#">
+                        <a {% if galerias[0].descripcion | length > 0 %} href="{{galerias[0].descripcion}}" target="_blank" {% else %} href="#"{% endif %}>
                             <img src="{{galerias[0].webPath | apply_filter('galeria_imagen_recortar')}}" alt="{{galerias[0].titulo}}"/>
                         </a>
                         <div class="tooltip">
@@ -24,7 +24,7 @@
                     </li>
 
                     <li id="second" class="secondanimation">
-                        <a href="#">
+                        <a {% if galerias[1].descripcion | length > 0 %} href="{{galerias[1].descripcion}}" target="_blank" {% else %} href="#"{% endif %}>
                             <img src="{{galerias[1].webPath | apply_filter('galeria_imagen_recortar')}}" alt="{{galerias[1].titulo}}"/>
                         </a>
                         <div class="tooltip">
@@ -33,7 +33,7 @@
                     </li>
 
                     <li id="third" class="thirdanimation">
-                        <a href="#">
+                        <a {% if galerias[2].descripcion | length > 0 %} href="{{galerias[2].descripcion}}" target="_blank" {% else %} href="#"{% endif %}>
                             <img src="{{galerias[2].webPath | apply_filter('galeria_imagen_recortar')}}" alt="{{galerias[2].titulo}}"/>
                         </a>
                         <div class="tooltip">
@@ -42,7 +42,7 @@
                     </li>
 
                     <li id="fourth" class="fourthanimation">
-                        <a href="#">
+                        <a {% if galerias[3].descripcion | length > 0 %} href="{{galerias[3].descripcion}}" target="_blank" {% else %} href="#"{% endif %}>
                             <img src="{{galerias[3].webPath | apply_filter('galeria_imagen_recortar')}}" alt="{{galerias[3].titulo}}"/>
                         </a>
                         <div class="tooltip">
@@ -51,7 +51,7 @@
                     </li>
 
                     <li id="fifth" class="fifthanimation">
-                        <a href="#">
+                        <a {% if galerias[4].descripcion | length > 0 %} href="{{galerias[4].descripcion}}" target="_blank" {% else %} href="#"{% endif %}>
                             <img src="{{galerias[4].webPath | apply_filter('galeria_imagen_recortar')}}" alt="{{galerias[4].titulo}}"/>
                         </a>
                         <div class="tooltip">
@@ -63,17 +63,22 @@
             <div class="progress-bar"></div>
         </div>
     </article>    
-    <article id="tweets-contenedor">
-    {{ render(controller("FrontendBundle:Default:lastTweets",{'username': 'LaNinadelMezcal'})) }}
+    <!--article id="tweets-contenedor">
+    {# render(controller("FrontendBundle:Default:lastTweets",{'username': 'LaNinadelMezcal'})) #}
+    </article-->
+    <article id="contenido-pagina-inicial">
+        <hr/>
+            <h2>{{paginaInicial.titulo(locale)}}</h2>
+            {{ paginaInicial.descripcion(locale) | raw }}
+        <hr/>
     </article>
-
 </section>
 
 {% endblock %}
 {% block javascripts %}
     {{parent()}}
     <script>
-    jQuery.iniciarCircle=function(){
+    /*jQuery.iniciarCircle=function(){
         $('ul.tweets-lista li:first-child').slideUp("slow",function(){
             $('ul.tweets-lista').append($(this).slideDown("fast"));
         });
@@ -83,7 +88,7 @@
         },6000);
     }
 
-    /*jQuery.mostrarTooltip=function() {
+    jQuery.mostrarTooltip=function() {
         $("#slider li .tooltip").animate({'left':'0px','opacity':1},'fast',function(){
             $("#slider li, #slider .progress-bar").css({"-moz-animation-play-state":"paused","-webkit-animation-play-state":"paused"});
         });
@@ -101,13 +106,13 @@
         setTimeout(function(){
             $.mostrarTooltip();
         },5000);
-    }*/
+    }
 
     jQuery.iniciar=function(){
         $.iniciarCircle();
-        /*$.mostrarTooltip();*/
     }
     
     $(document).on("ready",$.iniciar);
+    */
     </script>
 {% endblock %}

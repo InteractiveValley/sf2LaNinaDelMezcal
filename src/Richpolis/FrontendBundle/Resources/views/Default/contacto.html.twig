@@ -30,7 +30,7 @@
         </div>
     </article>
     <article class="form contacto">
-        <form onsubmit="return false;" action="{{path('frontend_contacto',{'_locale':locale})}}" method="post" class="form-contacto {%if error == true%}invalid{%endif%} {%if ok == true%}sent{%endif%}" novalidate="novalidate">
+        <form action="{{path('frontend_contacto',{'_locale':locale})}}" method="post" class="form-contacto {%if error == true%}invalid{%endif%} {%if ok == true%}sent{%endif%}" novalidate="novalidate">
           <div>
              <label for="richpolis_backendbundle_contactotype_name" class="required">{% trans %}Name{% endtrans %}</label>
              <span class="form-contacto-control-wrap Name {%if form.name.vars.errors  | length > 0%}form-not-valid{%endif%}">
@@ -89,17 +89,18 @@
 {% block javascripts %}
 {{parent()}}
 <script>
-$(document).ready( function() {   
+/*$(document).ready( function() {   
     $("input.form-submit").click( function() {
         $('img.ajax-loader').css({visibility: 'visible'});
         $("img.ajax-loader").fadeIn("fast",function(){
             $.post("{{path('frontend_contacto',{'_locale':locale})}}",$("form.form-contacto").serialize(),
             function(data){
+                alert(data);
                 $("#contacts").html(data).fadeIn("fast");
             });    
         });
     });    
-});
+});*/
 </script>
 
 {% endblock %}

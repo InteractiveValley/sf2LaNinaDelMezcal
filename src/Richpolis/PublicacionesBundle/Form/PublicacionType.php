@@ -13,7 +13,8 @@ class PublicacionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titulo')
+            ->add('tituloEn','text',array('label'=>'Titulo Ingles'))
+            ->add('tituloEs','text',array('label'=>'Titulo Español')) 
             ->add('descripcionEn','textarea', array(
                     'attr' => array(
                         'class' => 'tinymce',

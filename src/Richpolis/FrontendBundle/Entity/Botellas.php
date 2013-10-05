@@ -445,7 +445,6 @@ class Botellas
     
     /**
     * @ORM\PrePersist
-    * @ORM\PreUpdate
     */
     public function setSlugAtValue()
     {
